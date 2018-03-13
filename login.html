@@ -4,10 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>登录</title>
+    <title>毕业论文管理系统-登录</title>
+    <link rel="icon" href="src/img/titleLogo.jpg" type="image/x-icon"/>
+    <style>
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;border:none;}
+        body{font-size:12px; font-family:Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serifbackground:#fff;color:#2b2b2b;}
+        address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+        select,input,img{vertical-align:middle;}
+        table{border-collapse:collapse;border-spacing:0;}
+        table,td,tr,th{font-size:12px;}
+        a{text-decoration:none;cursor:pointer;}
+        fieldset,img{border:0;}
+        
+        .main{ position:absolute;left:50%; top:50%; background:url(src/img/login.png) no-repeat; width:772px; height:468px; margin:-234px 0 0 -386px;}
+        
+        .input-box{ position:absolute; top:90px; left:410px;color:#0952a1;}
+        .input-box input{ border:1px solid #7491b5; width:154px; height:20px; background-color:#f5fafe; padding-left:4px; line-height:20px;}
+        .input-box p{ line-height:28px;}
+        .input-box .identity input{ width:16px;}
+        .input-box .check{ width:14px; height:14px; margin-left:48px;}
+        .input-box .record{ margin-left:6px;}
+        .input-box .link{ margin-top:14px; margin-left:70px;}
+        a{ height:20px; width:72px; display:inline-block; color:#fff; line-height:20px; text-align:center; margin-top:10px;}
+        .log{ background:url(src/img/log.png) no-repeat; margin-right:16px; margin-left:48px;margin-bottom: 20px;}
+        .reset{ background:url(src/img/reset.png) no-repeat; color:#6d6d6d;margin-bottom: 20px;}
+        .main-box .copy{ text-align:center; margin-top:8px; color:#666666;}
+        .text{ text-align:center; color:#fff; margin-top:398px; line-height:24px;}
+    </style>
 </head>
-<body>
-    <div>登录页面111111111111</div>
-    <a href="http://localhost:3000/index.html">跳转到主页面</a>
+<body style="background-color:#3987cf;">
+    <div class="main">
+        <div class="login-box">
+            <div class="input-box">
+                <p>用户名：<input type="text" name="name" value="" class="user"/></p>
+                <p><span style=" padding-right:12px;">密</span>码：<input type="password" name="password" class="password"/></p>
+                <p>验证码：<input type="text" name="validationCode" value="" class="validationCode"/></p>
+                <p class="identity">
+                    <input type="radio" name="permission" value="teacher" checked>教师
+                    <input type="radio" name="permission" value="student">学生
+                    <input type="radio" name="permission" value="admin">管理员
+                </p>
+                <!-- <p><input type="checkbox"  class="check"/><span class="record">记住登录名</span></p> -->
+                <a href="#" class="log">登&nbsp;录</a><a href="#" class="reset">重&nbsp;置</a>
+            </div>
+        </div>
+        <div class="text">
+            <p>Copyright © 2013-2014 Uimaker.com<br>
+            苏ICP备09003079号</p>
+        </div>
+    </div>
 </body>
 </html>
