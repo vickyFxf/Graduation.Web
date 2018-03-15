@@ -15,18 +15,19 @@
         table,td,tr,th{font-size:12px;}
         a{text-decoration:none;cursor:pointer;}
         fieldset,img{border:0;}
-        
         .main{ position:absolute;left:50%; top:50%; background:url(src/img/login.png) no-repeat; width:772px; height:468px; margin:-234px 0 0 -386px;}
-        
-        .input-box{ position:absolute; top:90px; left:410px;color:#0952a1;}
+        .input-box{ position:absolute; top:100px; left:410px;color:#0952a1;}
         .input-box input{ border:1px solid #7491b5; width:154px; height:20px; background-color:#f5fafe; padding-left:4px; line-height:20px;}
         .input-box p{ line-height:28px;}
+        .input-box p.validate{position: relative;}
+        .input-box .validate #v_container{position: absolute;top:5px;right:40px;}
+        .input-box .validate .changeCode{position: absolute;right:0px;cursor: pointer}
         .input-box .identity input{ width:16px;}
         .input-box .check{ width:14px; height:14px; margin-left:48px;}
         .input-box .record{ margin-left:6px;}
         .input-box .link{ margin-top:14px; margin-left:70px;}
-        a{ height:20px; width:72px; display:inline-block; color:#fff; line-height:20px; text-align:center; margin-top:10px;}
-        .log{ background:url(src/img/log.png) no-repeat; margin-right:16px; margin-left:48px;margin-bottom: 20px;}
+        a{ height:28px; width:72px; display:inline-block; color:#fff; line-height:28px; text-align:center;margin-top: 10px}
+        .log{ background:url(src/img/log.png) no-repeat; margin-right:16px; margin-bottom: 20px;}
         .reset{ background:url(src/img/reset.png) no-repeat; color:#6d6d6d;margin-bottom: 20px;}
         .main-box .copy{ text-align:center; margin-top:8px; color:#666666;}
         .text{ text-align:center; color:#fff; margin-top:398px; line-height:24px;}
@@ -36,22 +37,46 @@
     <div class="main">
         <div class="login-box">
             <div class="input-box">
-                <p>用户名：<input type="text" name="name" value="" class="user"/></p>
-                <p><span style=" padding-right:12px;">密</span>码：<input type="password" name="password" class="password"/></p>
-                <p>验证码：<input type="text" name="validationCode" value="" class="validationCode"/></p>
-                <p class="identity">
-                    <input type="radio" name="permission" value="teacher" checked>教师
-                    <input type="radio" name="permission" value="student">学生
-                    <input type="radio" name="permission" value="admin">管理员
-                </p>
-                <!-- <p><input type="checkbox"  class="check"/><span class="record">记住登录名</span></p> -->
-                <a href="#" class="log">登&nbsp;录</a><a href="#" class="reset">重&nbsp;置</a>
+                <form id="loginForm">
+                    <p>用户名：<input type="text" name="name" value="" class="user"/></p>
+                    <p><span style=" padding-right:12px;">密</span>码：<input type="password" name="password" class="password"/></p>
+                    <p class="validate">验证码：<input type="text" name="validationCode" value="" class="validationCode" style="width:50px;" id="code_input"/>
+                        <span id="v_container" style="display:inline-block;width:60px;height: 20px;"></span>
+                        <span class="changeCode" style="display:inline-block" onclick="changeCode()">换一张</span>
+                    </p>
+                    <p class="identity">
+                        <input type="radio" name="permission" value="teacher">教师
+                        <input type="radio" name="permission" value="student" checked>学生
+                        <input type="radio" name="permission" value="admin">管理员
+                    </p>
+                    <a href="javascript:void(0)" class="log" id="log">登&nbsp;录</a><a href="javascript:void(0)" class="reset" onclick="formReset()">重&nbsp;置</a>
+                </form>
             </div>
         </div>
         <div class="text">
-            <p>Copyright © 2013-2014 Uimaker.com<br>
-            苏ICP备09003079号</p>
+            <p>Copyright © 2017-2018 1406010039范秀芳毕业设计  浙ICP备xxxxxxxx号</p>
         </div>
     </div>
 </body>
 </html>
+<script src="src/js/lib/gVerify.js"></script>
+<script type="text/javascript">
+    var verifyCode = new GVerify("v_container");
+    //清空表单
+    function formReset(){
+        document.getElementById('loginForm').reset();
+    }
+    //改变验证码
+    function changeCode(){
+        var verifyCode = new GVerify("v_container");
+    }
+    
+    document.getElementById("log").onclick = function(){
+        var res = verifyCode.validate(document.getElementById("code_input").value);
+        if(res){
+            window.location.href="http://localhost:4000/index.html"
+        }else{
+            alert("验证码错误");
+        }
+    }
+</script>

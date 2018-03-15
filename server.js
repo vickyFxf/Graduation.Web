@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
-var port = 3000;
+var port = 4000;
 var localhost = 'localhost';
 var open = require('open');
 var http=require('http');
@@ -33,5 +33,5 @@ new WebpackDevServer(webpack(config), {
         console.log(err);
     }
     console.log('Listening at localhost:' + port);
-    open("http://localhost:3000/login.html")
+    open("http://localhost:4000/login.html")
 });

@@ -1,0 +1,30 @@
+$blue-base:#6fb3e0;
+html,body,#app{
+    width: 100%;
+    height:100%;
+}
+.ant-layout-header{
+    background-color: $blue-base !important;
+    .logo{height:97px;}
+    .title{
+        height:97px;
+        line-height: 97px;
+        font-size: 28px;
+        color:#fff;
+        font-weight: 600;
+        text-shadow: #1659ac 0px 1px 3px;
+        margin-left: 20px;
+    }
+    @media screen and (max-width:1366px){
+        .logo{height:63px;}
+        .title{height:63px;line-height: 63px}
+    }
+}
+.ant-layout-footer{
+    p{
+        margin-bottom: 0;
+        text-align: center;
+    }
+}
+.left{float: left;}
+.right{float:right;}

@@ -11,7 +11,7 @@ module.exports = {
     output:{
         path:path.resolve(__dirname,"dist/"),
         filename:'bundle.js',
-        publicPath: '/static/'
+        // publicPath: '/static/'
     },
     module:{
         loaders:[
@@ -24,7 +24,11 @@ module.exports = {
                 use: ['style-loader','css-loader','sass-loader'],
                 exclude: /node_modules/,
                 include: path.join(__dirname, './src/styles')
-            }
+            },{
+        　　　　 test: /\.(gif|jpg|png)$/,
+        　　　　 loader: 'url-loader?limit=8192&name=images/[name].[ext]'
+    　　　　}
+
         ]
     },
     devServer:{

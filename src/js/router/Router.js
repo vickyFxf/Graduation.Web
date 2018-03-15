@@ -7,6 +7,7 @@ import {Router,Route,hashHistory,IndexRoute} from 'react-router';
 import Application from '../components/Application';
 import UserListData from '../components/users/UserListData';
 import UserAdd from '../components/users/UserAdd';
+import SubjectList from '../components/subject/SubjectList';
 
 class Root extends React.Component{
     render(){
@@ -15,6 +16,7 @@ class Root extends React.Component{
                 <Route path="/" component={Application}>
                     <Route path="users" component={UserListData}/>
                     <Route path="usersadd" component={UserAdd}/>
+                    <Route path="subject" component={SubjectList}/>
                 </Route>
             </Router>
         )
