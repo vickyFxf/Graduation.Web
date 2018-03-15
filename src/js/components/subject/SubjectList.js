@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import {Icon,Button,Input,Table, Divider} from 'antd';
+import {Link} from 'react-router';
 export default class SubjectList extends React.Component {
     render() {
         const Search = Input.Search;
@@ -87,7 +88,7 @@ export default class SubjectList extends React.Component {
         };
         return (
             <div id="subjectList">
-                <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
+                <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} /><Link to="subjectAdd">添加</Link></Button>
                 <Button><Icon type="edit" style={{ fontSize: 18, color: '#FFA500' }} />修改</Button>
                 <Button><Icon type="close-circle" style={{ fontSize: 18, color: '#FF0000' }} />删除</Button>
                 <Search
