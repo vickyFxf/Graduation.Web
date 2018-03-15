@@ -1,0 +1,17 @@
+.ant-table table{
+    border:1px solid #d9d9d9;
+    margin-top: 5px;
+    text-align: center !important;
+    .ant-table-thead th{
+        padding: 5px;
+        font-weight: 600;
+        text-align: center !important;
+    }
+    .ant-table-tbody td{
+        padding: 8px;
+        border-right: 1px dotted #d7d7d7;
+    }
+    .ant-table-tbody tr:nth-child(even){
+        background: #f5f8fa;
+    }
+}

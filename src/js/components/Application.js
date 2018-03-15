@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import {Link} from 'react-router';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon,Button} from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider,Footer } = Layout;
 export default class Application extends React.Component {
@@ -53,7 +53,7 @@ export default class Application extends React.Component {
                         <Breadcrumb.Item>位置：用户管理</Breadcrumb.Item>
                         <Breadcrumb.Item>管理员</Breadcrumb.Item>
                         </Breadcrumb>
-                        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+                        <Content style={{ background: '#fff', padding: 4, margin: 0, minHeight: 280 }}>
                             {this.props.children}
                         </Content>
                         <Footer>
