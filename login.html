@@ -37,8 +37,8 @@
     <div class="main">
         <div class="login-box">
             <div class="input-box">
-                <form id="loginForm">
-                    <p>用户名：<input type="text" name="name" value="" class="user"/></p>
+                <form id="loginForm" name="loginForm">
+                    <p>用户名：<input type="text" name="name" class="user"/></p>
                     <p><span style=" padding-right:12px;">密</span>码：<input type="password" name="password" class="password"/></p>
                     <p class="validate">验证码：<input type="text" name="validationCode" value="" class="validationCode" style="width:50px;" id="code_input"/>
                         <span id="v_container" style="display:inline-block;width:60px;height: 20px;"></span>
@@ -70,8 +70,13 @@
     function changeCode(){
         var verifyCode = new GVerify("v_container");
     }
-    
+    //表单验证
+    function validate(){
+        var name=document.loginForm.name.value;
+        var pwd=document.loginForm.password.value;
+    }
     document.getElementById("log").onclick = function(){
+        validate();
         var res = verifyCode.validate(document.getElementById("code_input").value);
         if(res){
             window.location.href="http://localhost:4000/index.html"

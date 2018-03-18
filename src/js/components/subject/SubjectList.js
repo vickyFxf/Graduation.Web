@@ -5,9 +5,28 @@
 import React from 'react';
 import {Icon,Button,Input,Table, Divider} from 'antd';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {getSubjectList} from '../../action/subject';
+
 export default class SubjectList extends React.Component {
+    componentWillMount(){
+        this.props.getSubjectList();
+    }
     render() {
         const Search = Input.Search;
+        const {lists,getSubjectList} = this.props;
+        console.log(lists);
+        // var showData = [];
+        // var list=lists.rows;
+
+        // var leftNewsDate=[];
+        // var vm = this;
+        // function search(){
+        //     const params="title="+vm.refs.searchValue.value;
+        //     vm.props.getSubjectList(params);
+        //     leftNewsDate=[];
+        // }
+        
         const columns = [{
             title: '课题名称',
             dataIndex: 'name',
@@ -96,8 +115,18 @@ export default class SubjectList extends React.Component {
                 onSearch={value => console.log(value)}
                 enterButton
                 />
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+                {lists?
+                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />:"没有数据！"
+               }
+                
             </div>
         );
     }
 }
+const getValue = (state)=>{
+    return {
+      lists:state.subReducer.lists
+    }
+}
+const SubContext = connect(getValue,{getSubjectList})(SubjectList)
+module.exports = SubContext;
