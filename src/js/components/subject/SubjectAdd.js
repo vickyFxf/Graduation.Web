@@ -27,7 +27,7 @@ export default class SubjectAdd extends React.Component {
                     wrapperCol={{ span: 12 }}
                     >
                         <Input />
-                    </FormItem>
+                    </FormItem>           
                     <FormItem
                     label="课题来源"
                     labelCol={{ span: 5 }}

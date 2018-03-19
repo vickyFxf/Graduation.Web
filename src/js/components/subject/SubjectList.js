@@ -29,8 +29,8 @@ export default class SubjectList extends React.Component {
         
         const columns = [{
             title: '课题名称',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'subName',
+            key: 'subName',
             render: text => <a href="#">{text}</a>,
           }, {
             title: '来源',
@@ -55,45 +55,11 @@ export default class SubjectList extends React.Component {
               <span>
                 <a href="#">查看</a>
                 <Divider type="vertical" />
+                <a href="#">修改</a>
+                <Divider type="vertical" />
                 <a href="#">删除</a>
               </span>
             ),
-          }];
-        const data = [{
-            key: '1',
-            name: '人力资源管理系统设计与实现',
-            subSource:'B=结合生产实际',
-            subCategory:'C=工程设计',
-            subTime:'2017-09-04 12:56',
-            isAudit:'未审核'
-          }, {
-            key: '2',
-            name: '多层架构下药库系统的设计',
-            subSource:'B=结合生产实际',
-            subCategory:'C=工程设计',
-            subTime:'2017-09-04 09:34',
-            isAudit:'已通过'
-          }, {
-            key: '3',
-            name: '毕业论文管理系统',
-            subSource:'B=结合生产实际',
-            subCategory:'C=工程设计',
-            subTime:'2017-09-05 08:34',
-            isAudit:'未审核'
-          }, {
-            key: '4',
-            name: '毕业论文管理系统',
-            subSource:'B=结合生产实际',
-            subCategory:'C=工程设计',
-            subTime:'2017-09-05 08:34',
-            isAudit:'未审核'
-          }, {
-            key: '5',
-            name: '毕业论文管理系统',
-            subSource:'B=结合生产实际',
-            subCategory:'C=工程设计',
-            subTime:'2017-09-05 08:34',
-            isAudit:'未审核'
           }];
         // rowSelection object indicates the need for row selection
         const rowSelection = {
@@ -108,7 +74,6 @@ export default class SubjectList extends React.Component {
         return (
             <div id="subjectList">
                 <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} /><Link to="subjectAdd">添加</Link></Button>
-                <Button><Icon type="edit" style={{ fontSize: 18, color: '#FFA500' }} />修改</Button>
                 <Button><Icon type="close-circle" style={{ fontSize: 18, color: '#FF0000' }} />删除</Button>
                 <Search
                 placeholder="请输入关键字"
@@ -116,7 +81,7 @@ export default class SubjectList extends React.Component {
                 enterButton
                 />
                 {lists?
-                <Table rowSelection={rowSelection} columns={columns} dataSource={data} />:"没有数据！"
+                <Table rowSelection={rowSelection} columns={columns} dataSource={lists} />:"没有数据！"
                }
                 
             </div>
