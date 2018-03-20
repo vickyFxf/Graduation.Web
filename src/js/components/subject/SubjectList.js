@@ -10,7 +10,7 @@ import {getSubjectList} from '../../action/subject';
 
 export default class SubjectList extends React.Component {
     componentWillMount(){
-        this.props.getSubjectList();
+        // this.props.getSubjectList();
     }
     render() {
         const Search = Input.Search;
