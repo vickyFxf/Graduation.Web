@@ -74,9 +74,9 @@
     //表单验证
     function validate(){
         var userInfo={};
-        userInfo._id=$.trim(loginForm.name.value);
+        userInfo.id=$.trim(loginForm.name.value);
         userInfo.password=$.trim(document.loginForm.password.value);
-        if(!userInfo._id){
+        if(!userInfo.id){
             return '请填写用户名！'
         }
         if(!userInfo.password){
@@ -99,6 +99,9 @@
                         if(res.status){
                             alert(res.msg);
                         }else{
+                            sessionStorage.setItem("id", res.id);
+                            sessionStorage.setItem("userName", res.name);
+                            sessionStorage.setItem("permissions", res.permissions);
                             window.location.href="http://localhost:4000/index.html"
                         }
                     }

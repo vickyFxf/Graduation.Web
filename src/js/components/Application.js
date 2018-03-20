@@ -8,6 +8,14 @@ import { Layout, Menu, Breadcrumb, Icon,Button} from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider,Footer } = Layout;
 export default class Application extends React.Component {
+    constructor(props){
+        super(props);
+        this.state={
+            id:sessionStorage.getItem('id'),
+            userName:sessionStorage.getItem('userName'),
+            permissions:sessionStorage.getItem('permissions')
+        }
+    }
     render() {
         return (
             <Layout>
@@ -16,7 +24,7 @@ export default class Application extends React.Component {
                     <div className="left title">温州医科大学毕业论文管理平台</div>
                     <div className="right">
                         <ul>
-                            <li>欢迎您&nbsp;&nbsp;19839949 陈伟&nbsp;&nbsp;<a href="javascript:void(0)">退出</a></li>
+                            <li>欢迎您&nbsp;&nbsp;{this.state.id}&nbsp;{this.state.userName}&nbsp;&nbsp;<a href="javascript:void(0)">退出</a></li>
                         </ul>
                     </div>
                 </Header>
