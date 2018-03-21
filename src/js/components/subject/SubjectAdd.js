@@ -5,6 +5,9 @@
 import React from 'react';
 import { Form, Input, Tooltip, Icon, Cascader,Select,Button} from 'antd';
 export default class SubjectAdd extends React.Component {
+    componentWillMount(){
+        let ue = UE.getEditor('editor');
+    }
     render() {
         const formItemLayout = {
             labelCol: {
@@ -18,7 +21,7 @@ export default class SubjectAdd extends React.Component {
           };
         const FormItem = Form.Item;
         return (
-            <div>
+            <div id="subAdd">
                <p>Hi~ admin，欢迎使用课题发布功能！</p>
                <Form>
                     <FormItem
@@ -66,13 +69,15 @@ export default class SubjectAdd extends React.Component {
                     labelCol={{ span: 5 }}
                     wrapperCol={{ span: 12 }}
                     >
-                        <Input />
+                        <textarea id="editor" type="text/plain"></textarea>
                     </FormItem>
                     <FormItem
-                    labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{
+                        xs: { span: 24, offset: 0 },
+                        sm: { span: 16, offset: 8 },
+                      }}
                     >
-                        <Button type="primary">立即发布</Button>
+                        <Button type="primary" htmlType="submit">立即发布</Button>
                     </FormItem>
                </Form>
             </div>
