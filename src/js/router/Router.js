@@ -8,7 +8,7 @@ import Application from '../components/Application';
 import UserStudentList from '../components/users/UserStudentList';
 import UserAdd from '../components/users/UserAdd';
 import SubjectList from '../components/subject/SubjectList';
-import SubjectAdd from '../components/subject/SubjectAdd';
+import SubjectAddForm from '../components/subject/SubjectAdd';
 
 class Root extends React.Component{
     render(){
@@ -18,7 +18,7 @@ class Root extends React.Component{
                     <Route path="student" component={UserStudentList}/>
                     <Route path="usersadd" component={UserAdd}/>
                     <Route path="subject" component={SubjectList}/>
-                    <Route path="subjectAdd" component={SubjectAdd}/>
+                    <Route path="subjectAdd" component={SubjectAddForm}/>
                 </Route>
             </Router>
         )
