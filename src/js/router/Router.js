@@ -9,6 +9,8 @@ import UserStudentList from '../components/users/UserStudentList';
 import UserAdd from '../components/users/UserAdd';
 import SubjectList from '../components/subject/SubjectList';
 import SubjectAddForm from '../components/subject/SubjectAdd';
+import BasicInfo from '../components/personalCenter/BasicInfo';
+import ChangePwd from '../components/personalCenter/ChangePwd';
 
 class Root extends React.Component{
     render(){
@@ -19,6 +21,9 @@ class Root extends React.Component{
                     <Route path="usersadd" component={UserAdd}/>
                     <Route path="subject" component={SubjectList}/>
                     <Route path="subjectAdd" component={SubjectAddForm}/>
+                    <Route path="usersadd" component={UserAdd}/>
+                    <Route path="basicInfo" component={BasicInfo}/>
+                    <Route path="changePwd" component={ChangePwd}/>
                 </Route>
             </Router>
         )

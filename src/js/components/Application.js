@@ -40,24 +40,51 @@ export default class Application extends React.Component {
                                 <Menu.Item key="1">最新消息</Menu.Item>
                                 <Menu.Item key="2">所有通告</Menu.Item>
                             </SubMenu>
-                            {/* <SubMenu key="sub2" title={<span><Icon type="user" />用户管理</span>}>
-                                <Menu.Item key="5">管理员</Menu.Item>
-                                <Menu.Item key="6">教师</Menu.Item>
-                                <Menu.Item key="7"><Link to="student">学生</Link></Menu.Item>
-                            </SubMenu> */}
-                            <SubMenu key="sub3" title={<span><Icon type="laptop" />我的学生</span>}>
-                                <Menu.Item key="9">option9</Menu.Item>
-                                <Menu.Item key="10">option10</Menu.Item>
-                                <Menu.Item key="11">option11</Menu.Item>
-                                <Menu.Item key="12">option12</Menu.Item>
+                            {this.state.permissions=="3"?
+                                <SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
+                                    <Menu.Item key="3">管理员</Menu.Item>
+                                    <Menu.Item key="4">教师</Menu.Item>
+                                    <Menu.Item key="5"><Link to="student">学生</Link></Menu.Item>
+                                </SubMenu>
+                            :""}
+                            {this.state.permissions=="1"||this.state.permissions=="2"?
+                                <SubMenu key="sub3" title={<span><Icon type="contacts" />我的学生</span>}>
+                                    <Menu.Item key="6">option9</Menu.Item>
+                                    <Menu.Item key="7">option10</Menu.Item>
+                                    <Menu.Item key="8">option11</Menu.Item>
+                                    <Menu.Item key="9">option12</Menu.Item>
+                                </SubMenu>
+                            :""}
+                            {this.state.permissions=="3"||this.state.permissions=="2"?
+                            <SubMenu key="sub4" title={<span><Icon type="appstore-o"/>分类管理</span>}>
+                                {this.state.permissions=="3"?
+                                <Menu.Item key="10">新闻管理</Menu.Item>
+                                :""}
+                                {this.state.permissions=="2"?
+                                <Menu.Item key="11">课题类型</Menu.Item>
+                                :""}
+                                {this.state.permissions=="2"?
+                                <Menu.Item key="12">课题来源</Menu.Item>
+                                :""}
                             </SubMenu>
-                            {/* <SubMenu key="sub3" title={<span><Icon type="laptop" />分类管理</span>}>
-                                <Menu.Item key="9">option9</Menu.Item>
-                                <Menu.Item key="10">option10</Menu.Item>
-                                <Menu.Item key="11">option11</Menu.Item>
-                                <Menu.Item key="12">option12</Menu.Item>
-                            </SubMenu> */}
-                            <SubMenu key="sub4" title={<span><Icon type="laptop" /><Link to="subject">我的课题</Link></span>}>
+                            :""}
+                            {this.state.permissions=="1"||this.state.permissions=="2"?
+                                <SubMenu key="sub5" title={<span><Icon type="schedule" />课题管理</span>}>
+                                    <Menu.Item key="13"><Link to="subject">我的课题</Link></Menu.Item>
+                                    {this.state.permissions=="2"?
+                                    <Menu.Item key="14">待审批课题</Menu.Item>
+                                    :""}
+                                </SubMenu>
+                            :""}
+                            {this.state.permissions=="0"?
+                                <SubMenu key="sub6" title={<span><Icon type="schedule" />学生</span>}>
+                                    <Menu.Item key="15"><Link to="subject">我要选题</Link></Menu.Item>
+                                    <Menu.Item key="16">任务</Menu.Item>
+                                </SubMenu>
+                            :""}
+                            <SubMenu key="sub7" title={<span><Icon type="user" />个人中心</span>}>
+                                <Menu.Item key="17"><Link to="basicInfo">基本信息</Link></Menu.Item>
+                                <Menu.Item key="18"><Link to="changePwd">个人修改密码</Link></Menu.Item>
                             </SubMenu>
                         </Menu>
                     </Sider>

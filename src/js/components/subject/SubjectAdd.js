@@ -5,6 +5,7 @@
 import React from 'react';
 import {AddSubject} from '../../services/subjectService.js';
 import { Form, Input, Tooltip, Icon, Cascader,Select,Button,Modal} from 'antd';
+import {Link} from 'react-router';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const ue = UE.getEditor('editor');
@@ -13,15 +14,21 @@ class SubjectAdd extends React.Component {
         super(props);
         this.state={
             isEdit:0,//0代表初次，1代表未填入，2代表已填入
+            isForm:true
         }
     }
     componentWillMount(){
+
+    }
+    componentDidMount(){
+        const ue = UE.getEditor('editor');
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <div id="subAdd">
                 <p>Hi~ admin，欢迎使用课题发布功能！</p>
+                {this.state.isForm?
                 <Form onSubmit={this.handleSubmit} className="subAdd-form">
                     <FormItem
                     label="课题名称"
@@ -32,6 +39,7 @@ class SubjectAdd extends React.Component {
                             rules: [{
                             required: true, message: '请填写课题名称!',
                             }],
+                            initialValue:'测试初始化值'
                         })(
                             <Input />
                         )}
@@ -80,7 +88,7 @@ class SubjectAdd extends React.Component {
                     labelCol={{ span: 5 }}
                     wrapperCol={{ span: 12 }}
                     >
-                        <textarea id="editor" type="text/plain"></textarea>
+                        <textarea id="editor" type="text/plain" name="content"></textarea>
                         <div className="ant-form-explain" style={{marginTop:'100px',color:'#f5222d',visibility:this.state.isEdit==1?'visible':'hidden'}}>请填写课题简介!</div>
                     </FormItem>
                     <FormItem
@@ -92,11 +100,21 @@ class SubjectAdd extends React.Component {
                         <Button type="primary" htmlType="submit">立即发布</Button>
                     </FormItem>
                 </Form>
+                :
+                <div style={{height:'300px',textAlign:'center',lineHeight:'300px'}}>
+                    <Link>查看详情>></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Link to="subjectAdd" onClick={this.toAddPage.bind(this)}>继续增加>></Link>
+                </div>
+                }
+                
             </div>
         );
     }
     _addSubject(){
         AddSubject(data);
+    }
+    toAddPage(){
+        this.setState({isForm:true})
     }
     handleSubmit = (e) => {
         e.preventDefault();
@@ -110,7 +128,9 @@ class SubjectAdd extends React.Component {
                     return false;
                 }else{
                     data.subIntroduction=ue.getContentTxt();
+                    data.creatUserId=sessionStorage.getItem('id');
                     this.success();
+                    this.setState({isForm:false});
                     AddSubject(data);
                 }
             }
