@@ -78,7 +78,7 @@ export default class Application extends React.Component {
                             :""}
                             {this.state.permissions=="0"?
                                 <SubMenu key="sub6" title={<span><Icon type="schedule" />学生</span>}>
-                                    <Menu.Item key="15"><Link to="subject">我要选题</Link></Menu.Item>
+                                    <Menu.Item key="15"><Link to="subjectChoosed">我要选题</Link></Menu.Item>
                                     <Menu.Item key="16">任务</Menu.Item>
                                 </SubMenu>
                             :""}

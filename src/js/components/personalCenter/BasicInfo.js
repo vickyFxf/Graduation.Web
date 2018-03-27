@@ -3,10 +3,14 @@
  * Created by vicky on 2018/03/36
  */
 import React from 'react';
-import { Form, Input, Tooltip, Icon, Cascader,Select,Button,Modal} from 'antd';
+import { Form, Input,Select,Button} from 'antd';
+import {GetUserInfo,UpdateUserInfo} from '../../services/usersService.js';
 const FormItem = Form.Item;
 const Option = Select.Option;
 class BasicInfoForm extends React.Component {
+    componentWillMount(){
+        // this._getUserInfo();
+    }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
@@ -32,6 +36,9 @@ class BasicInfoForm extends React.Component {
                     wrapperCol={{ span: 12 }}
                     >
                         {getFieldDecorator('id', {
+                            rules: [{
+                                required: true,
+                                }],
                            initialValue:'1406010039'
                         })(
                             <Input disabled='true'/>
@@ -43,6 +50,9 @@ class BasicInfoForm extends React.Component {
                     wrapperCol={{ span: 12 }}
                     >
                         {getFieldDecorator('sex', {
+                            rules: [{
+                                required: true, message: '请选择性别!',
+                                }],
                             initialValue:'1'
                         })(
                             <Select placeholder="请选择课题类别">
@@ -57,6 +67,9 @@ class BasicInfoForm extends React.Component {
                     wrapperCol={{ span: 12 }}
                     >
                         {getFieldDecorator('college', {
+                            rules: [{
+                                required: true, message: '请填写学院!',
+                                }],
                             initialValue:'第一临床、信息与工程学院'
                         })(
                             <Input />
@@ -68,17 +81,9 @@ class BasicInfoForm extends React.Component {
                     wrapperCol={{ span: 12 }}
                     >
                         {getFieldDecorator('major', {
-                            initialValue:'信息管理与信息系统'
-                        })(
-                            <Input />
-                        )}
-                    </FormItem>
-                    <FormItem
-                    label="专业"
-                    labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
-                    >
-                        {getFieldDecorator('major', {
+                            rules: [{
+                                required: true, message: '请填写专业!',
+                                }],
                             initialValue:'信息管理与信息系统'
                         })(
                             <Input />
@@ -90,6 +95,9 @@ class BasicInfoForm extends React.Component {
                     wrapperCol={{ span: 12 }}
                     >
                         {getFieldDecorator('email', {
+                            rules: [{
+                                required: true, message: '请填写邮箱!',
+                                }],
                             initialValue:'1004272351@qq.com'
                         })(
                             <Input />
@@ -101,6 +109,9 @@ class BasicInfoForm extends React.Component {
                     wrapperCol={{ span: 12 }}
                     >
                         {getFieldDecorator('tel', {
+                            rules: [{
+                                required: true, message: '请填写联系方式!',
+                                }],
                             initialValue:'18057727150'
                         })(
                             <Input />
@@ -118,23 +129,19 @@ class BasicInfoForm extends React.Component {
             </div>
         );
     }
+    _getUserInfo(){
+        let data;
+        data.id=sessionStorage.getItem('id');
+        GetUserInfo(data);
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         let data;
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 data=values;
-                data.isAudit=0;
-                if(ue.hasContents()=='undefined'||!ue.hasContents()){
-                    this.setState({isEdit:1})
-                    return false;
-                }else{
-                    data.subIntroduction=ue.getContentTxt();
-                    data.creatUserId=sessionStorage.getItem('id');
-                    this.success();
-                    this.setState({isForm:false});
-                    AddSubject(data);
-                }
+                data.sex=Number(data.sex);
+                UpdateUserInfo(data);
             }
         });
     }
