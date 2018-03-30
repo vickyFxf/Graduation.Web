@@ -1,3 +1,6 @@
+/*
+*组件样式
+*/
 @import "main/layout.scss";
 @import "main/reset.scss";
 @import "main/button.scss";
@@ -5,3 +8,9 @@
 @import "main/table.scss";
 @import "main/ueditor.scss";
 @import "main/modal.scss";
+@import "main/container.scss";
+
+/*
+*各页面样式
+*/
+@import "main/subDetails.scss";

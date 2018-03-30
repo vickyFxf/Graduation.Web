@@ -18,10 +18,11 @@ class SubjectAdd extends React.Component {
         }
     }
     componentWillMount(){
-
+        // location.reload();
     }
     componentDidMount(){
-        const ue = UE.getEditor('editor');
+        // location.reload();
+        // const ue = UE.getEditor('editor');
     }
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -39,7 +40,6 @@ class SubjectAdd extends React.Component {
                             rules: [{
                             required: true, message: '请填写课题名称!',
                             }],
-                            initialValue:'测试初始化值'
                         })(
                             <Input />
                         )}
@@ -102,7 +102,7 @@ class SubjectAdd extends React.Component {
                 </Form>
                 :
                 <div style={{height:'300px',textAlign:'center',lineHeight:'300px'}}>
-                    <Link>查看详情>></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Link to="subjectDetails">查看详情>></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Link to="subjectAdd" onClick={this.toAddPage.bind(this)}>继续增加>></Link>
                 </div>
                 }

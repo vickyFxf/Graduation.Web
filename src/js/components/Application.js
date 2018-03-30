@@ -7,6 +7,7 @@ import {Link} from 'react-router';
 import { Layout, Menu, Breadcrumb, Icon,Button} from 'antd';
 const { SubMenu } = Menu;
 const { Header, Content, Sider,Footer } = Layout;
+
 export default class Application extends React.Component {
     constructor(props){
         super(props);
@@ -58,7 +59,7 @@ export default class Application extends React.Component {
                             {this.state.permissions=="3"||this.state.permissions=="2"?
                             <SubMenu key="sub4" title={<span><Icon type="appstore-o"/>分类管理</span>}>
                                 {this.state.permissions=="3"?
-                                <Menu.Item key="10">新闻管理</Menu.Item>
+                                <Menu.Item key="10">新闻分类</Menu.Item>
                                 :""}
                                 {this.state.permissions=="2"?
                                 <Menu.Item key="11">课题类型</Menu.Item>
@@ -89,10 +90,7 @@ export default class Application extends React.Component {
                         </Menu>
                     </Sider>
                     <Layout style={{ padding: '0 24px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>位置：新增课题</Breadcrumb.Item>
-                        {/* <Breadcrumb.Item></Breadcrumb.Item> */}
-                        </Breadcrumb>
+                        {/* <Breadcrumb style={{ margin: '16px 0' }} routes={props.routes} params={props.params}/> */}
                         <Content style={{ background: '#fff', padding: 4, margin: 0, minHeight: 280 }}>
                             {this.props.children}
                         </Content>

@@ -19,7 +19,7 @@ class BasicInfoForm extends React.Component {
                     <FormItem
                     label="姓名"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{ span: 5 }}
                     >
                         {getFieldDecorator('name', {
                             rules: [{
@@ -33,7 +33,7 @@ class BasicInfoForm extends React.Component {
                     <FormItem
                     label="学号"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{ span: 5 }}
                     >
                         {getFieldDecorator('id', {
                             rules: [{
@@ -47,7 +47,7 @@ class BasicInfoForm extends React.Component {
                     <FormItem
                     label="性别"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{ span: 5 }}
                     >
                         {getFieldDecorator('sex', {
                             rules: [{
@@ -64,7 +64,7 @@ class BasicInfoForm extends React.Component {
                     <FormItem
                     label="学院"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{ span: 5 }}
                     >
                         {getFieldDecorator('college', {
                             rules: [{
@@ -78,7 +78,7 @@ class BasicInfoForm extends React.Component {
                     <FormItem
                     label="专业"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{ span: 5 }}
                     >
                         {getFieldDecorator('major', {
                             rules: [{
@@ -92,7 +92,7 @@ class BasicInfoForm extends React.Component {
                     <FormItem
                     label="邮箱"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{ span: 5 }}
                     >
                         {getFieldDecorator('email', {
                             rules: [{
@@ -106,7 +106,7 @@ class BasicInfoForm extends React.Component {
                     <FormItem
                     label="联系方式"
                     labelCol={{ span: 5 }}
-                    wrapperCol={{ span: 12 }}
+                    wrapperCol={{ span: 5 }}
                     >
                         {getFieldDecorator('tel', {
                             rules: [{

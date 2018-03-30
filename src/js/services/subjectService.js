@@ -33,3 +33,15 @@ export function AddSubject(data){
         }
     })
 }
+//查看课题详情
+export function GetSubjectDetails(data){
+    return request({
+        url:'/Subject-Module/Search/',
+        method:'GET',
+        type:'json',
+        contentType:'application/json',
+        data:{
+            _id:data._id,
+        }
+    })
+}
