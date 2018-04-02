@@ -48,14 +48,6 @@ export default class Application extends React.Component {
                                     <Menu.Item key="5"><Link to="student">学生</Link></Menu.Item>
                                 </SubMenu>
                             :""}
-                            {this.state.permissions=="1"||this.state.permissions=="2"?
-                                <SubMenu key="sub3" title={<span><Icon type="contacts" />我的学生</span>}>
-                                    <Menu.Item key="6">option9</Menu.Item>
-                                    <Menu.Item key="7">option10</Menu.Item>
-                                    <Menu.Item key="8">option11</Menu.Item>
-                                    <Menu.Item key="9">option12</Menu.Item>
-                                </SubMenu>
-                            :""}
                             {this.state.permissions=="3"||this.state.permissions=="2"?
                             <SubMenu key="sub4" title={<span><Icon type="appstore-o"/>分类管理</span>}>
                                 {this.state.permissions=="3"?
@@ -71,7 +63,8 @@ export default class Application extends React.Component {
                             :""}
                             {this.state.permissions=="1"||this.state.permissions=="2"?
                                 <SubMenu key="sub5" title={<span><Icon type="schedule" />课题管理</span>}>
-                                    <Menu.Item key="13"><Link to="subject">我的课题</Link></Menu.Item>
+                                    <Menu.Item key="13"><Link to="subject">所有课题</Link></Menu.Item>
+                                    <Menu.Item key="19"><Link to="subject">被选课题</Link></Menu.Item>
                                     {this.state.permissions=="2"?
                                     <Menu.Item key="14">待审批课题</Menu.Item>
                                     :""}

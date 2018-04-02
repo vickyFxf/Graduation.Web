@@ -14,7 +14,6 @@ import SubjectDetails from '../components/subject/SubjectDetails';
 import BasicInfo from '../components/personalCenter/BasicInfo';
 import ChangePwd from '../components/personalCenter/ChangePwd';
 
-
 class Root extends React.Component{
     render(){
         return(
