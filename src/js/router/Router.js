@@ -24,7 +24,7 @@ class Root extends React.Component{
                     <Route path="subject" breadcrumbName="课题列表" component={SubjectList}/>
                     <Route path="subjectAdd" breadcrumbName="添加课题" component={SubjectAddForm}/>
                     <Route path="subjectChoosed" breadcrumbName="选择课题" component={SubjectChoosed}/>
-                    <Route path="subjectDetails" breadcrumbName="课题详情" component={SubjectDetails}/>
+                    <Route path="subjectDetails/:_id" breadcrumbName="课题详情" component={SubjectDetails}/>
                     <Route path="usersadd" breadcrumbName="添加用户" component={UserAdd}/>
                     <Route path="basicInfo" breadcrumbName="基本信息" component={BasicInfo}/>
                     <Route path="changePwd" breadcrumbName="修改密码" component={ChangePwd}/>

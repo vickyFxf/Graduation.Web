@@ -11,12 +11,23 @@ export default class SubjectDetails extends React.Component {
   constructor(props){
     super(props);
     this.state={
+        _id:this.props.params._id,
+        details:{}
     }
   }
   componentWillMount(){
-    // this._getSubList();
+    this._getSubList();
+  }
+  _getSubList(){
+    let data={};
+    data._id=this.state._id;
+    GetSubjectDetails(data).then(res=>{
+        this.state.details=res;
+        this.setState({});
+    })
   }
   render() {
+      const item=this.state.details;
       return(
           <div className="table-container" id="subDetails">
               <table>
@@ -42,9 +53,7 @@ export default class SubjectDetails extends React.Component {
                     </tr>
                     <tr style={{minHeight:'35px'}}>
                         <td>课题简介</td>
-                        <td>通过多层架构，BS的工作模式，实现药库的入库、出库、盘点、报损、价格管理、字典管理等功能。数据库为SQL Server。通过多层架构，BS的工作模式，实现药库的入库、出库、盘点、报损、价格管理、字典管理等功能。数据库为SQL Server。
-                        通过多层架构，BS的工作模式，实现药库的入库、出库、盘点、报损、价格管理、字典管理等功能。数据库为SQL Server。通过多层架构，BS的工作模式，实现药库的入库、出库、盘点、报损、价格管理、字典管理等功能。数据库为SQL Server。
-                        </td>
+                        <td>{item.subIntroduction}</td>
                     </tr>
                   </tbody>
                   <caption style={{textAlign:'center',captionSide:'bottom',padding:'0',color:'#000'}}>

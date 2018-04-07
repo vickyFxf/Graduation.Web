@@ -11,6 +11,7 @@ export default class SubjectList extends React.Component {
   constructor(props){
     super(props);
     this.state={
+      currentId:sessionStorage.getItem('id'),
       subList:[],
       formData:{
 
@@ -18,11 +19,10 @@ export default class SubjectList extends React.Component {
     }
   }
   componentWillMount(){
-    // this._getSubList();
+    this._getSubList();
   }
   render() {
     const Search = Input.Search;
-    const {lists,getSubjectList} = this.props;
     const columns = [{
       title: '课题名称',
       dataIndex: 'subName',
@@ -76,12 +76,20 @@ export default class SubjectList extends React.Component {
         onSearch={value => console.log(value)}
         enterButton
         />
-        {/* <Table rowSelection={rowSelection} columns={columns} dataSource={lists} />:"没有数据！" */}
+        <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.subList} />
           
       </div>
     );
   }
   _getSubList(){
-    GetSubList(data);
+    let data={};
+    data.creatUserId=this.state.currentId;
+    GetSubList(data).then((res)=>{
+      let resData=res;
+      if(resData.length>0){
+        this.state.subList=resData;
+        this.setState({});
+      }
+    })
   }
 }

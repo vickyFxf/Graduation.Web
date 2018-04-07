@@ -14,7 +14,8 @@ class SubjectAdd extends React.Component {
         super(props);
         this.state={
             isEdit:0,//0代表初次，1代表未填入，2代表已填入
-            isForm:true
+            isForm:true,
+            successId:'',
         }
     }
     componentWillMount(){
@@ -102,7 +103,7 @@ class SubjectAdd extends React.Component {
                 </Form>
                 :
                 <div style={{height:'300px',textAlign:'center',lineHeight:'300px'}}>
-                    <Link to="subjectDetails">查看详情>></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Link to={'subjectDetails/'+this.state.successId}>查看详情>></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Link to="subjectAdd" onClick={this.toAddPage.bind(this)}>继续增加>></Link>
                 </div>
                 }
@@ -131,7 +132,10 @@ class SubjectAdd extends React.Component {
                     data.creatUserId=sessionStorage.getItem('id');
                     this.success();
                     this.setState({isForm:false});
-                    AddSubject(data);
+                    AddSubject(data).then(res=>{
+                        this.state.successId=res._id;
+                        this.setState({});
+                    })
                 }
             }
         });
