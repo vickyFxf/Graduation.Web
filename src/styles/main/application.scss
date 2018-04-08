@@ -1,0 +1,12 @@
+.currentInfo{
+    span{
+        margin: 0 5px;
+    }
+}
+.logout{
+    cursor: pointer;
+    &:hover{
+        color:#fff;
+        text-decoration: underline;
+    }
+}
