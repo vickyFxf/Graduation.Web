@@ -5,13 +5,10 @@ import request from './requestWrapper';
 //获取个人信息
 export function GetUserInfo(data){
     return request({
-        url:'/User-Module/UserInfo/:id',
+        url:'/User-Module/UserInfo/'+data.id,
         method:'GET',
         type:'json',
         contentType:'application/json',
-        data:{
-            id:data.id
-        }
     })
 }
 //修改个人信息
