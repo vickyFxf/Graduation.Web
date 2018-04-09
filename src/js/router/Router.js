@@ -1,3 +1,9 @@
+/*
+ * @Author: VickyFan 
+ * @Date: 2018-04-09 10:30:42 
+ * @Last Modified by:   VickyFan 
+ * @Last Modified time: 2018-04-09 10:30:42 
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -31,16 +37,3 @@ export default class Root extends React.Component {
 		)
 	}
 }
-// export default (
-// 	<Route path="/" component={Application}>
-// 		<Route path="student" component={UserStudentList} />
-// 		<Route path="usersadd" component={UserAdd} />
-// 		<Route path="subject" component={SubjectList} />
-// 		<Route path="subjectAdd" component={SubjectAddForm} />
-// 		<Route path="subjectChoosed" component={SubjectChoosed} />
-// 		<Route path="subjectDetails/:_id" component={SubjectDetails} />
-// 		<Route path="usersadd" component={UserAdd} />
-// 		<Route path="basicInfo" component={BasicInfo} />
-// 		<Route path="changePwd" component={ChangePwd} />
-// 	</Route>
-// )
