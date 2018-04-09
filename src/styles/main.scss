@@ -13,7 +13,11 @@
 /*
 *各页面样式
 */
-@import "main/application.scss";
-@import "main/subDetails.scss";
-@import "main/basicInfo.scss";
-@import "main/changePwd.scss";
+@import "main/module/application.scss";
+@import "main/module/subDetails.scss";
+@import "main/module/basicInfo.scss";
+@import "main/module/changePwd.scss";
+
+@import "main/module/studentMgt.scss";
+@import "main/module/adminMgt.scss";
+@import "main/module/teacherMgt.scss";

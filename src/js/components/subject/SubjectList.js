@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:29:03 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-09 10:59:22
+ * @Last Modified time: 2018-04-09 16:25:34
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider } from 'antd';
@@ -70,8 +70,9 @@ export default class SubjectList extends React.Component {
       }),
     };
     return (
-      <div id="subjectList">
+      <div id="subjectList" className="table-list">
         <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} /><Link to="subjectAdd">添加</Link></Button>
+        <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />修改</Button>
         <Button><Icon type="close-circle" style={{ fontSize: 18, color: '#FF0000' }} />删除</Button>
         <Search
           placeholder="请输入关键字"

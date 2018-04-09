@@ -1,8 +1,8 @@
 /*
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:29:46 
- * @Last Modified by:   VickyFan 
- * @Last Modified time: 2018-04-09 10:29:46 
+ * @Last Modified by: VickyFan
+ * @Last Modified time: 2018-04-09 16:52:59
  */
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
@@ -28,15 +28,15 @@ export default class Application extends React.Component {
     const tips = '初次登录，请先修改默认密码！';
     const path = `#/changePwd?_k=4aeonu`;
     this.isFirstLogin();
-    if (this.state.isFirst) {
-      Modal.warning({
-        title: '警告！',
-        content: tips,
-        onOk: () => {
-          browserHistory.push(path);
-        }
-      })
-    }
+    // if (this.state.isFirst) {
+    //   Modal.warning({
+    //     title: '警告！',
+    //     content: tips,
+    //     onOk: () => {
+    //       browserHistory.push(path);
+    //     }
+    //   })
+    // }
   }
   render() {
     return (
@@ -66,11 +66,11 @@ export default class Application extends React.Component {
                 <Menu.Item key="1">最新消息</Menu.Item>
                 <Menu.Item key="2">所有通告</Menu.Item>
               </SubMenu>
-              {this.state.permissions == "3" ?
+              {this.state.permissions == "2" ?
                 <SubMenu key="sub2" title={<span><Icon type="team" />用户管理</span>}>
-                  <Menu.Item key="3">管理员</Menu.Item>
-                  <Menu.Item key="4">教师</Menu.Item>
-                  <Menu.Item key="5"><Link to="student">学生</Link></Menu.Item>
+                  <Menu.Item key="3"><Link to="adminMgt">管理员</Link></Menu.Item>
+                  <Menu.Item key="4"><Link to="teacherMgt">教师</Link></Menu.Item>
+                  <Menu.Item key="5"><Link to="studentMgt">学生</Link></Menu.Item>
                 </SubMenu>
                 : ""}
               {this.state.permissions == "3" || this.state.permissions == "2" ?
