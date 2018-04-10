@@ -15,7 +15,7 @@ html.borderbox *, html.borderbox *:before, html.borderbox *:after {
   box-sizing: border-box;
 }
 /* 内外边距通常让各个浏览器样式的表现位置不同 */
-body, dl, dd, h1, h2, h3, h4, h5, h6, p, form {
+html,body, dl, dd, h1, h2, h3, h4, h5, h6, p, form {
   margin: 0;
 }
 ol, ul, legend, button, input, optgroup, select, textarea, fieldset {

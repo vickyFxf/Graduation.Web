@@ -1,0 +1,42 @@
+.globalTable {
+  padding-top: 120px;
+  @media (min-width:1440px) {
+    padding-top: 280px;
+  }
+}
+.img-box{
+  width: 400px; 
+  height: 300px; 
+  -moz-border-radius: 200px / 150px; 
+  -webkit-border-radius: 200px / 150px; 
+  border-radius: 200px / 150px;
+  @media (min-width:1440px) {
+    width: 600px; 
+    height: 400px; 
+    -moz-border-radius: 300px / 200px; 
+    -webkit-border-radius: 300px / 200px; 
+    border-radius: 300px / 200px;
+  }
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-image: url('../img/library.jpg');
+  margin: 0 auto;
+}
+// @font-face {
+//   font-family: 'STXingkai';
+//   src: url("/public/font/STXingkai/STXingkai.eot?7526586"); /* IE9+*/
+//   src: url("/public/font/STXingkai/STXingkai.eot?7526586#iefix") format('embedded-opentype'),
+//   url("/public/font/STXingkai/STXingkai.svg?7526586#fontello") format('svg'),
+//   url("/public/font/STXingkai/STXingkai.woff?7526586") format('woff'),/* chrome、firefox */
+//   url("/public/font/STXingkai/STXingkai.ttf?7526586") format('truetype');/* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+// }
+.blank-title{
+  text-align: center;
+  font-size: 26px;
+  font-family:'STXingkai'; 
+  color: #369dd5;
+  @media (min-width:1440px) {
+    font-size: 32px;
+  }
+}

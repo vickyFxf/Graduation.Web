@@ -251,34 +251,34 @@
   //登录
   document.getElementById("log").onclick = function () {
     var userInfo = validate();
-    // sessionStorage.setItem("id",'70001' );
-    // sessionStorage.setItem("userName", 'admin');
-    // sessionStorage.setItem("permissions", 2);
-    // window.location.href = "http://localhost:4000/index.html"
-    if (typeof (userInfo) == 'object') {
-      var res = verifyCode.validate(document.getElementById("code_input").value);
-      if (res) {
-        $.ajax({
-          url: 'http://localhost:3000/User-Module/CheckLogin',
-          type: 'POST',
-          data: userInfo,
-          dataType: 'json',
-          success: (res) => {
-            if (res.status) {
-              alert(res.msg);
-            } else {
-              sessionStorage.setItem("id", res.id);
-              sessionStorage.setItem("userName", res.name);
-              sessionStorage.setItem("permissions", res.permissions);
-              window.location.href = "http://localhost:4000/index.html"
-            }
-          }
-        })
-      } else {
-        alert("验证码错误");
-      }
-    } else {
-      alert(userInfo);
-    }
+    sessionStorage.setItem("id",'70001' );
+    sessionStorage.setItem("userName", 'admin');
+    sessionStorage.setItem("permissions", 2);
+    window.location.href = "http://localhost:4000/index.html"
+    // if (typeof (userInfo) == 'object') {
+    //   var res = verifyCode.validate(document.getElementById("code_input").value);
+    //   if (res) {
+    //     $.ajax({
+    //       url: 'http://localhost:3000/User-Module/CheckLogin',
+    //       type: 'POST',
+    //       data: userInfo,
+    //       dataType: 'json',
+    //       success: (res) => {
+    //         if (res.status) {
+    //           alert(res.msg);
+    //         } else {
+    //           sessionStorage.setItem("id", res.id);
+    //           sessionStorage.setItem("userName", res.name);
+    //           sessionStorage.setItem("permissions", res.permissions);
+    //           window.location.href = "http://localhost:4000/index.html"
+    //         }
+    //       }
+    //     })
+    //   } else {
+    //     alert("验证码错误");
+    //   }
+    // } else {
+    //   alert(userInfo);
+    // }
   }
 </script>

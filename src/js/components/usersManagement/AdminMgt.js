@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 16:49:48 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-09 17:02:38
+ * @Last Modified time: 2018-04-10 11:15:43
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider } from 'antd';
@@ -13,7 +13,11 @@ export default class AdminMgt extends React.Component {
   render() {
     const Search = Input.Search;
     const columns = [{
-      title: '学号',
+      title: '序号',
+      dataIndex: 'key',
+      key: 'key',
+    },{
+      title: '编号',
       dataIndex: 'id',
       key: 'id',
       render: text => <a href="#">{text}</a>,
@@ -30,13 +34,13 @@ export default class AdminMgt extends React.Component {
       dataIndex: 'college',
       key: 'college',
     }, {
-      title: '专业',
-      dataIndex: 'major',
-      key: 'major',
+      title: '职称',
+      dataIndex: 'title',
+      key: 'title',
     }, {
-      title: '班级',
-      dataIndex: 'class',
-      key: 'class',
+      title: '岗位',
+      dataIndex: 'position',
+      key: 'position',
     }, {
       title: '邮箱',
       dataIndex: 'email',
@@ -60,12 +64,22 @@ export default class AdminMgt extends React.Component {
     }];
     const data = [{
       key: '1',
-      id: "1406010039",
-      name: "范秀芳",
-      sex: "女",
+      id: "70001",
+      name: "李诞",
+      sex: "男",
       college: "第一临床、信息与工程学院",
-      major: "信息管理与信息系统",
-      class: 2,
+      title:'讲师',
+      position:'处长',
+      email: "1004272351@qq.com",
+      tel: "18057727150",
+    },{
+      key: '2',
+      id: "70002",
+      name: "池子",
+      sex: "男",
+      college: "第一临床、信息与工程学院",
+      title:'讲师',
+      position:'科员',
       email: "1004272351@qq.com",
       tel: "18057727150",
     }];// rowSelection object indicates the need for row selection
@@ -80,9 +94,10 @@ export default class AdminMgt extends React.Component {
     };
 
     return (
-      <div id="adminMgt" className="userMgt-list">
-        <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} /><Link to="subjectAdd">添加</Link></Button>
+      <div id="teacherMgt" className="userMgt-list">
+        <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
         <Button><Icon type="close-circle" style={{ fontSize: 18, color: '#FF0000' }} />删除</Button>
+        <label className="search-label">按编号查询：</label>
         <Search
           placeholder="请输入关键字"
           onSearch={value => console.log(value)}
