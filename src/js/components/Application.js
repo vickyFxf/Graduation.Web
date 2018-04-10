@@ -28,15 +28,15 @@ export default class Application extends React.Component {
     const tips = '初次登录，请先修改默认密码！';
     const path = `#/changePwd?_k=4aeonu`;
     this.isFirstLogin();
-    // if (this.state.isFirst) {
-    //   Modal.warning({
-    //     title: '警告！',
-    //     content: tips,
-    //     onOk: () => {
-    //       browserHistory.push(path);
-    //     }
-    //   })
-    // }
+    if (this.state.isFirst) {
+      Modal.warning({
+        title: '警告！',
+        content: tips,
+        onOk: () => {
+          browserHistory.push(path);
+        }
+      })
+    }
   }
   render() {
     return (

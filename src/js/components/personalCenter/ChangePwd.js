@@ -72,7 +72,7 @@ class ChangePwdForm extends React.Component {
               wrapperCol={{
                 xs: { span: 16, offset: 0 },
                 sm: { span: 12, offset: 4 },
-              }}
+              }}   
             >
               <Button type="primary" htmlType="submit">确定</Button>
             </FormItem>
