@@ -1,0 +1,21 @@
+.globalTable {
+  padding-top: 200px;
+}
+.img-box{
+  width: 600px; 
+  height: 400px; 
+  -moz-border-radius: 300px / 200px; 
+  -webkit-border-radius: 300px / 200px; 
+  border-radius: 300px / 200px; 
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-image: url('../img/library.jpg');
+  margin: 0 auto;
+}
+.blank-title{
+  text-align: center;
+  font-size: 32px;
+  font-family:'华文行楷'; 
+  color: #369dd5;
+}

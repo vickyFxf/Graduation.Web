@@ -1,0 +1,21 @@
+.sub-panel-content{
+  .thread-item{
+    padding: 9px 5% 8px;
+    display: block;
+    position: relative;
+    h3{
+      color:#fff;
+      margin: 8px 0 0 5px;
+      font-size: 1.17em;
+      line-height: 1.35;
+    }
+    &:hover{
+      background: #6aabce;
+    }
+  }
+  .avator{
+    float: left;
+    margin-right: 8px;
+    position: relative;
+  }
+}

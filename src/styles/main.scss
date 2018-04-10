@@ -1,6 +1,4 @@
-/*
-*组件样式
-*/
+//组件样式
 @import "main/layout.scss";
 @import "main/reset.scss";
 @import "main/button.scss";
@@ -9,10 +7,10 @@
 @import "main/ueditor.scss";
 @import "main/modal.scss";
 @import "main/container.scss";
-
-/*
-*各页面样式
-*/
+@import "main/global-panel.scss";
+@import "main/sub-panel.scss";
+@import "main/blankArea.scss";
+//各模块样式
 @import "main/module/application.scss";
 @import "main/module/subDetails.scss";
 @import "main/module/basicInfo.scss";
@@ -21,3 +19,6 @@
 @import "main/module/studentMgt.scss";
 @import "main/module/adminMgt.scss";
 @import "main/module/teacherMgt.scss";
+
+//公共样式
+@import "main/common/userMgt-list.scss";

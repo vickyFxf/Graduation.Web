@@ -1,0 +1,50 @@
+.global-panel{
+  color:#fff;
+  position: relative;
+  .logo-box{
+    padding: 20px 0;
+  }
+  .nav-box{
+    .global-panel-item{
+      &:hover{
+        background: #369dd5;
+      }
+    }
+  }
+  .info-box{
+    position: absolute;
+    bottom: 80px;
+    width:100%;
+    .avatar{
+      display: inline-block;
+      width: 36px;
+      height:36px;
+      line-height: 36px;
+      background: #369dd5;
+      border-radius: 2px;
+      font-size: 28px;
+    }
+  }
+  .exit-box{
+    position: absolute;
+    bottom: 10px;
+    width:100%;
+  }
+}
+.global-panel-item{
+  display: block;
+  padding:6px 0;
+  text-decoration: none;
+  outline: none;
+  position: relative;
+  text-align: center;
+  color:#fff;
+  &:hover{color:#fff}
+  i{
+    font-size: 36px;
+  }
+  div{
+    font-size: 15px;
+  }
+}
+

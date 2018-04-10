@@ -1,30 +1,35 @@
-$blue-base:#6fb3e0;
+$blue-base:#2a7ead;
+$blue-light:#6aabce;
 html,body,#app{
     width: 100%;
     height:100%;
 }
-.ant-layout-header{
-    background-color: $blue-base !important;
-    .logo{height:97px;}
-    .title{
-        height:97px;
-        line-height: 97px;
-        font-size: 28px;
-        color:#fff;
-        font-weight: 600;
-        text-shadow: #1659ac 0px 1px 3px;
-        margin-left: 20px;
-    }
-    @media screen and (max-width:1366px){
-        .logo{height:63px;}
-        .title{height:63px;line-height: 63px}
-    }
+.global-panel{
+  width:80px;
+  @media (min-width:1440px){
+    width:100px;
+  }
+  height:100%;
+  background-color: $blue-base;
 }
-.ant-layout-footer{
-    p{
-        margin-bottom: 0;
-        text-align: center;
-    }
+.page-container{
+  height: 100%;
+  background: #f1f5fb;
+}
+.sub-panel{
+  position: relative;
+  height:100%;
+  background-color: #369dd5;
+  float: left;
+  @media (min-width:1440px) {
+    width:300px;
+  }
+}
+.global-detail-area{
+  height:100%;
+  background: #e7edf7;
+  width:100%;
+  padding-left: 300px;
 }
 .left{float: left;}
 .right{float:right;}

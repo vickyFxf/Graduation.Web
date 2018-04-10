@@ -1,29 +1,4 @@
 #studentMgt{
-  margin: 20px;
-  table{width: 100%;}
-  caption{
-    text-align: center;
-    font-size: 24px;
-    font-family: "微软雅黑";
-    margin-bottom: 0;
-    button{
-      width: 70px;
-      height:28px;
-      font-size: 16px;
-      line-height: 25px;
-      color:#333;
-      border-radius: 3px;
-      margin: 0 30px;
-      outline:none;
-    }
-  }
-  .attention{color:#889988}
-  tr{
-    height:34px;
-    td:first-child{
-      min-width: 200px;
-      font-weight: 800
-    }
-  }
-  tr:nth-child(odd){background-color: #edf5fa;}
+  .ant-table-thead > tr > th{padding: 0}
+  .ant-table-tbody td{padding: 0}
 }
