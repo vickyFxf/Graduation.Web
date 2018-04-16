@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Table, Icon, Divider } from 'antd';
-export default class SubjectChoosed extends React.Component {
+export default class OpeningReport extends React.Component {
   render() {
     const columns = [{
       title: '序号',
@@ -17,6 +17,14 @@ export default class SubjectChoosed extends React.Component {
     }, {
       title: '指导教师',
       dataIndex: 'teacherName',
+    }, {
+      title: '操作',
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <a href="#">申请</a>
+        </span>
+      ),
     }];
     const data = [];
     for (let i = 0; i < 46; i++) {
@@ -33,7 +41,7 @@ export default class SubjectChoosed extends React.Component {
           columns={columns}
           dataSource={data}
           pagination={{
-            pageSize: 20,
+            pageSize: 10,
           }}
         />
       </div>

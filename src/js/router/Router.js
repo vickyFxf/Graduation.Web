@@ -10,19 +10,28 @@ import { Provider } from 'react-redux';
 import store from '../store/index';
 import { Router, Route, hashHistory, IndexRoute, browserHistory,IndexRedirect } from 'react-router';
 import Application from '../components/Application';
-import SubjectList from '../components/subject/SubjectList';
-import SubjectAddForm from '../components/subject/SubjectAdd';
-import SubjectChoosed from '../components/subject/SubjectChoosed';
-import SubjectDetails from '../components/subject/SubjectDetails';
-import BasicInfo from '../components/personalCenter/BasicInfo';
-import ChangePwd from '../components/personalCenter/ChangePwd';
+
+
 
 import HomePage from '../components/page/HomePage';
+//用户管理
 import UserPage from '../components/page/UserPage';
 import AdminMgt from '../components/usersManagement/AdminMgt';
 import TeacherMgt from '../components/usersManagement/TeacherMgt';
 import StudentMgt from '../components/usersManagement/StudentMgt';
-
+//个人中心
+import SelfPage from '../components/page/SelfPage';
+import BasicInfo from '../components/personalCenter/BasicInfo';
+import ChangePwd from '../components/personalCenter/ChangePwd';
+//课题
+import SubjectPage from '../components/page/SubjectPage';
+import SubjectList from '../components/subject/SubjectList';
+import SubjectAddForm from '../components/subject/SubjectAdd';
+import SubjectChoosed from '../components/subject/SubjectChoosed';
+import SubjectDetails from '../components/subject/SubjectDetails';
+//任务
+import TaskPage from '../components/page/TaskPage';
+import OpeningReport from '../components/task/OpeningReport';
 export default class Root extends React.Component {
 	render() {
 		return (
@@ -36,14 +45,22 @@ export default class Root extends React.Component {
             <Route path="teacherMgt" component={TeacherMgt} />
             <Route path="studentMgt" component={StudentMgt} />
           </Route>
-          {/* 课题管理 */}
-					<Route path="subject" component={SubjectList} />
-					<Route path="subjectAdd" component={SubjectAddForm} />
-					<Route path="subjectChoosed" component={SubjectChoosed} />
-					<Route path="subjectDetails/:_id" component={SubjectDetails} />
-          {/* 个人中心 */}
-					<Route path="basicInfo" component={BasicInfo} />
-					<Route path="changePwd" component={ChangePwd} />
+					{/* 课题管理 */}
+					<Route path="subject" component={SubjectPage}>
+						<Route path="list" component={SubjectList} />
+						<Route path="subjectAdd" component={SubjectAddForm} />
+						<Route path="subjectChoosed" component={SubjectChoosed} />
+						<Route path="subjectDetails/:_id" component={SubjectDetails} />
+					</Route>
+					{/* 个人中心 */}
+					<Route path="selfInfo" component={SelfPage}>
+						<Route path="basicInfo" component={BasicInfo} />
+						<Route path="changePwd" component={ChangePwd} />
+					</Route>
+					{/* 任务 */}
+					<Route path="task" component={TaskPage}>
+						<Route path="openingReport" component={OpeningReport}/>
+					</Route>
 				</Route>
 			</Router>
 		)

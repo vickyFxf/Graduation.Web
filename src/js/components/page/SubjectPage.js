@@ -4,7 +4,7 @@ import BlankArea from '../common/BlankArea';
 export default class SubjectPage extends React.Component {
   render() {
     let items;
-    items=[{avator: "", id: 10000, title: '数据录入', link: '/efficiency/efficiencyData', info: ''}]
+    items=[{avator: "", id: 10001, title: '申请选题', link: '/subject/subjectAdd', info: ''}]
     return (
       <div className="page-container clear">
         <div className="sub-panel">
@@ -13,7 +13,10 @@ export default class SubjectPage extends React.Component {
           </div>
         </div>
         <div className="global-detail-area">
-          <BlankArea/>
+        {this.props.children == undefined ?
+          <div className="global-detail-area">
+            <BlankArea />
+          </div> : this.props.children}
         </div>
       </div>
     )
