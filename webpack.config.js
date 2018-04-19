@@ -2,14 +2,16 @@
  * @Author: VickyFan 
  * @Date: 2018-03-01 09:12:02 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-09 10:16:40
+ * @Last Modified time: 2018-04-16 17:28:59
  */
 var path = require('path');
 var proxy = require('http-proxy-middleware');
 module.exports = {
+  //入口
   entry: [
     path.resolve(__dirname, 'src/App.js')
   ],
+  //出口
   output: {
     path: path.resolve(__dirname, 'dist/'),
     filename: 'bundle.js',

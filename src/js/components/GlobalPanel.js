@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-10 15:28:16 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-10 20:28:15
+ * @Last Modified time: 2018-04-19 10:01:51
  */
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
@@ -38,4 +38,32 @@ export default class GlobalPanel extends React.Component {
       </div>
     )
   }
+  //查看是否是初次登录
+  // isFirstLogin() {
+  //   let data = {};
+  //   data.id = this.state.id;
+  //   GetUserInfo(data).then(res => {
+  //     let mdPwd = hex_md5('123456');
+  //     if (res.password == mdPwd) {
+  //       this.state.isFirst = true;
+  //     } else {
+  //       this.state.isFirst = false;
+  //     }
+  //     this.setState({});
+  //   })
+  // }
+  // logout() {
+  //   const tips = '退出前，请先修改默认密码';
+  //   if (this.state.isFirst) {
+  //     Modal.warning({
+  //       title: '警告！',
+  //       content: tips,
+  //       onOk: () => {
+  //         window.location.href = '';
+  //       }
+  //     })
+  //   } else {
+  //     window.location.href = 'http://localhost:4000/login.html';
+  //   }
+  // }
 }

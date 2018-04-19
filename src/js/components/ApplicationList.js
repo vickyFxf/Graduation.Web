@@ -88,15 +88,15 @@ export default class ApplicationList extends React.Component {
     switch (e.title) {
       case "教师":
         return <div className="thread-item-wrapper">
-          <i className="iconfont icon-yonghu"></i>
+          <span>教</span>
         </div>;
       case "学生":
         return <div className="thread-item-wrapper">
-          <i className="iconfont icon-yonghu"></i>
+          <span>学</span>
         </div>;
       case "管理员":
         return <div className="thread-item-wrapper">
-          <i className="iconfont icon-yonghu"></i>
+          <span>管</span>
         </div>;
     }
   }

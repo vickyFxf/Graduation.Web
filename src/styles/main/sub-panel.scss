@@ -10,11 +10,23 @@
     h3{
       color:#fff;
       margin: 8px 0 0 5px;
-      font-size: 1em;
-      line-height: 1em;
+      font-size: 1.2em;
+      line-height: 1.2em;
     }
     &:hover{
       background: #6aabce;
+    }
+    .thread-item-avator span{
+      display: inline-block;
+      height:30px;
+      width:30px;
+      text-align: center;
+      border-radius: 3px;
+      background: #fff;
+      color:#369dd5;
+      font-size: 26px;
+      line-height: 30px;
+      margin-bottom: 5px;
     }
   }
   .thread-item.active{
