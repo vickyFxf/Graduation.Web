@@ -32,7 +32,7 @@ class BasicInfoForm extends React.Component {
         <Form onSubmit={this.handleSubmit} className="subAdd-form">
           <fieldset>
             <legend>基本资料</legend>
-            <FormItem
+            {/* <FormItem
               label="上传头像"
               labelCol={{ span: 3 }}
               wrapperCol={{ span: 5 }}
@@ -48,7 +48,7 @@ class BasicInfoForm extends React.Component {
               >
                 {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
               </Upload>
-            </FormItem>
+            </FormItem> */}
             <FormItem
               label="姓名"
               labelCol={{ span: 3 }}

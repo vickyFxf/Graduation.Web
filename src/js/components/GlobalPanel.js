@@ -18,9 +18,10 @@ export default class GlobalPanel extends React.Component {
         </div>
         <div className="nav-box">
           <Link to="index" activeClassName="active" className="global-panel-item"><i className="iconfont icon-tongzhi"></i><div>通知</div></Link>
-          {/* <Link to="" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link> */}
-          {/* <Link to="" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link> */}
-          <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link>
+          <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>
+          <Link to="task" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link>
+          <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
+          {/* <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link> */}
           {/* <Link to="" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link> */}
         </div>
         <div className="info-box">

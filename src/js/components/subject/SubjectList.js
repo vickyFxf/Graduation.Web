@@ -69,9 +69,11 @@ export default class SubjectList extends React.Component {
         name: record.name,
       }),
     };
+    this.state.subList=[{"subName":"毕业论文管理系统设计与是实现","subSource":"学术研究","subCategory":"程序应用","subTime":"2018-3-17","isAudit":"未审核"},
+    {"subName":"人力资源管理系统设计与实现","subSource":"学术研究","subCategory":"程序应用","subTime":"2018-3-18","isAudit":"已通过"}]    
     return (
       <div id="subjectList" className="table-list">
-        <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} /><Link to="subjectAdd">添加</Link></Button>
+        <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} /><Link to="subject/subjectAdd">添加</Link></Button>
         <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />修改</Button>
         <Button><Icon type="close-circle" style={{ fontSize: 18, color: '#FF0000' }} />删除</Button>
         <Search
