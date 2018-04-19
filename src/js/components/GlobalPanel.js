@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-10 15:28:16 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-19 10:01:51
+ * @Last Modified time: 2018-04-19 15:35:56
  */
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
@@ -13,7 +13,7 @@ export default class GlobalPanel extends React.Component {
       <div className="global-panel">
         <div className="logo-box">
           <div>
-            <img src="/src/img/logo.gif" alt="温州医科大学" className="logo" style={{width:'100%'}}/>
+            <img src="/src/img/logo.png" alt="温州医科大学" className="logo" style={{width:'100%'}}/>
           </div>
         </div>
         <div className="nav-box">
@@ -21,8 +21,8 @@ export default class GlobalPanel extends React.Component {
           <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>
           <Link to="task" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link>
           <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
-          {/* <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link> */}
-          {/* <Link to="" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link> */}
+          <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link>
+          <Link to="set" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link>
         </div>
         <div className="info-box">
           <a className="global-panel-item"><span className="avatar">范</span></a>

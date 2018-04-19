@@ -1,3 +1,12 @@
+/*
+ * @Author: VickyFan 
+ * @Date: 2018-04-19 15:14:54 
+ * @Last Modified by:   VickyFan 
+ * @Last Modified time: 2018-04-19 15:14:54 
+ */
+/**
+ * 个人中心页
+ */
 import React from 'react';
 import ApplicationList from '../ApplicationList';
 import BlankArea from '../common/BlankArea';
