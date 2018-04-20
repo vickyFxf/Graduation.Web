@@ -1,0 +1,35 @@
+.classList table{
+  width:100%;
+  margin-bottom: 20px;
+  thead{
+    border-bottom: 1px dashed #000;
+  }
+  th,td{
+    text-align: center;
+  }
+  td{
+    padding: 5px 0;
+    a{
+      color:#000;
+      &:hover{
+        text-decoration:underline;
+      }
+    }
+    a:first-child{
+      margin-right: 8px;
+    }
+  }
+  tbody tr{
+    border-bottom: 1px dashed #000;
+    &:hover{
+      background: rgba($color: #56646d, $alpha: 0.08)
+    }
+  }
+}
+.classAdd{
+  margin-top: 100px;
+  border-top: 1px solid #e3e7ea;
+  .ant-input{
+    width:300px;
+  }
+}
