@@ -2,21 +2,34 @@
  * @Author: VickyFan 
  * @Date: 2018-04-20 09:45:08 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-20 16:15:09
+ * @Last Modified time: 2018-04-23 13:43:22
  */
 /**
  * 分类管理
  */
 import React from 'react';
-import { Tabs, Button, Modal ,Input} from 'antd';
+import { Tabs, Button, Modal, Input } from 'antd';
+import { AddClass, DeleteClass, UpdateClass, GetClassList } from '../../services/classService.js';
 const TabPane = Tabs.TabPane;
 const confirm = Modal.confirm;
 export default class ClassificationMgt extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currenType: 0,
+      currenList: [],
+      InputValue: '',
+    }
+  }
+  componentWillMount() {
+    this.getCurrentList();
+  }
+
   render() {
     return (
       <div className="mid-area classList">
-        <Tabs onChange={this.callback.bind(this)} type="card">
-          <TabPane tab="课题来源" key="1">
+        <Tabs onChange={this.changeTab.bind(this)} type="card">
+          <TabPane tab="课题来源" key="0">
             <table>
               <thead>
                 <tr>
@@ -26,63 +39,104 @@ export default class ClassificationMgt extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td><td>学术研究</td>
-                  <td>
-                    <a onClick={this.showDeleteConfirm.bind(this)}>删除</a>
-                  </td>
-                </tr>
+                {
+                  _.map(this.state.currenList, (item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index}</td>
+                        <td>{item.className}</td>
+                        <td><a onClick={this.showDeleteConfirm.bind(this, item)}>删除</a></td>
+                      </tr>
+                    )
+                  })
+                }
               </tbody>
             </table>
-            <div className="classAdd">
-              <h3>新增课题来源</h3>
-              <div>
-                <label>来源名称：</label>
-                <Input />
-                <Button type="primary" htmlType="submit">保存</Button>
-              </div>
-            </div>
           </TabPane>
-          <TabPane tab="课题类别" key="2">
+          <TabPane tab="课题类别" key="1">
             <table>
               <thead>
-                <tr><th>序号</th><th>来源名称</th></tr>
+                <tr>
+                  <th style={{ width: '15%' }}>序号</th>
+                  <th>来源名称</th>
+                  <th style={{ width: '20%' }}>操作</th>
+                </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td><td>程序设计</td>
-                </tr>
-                <tr>
-                  <td>2</td><td>科学应用</td>
-                </tr>
+                {
+                  _.map(this.state.currenList, (item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index}</td>
+                        <td>{item.className}</td>
+                        <td><a onClick={this.showDeleteConfirm.bind(this, item)}>删除</a></td>
+                      </tr>
+                    )
+                  })
+                }
               </tbody>
             </table>
-            <div className="classAdd">
-              <h3>新增课题类别</h3>
-              <div>
-                <label>来源名称：</label>
-                <Input />
-                <Button type="primary" htmlType="submit">保存</Button>
-              </div>
-            </div>
           </TabPane>
         </Tabs>
+        <div className="classAdd">
+          <h3>新增课题类别</h3>
+          <div>
+            <label>来源名称：</label>
+            <Input onChange={this.changeValue.bind(this)} />
+            <Button type="primary" htmlType="submit" onClick={this.addClass.bind(this)}>保存</Button>
+          </div>
+        </div>
       </div>
     );
   }
-  callback(key) {
-    console.log(key);
+  //获取分类列表
+  getCurrentList() {
+    GetClassList(this.state.currenType).then(res => {
+      if (res) {
+        this.state.currenList = res;
+      }
+      this.setState({});
+    })
   }
-  //删除对话框
-  showDeleteConfirm(){
+  //切换tab栏
+  changeTab(key) {
+    this.state.currenType = key;
+    this.setState({});
+    this.getCurrentList();
+  }
+  //删除某个分类
+  showDeleteConfirm(item) {
     confirm({
       title: '你确定要删除？',
       okText: '确定',
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        console.log('OK');
+        DeleteClass(item._id).then(res => {
+          if (res.status == 200) {
+            console.log("success")
+          } else {
+            console.log("error")
+          }
+        })
       }
     });
+  }
+  //获取Input框的值
+  changeValue(e) {
+    this.state.InputValue = e.target.value;
+    this.setState({});
+  }
+  //新增分类
+  addClass() {
+    let data = {};
+    data.classType = this.state.currenType;
+    data.className = this.state.InputValue;
+    // AddClass(data).then(res=>{
+    //   if(res){
+    //     console.log('success');
+    //     this.getCurrentList();
+    //   }
+    // })
   }
 }
