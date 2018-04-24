@@ -43,7 +43,7 @@ export default class ClassificationMgt extends React.Component {
                   _.map(this.state.currenList, (item, index) => {
                     return (
                       <tr key={index}>
-                        <td>{index}</td>
+                        <td>{index + 1}</td>
                         <td>{item.className}</td>
                         <td><a onClick={this.showDeleteConfirm.bind(this, item)}>删除</a></td>
                       </tr>
@@ -67,7 +67,7 @@ export default class ClassificationMgt extends React.Component {
                   _.map(this.state.currenList, (item, index) => {
                     return (
                       <tr key={index}>
-                        <td>{index}</td>
+                        <td>{index+1}</td>
                         <td>{item.className}</td>
                         <td><a onClick={this.showDeleteConfirm.bind(this, item)}>删除</a></td>
                       </tr>
@@ -91,9 +91,27 @@ export default class ClassificationMgt extends React.Component {
   }
   //获取分类列表
   getCurrentList() {
-    GetClassList(this.state.currenType).then(res => {
+    GetClassList().then(res => {
       if (res) {
-        this.state.currenList = res;
+        if (this.state.currenType == 0) {
+          //课题来源
+          let a = [];
+          _.map(res,(item,index)=>{
+            if(item.classType==0){
+              a.push(item);
+            }
+          })
+          this.state.currenList = a;
+        }else{
+          //课题类别
+          let b = [];
+          _.map(res,(item,index)=>{
+            if(item.classType==1){
+              b.push(item);
+            }
+          })
+          this.state.currenList = b;
+        }
       }
       this.setState({});
     })
@@ -101,7 +119,6 @@ export default class ClassificationMgt extends React.Component {
   //切换tab栏
   changeTab(key) {
     this.state.currenType = key;
-    this.setState({});
     this.getCurrentList();
   }
   //删除某个分类
@@ -114,7 +131,7 @@ export default class ClassificationMgt extends React.Component {
       onOk() {
         DeleteClass(item._id).then(res => {
           if (res.status == 200) {
-            console.log("success")
+            this.getCurrentList();
           } else {
             console.log("error")
           }
@@ -132,11 +149,10 @@ export default class ClassificationMgt extends React.Component {
     let data = {};
     data.classType = this.state.currenType;
     data.className = this.state.InputValue;
-    // AddClass(data).then(res=>{
-    //   if(res){
-    //     console.log('success');
-    //     this.getCurrentList();
-    //   }
-    // })
+    AddClass(data).then(res => {
+      if (res) {
+        this.getCurrentList();
+      }
+    })
   }
 }

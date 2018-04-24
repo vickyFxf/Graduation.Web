@@ -12,7 +12,7 @@ import request from './requestWrapper';
  */
 export function AddClass(data) {
   return request({
-    url: '/Class-Module/ClassAdd/',
+    url: '/Class-Module/ClassAdd',
     method: 'POST',
     type: 'json',
     contentType: 'application/json',
@@ -29,7 +29,7 @@ export function AddClass(data) {
  */
 export function DeleteClass(data) {
   return request({
-    url: '/Class-Module/ClassDel/:_id'+data._id,
+    url: '/Class-Module/ClassDel/'+data,
     method: 'DELETE',
     type: 'json',
     contentType: 'application/json',
@@ -63,7 +63,6 @@ export function GetClassList(classType) {
     type: 'json',
     contentType: 'application/json',
     data: JSON.stringify({
-      classType:classType,
     })
   })
 }

@@ -45,6 +45,9 @@ export function DeleteUser(data) {
   })
 }
 
+/**
+ * 查询用户列表
+ */
 export function GetUserList(data) {
   return request({
     url: '/User-Module/List',
@@ -52,7 +55,7 @@ export function GetUserList(data) {
     type: 'json',
     contentType: 'application/json',
     data: JSON.stringify({
-      ...data
+      // permissions:data.permissions
     })
   })
 }

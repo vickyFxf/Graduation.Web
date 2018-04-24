@@ -18,7 +18,7 @@ export default class TeacherMgt extends React.Component {
       searchId: '',
     }
   }
-  componentWillMount(){
+  componentWillMount() {
     this.getUserList();
   }
   render() {
@@ -99,15 +99,16 @@ export default class TeacherMgt extends React.Component {
         name: record.name,
       }),
     };
+    console.log(this.state.userList);
     return (
       <div id="teacherMgt" className="userMgt-list">
         <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
         <label className="search-label">按编号查询：</label>
         <Search
           placeholder="请输入关键字"
-          onSearch={(value)=>{
+          onSearch={(value) => {
             this.setState({
-              searchId:value
+              searchId: value
             });
             this.getUserList();
           }}
@@ -124,11 +125,17 @@ export default class TeacherMgt extends React.Component {
   //获取用户列表
   getUserList() {
     let data = {};
-    data.permission = 1;
+    data.permissions = 1;
     data.id = this.state.searchId;
     GetUserList(data).then(res => {
       if (res.length > 0) {
-        this.state.userList = res;
+        let a = [];
+        _.map(res, (item, index) => {
+          if (item.permissions == 1) {
+            a.push(item);
+          }
+        })
+        this.state.userList = a;
       }
     })
     this.setState({});

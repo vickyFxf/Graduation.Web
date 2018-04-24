@@ -39,6 +39,9 @@ html,body,#app{
   height:100%;
   width:60%;
   border-right:1px solid #e3e7ea;
+  @media (max-width:1440px) {
+    width:100%;
+  }
 }
 .left{float: left;}
 .right{float:right;}
