@@ -2,21 +2,29 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 16:49:48 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-10 11:15:43
+ * @Last Modified time: 2018-04-24 15:16:30
  */
 import React from 'react';
-import { Icon, Button, Input, Table, Divider } from 'antd';
+import { Icon, Button, Input, Table, Divider, Modal } from 'antd';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
+import { DeleteUser, GetUserList } from '../../services/usersService.js';
+const confirm = Modal.confirm;
 export default class AdminMgt extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userList: [],
+      searchId: '',
+    }
+  }
   render() {
     const Search = Input.Search;
     const columns = [{
       title: '序号',
       dataIndex: 'key',
       key: 'key',
-    },{
+    }, {
       title: '编号',
       dataIndex: 'id',
       key: 'id',
@@ -54,32 +62,28 @@ export default class AdminMgt extends React.Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="#">查看</a>
-          <Divider type="vertical" />
-          <a href="#">删除</a>
-          <Divider type="vertical" />
-          <a href="#">密码重置</a>
+          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
         </span>
       ),
     }];
     const data = [{
       key: '1',
-      id: "70001",
-      name: "李诞",
+      id: "60001",
+      name: "周杰伦",
       sex: "男",
       college: "第一临床、信息与工程学院",
-      title:'讲师',
-      position:'处长',
+      title: '教授',
+      position: '主任',
       email: "1004272351@qq.com",
       tel: "18057727150",
-    },{
+    }, {
       key: '2',
-      id: "70002",
-      name: "池子",
+      id: "60002",
+      name: "张一山",
       sex: "男",
       college: "第一临床、信息与工程学院",
-      title:'讲师',
-      position:'科员',
+      title: '讲师',
+      position: '科员',
       email: "1004272351@qq.com",
       tel: "18057727150",
     }];// rowSelection object indicates the need for row selection
@@ -92,19 +96,56 @@ export default class AdminMgt extends React.Component {
         name: record.name,
       }),
     };
-
+    console.log(this.state.currentUser);
     return (
       <div id="teacherMgt" className="userMgt-list">
         <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
-        <Button><Icon type="close-circle" style={{ fontSize: 18, color: '#FF0000' }} />删除</Button>
         <label className="search-label">按编号查询：</label>
         <Search
           placeholder="请输入关键字"
-          onSearch={value => console.log(value)}
+          onSearch={value => this.searchUser.bind(this,value)}
           enterButton
         />
-        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+        <Table
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={data}
+        />
       </div>
     );
+  }
+  //获取用户列表
+  getTeacherList() {
+    let data = {};
+    data.permission = 2;
+    data.id = this.state.searchId;
+    GetUserList().then(res => {
+      if (res.length > 0) {
+        this.state.userList = res;
+      }
+    })
+    this.setState({});
+  }
+  //删除某个用户
+  showDeleteConfirm(r) {
+    confirm({
+      title: '你确定要删除？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        DeleteUser(r).then(res => {
+          if (res.status == 200) {
+            console.log('success');
+          }
+        })
+      }
+    });
+  }
+  //按编号查询
+  searchUser(value) {
+    this.state.searchId=value;
+    this.getTeacherList();
+    this.setState({});
   }
 }

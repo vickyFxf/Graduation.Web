@@ -2,14 +2,22 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 16:49:48 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-23 13:45:07
+ * @Last Modified time: 2018-04-24 15:13:28
  */
 import React from 'react';
-import { Icon, Button, Input, Table, Divider } from 'antd';
+import { Icon, Button, Input, Table, Divider, Modal } from 'antd';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-
+import { DeleteUser, GetUserList } from '../../services/usersService.js';
+const confirm = Modal.confirm;
 export default class TeacherMgt extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userList: [],
+      searchId: '',
+    }
+  }
   render() {
     const Search = Input.Search;
     const columns = [{
@@ -54,9 +62,7 @@ export default class TeacherMgt extends React.Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="#">查看</a>
-          <Divider type="vertical" />
-          <a href="#">删除</a>
+          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
         </span>
       ),
     }];
@@ -90,19 +96,56 @@ export default class TeacherMgt extends React.Component {
         name: record.name,
       }),
     };
-
+    console.log(this.state.currentUser);
     return (
       <div id="teacherMgt" className="userMgt-list">
         <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
-        <Button><Icon type="close-circle" style={{ fontSize: 18, color: '#FF0000' }} />删除</Button>
         <label className="search-label">按编号查询：</label>
         <Search
           placeholder="请输入关键字"
-          onSearch={value => console.log(value)}
+          onSearch={value => this.searchUser.bind(this,value)}
           enterButton
         />
-        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+        <Table
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={data}
+        />
       </div>
     );
+  }
+  //获取用户列表
+  getTeacherList() {
+    let data = {};
+    data.permission = 1;
+    data.id = this.state.searchId;
+    GetUserList().then(res => {
+      if (res.length > 0) {
+        this.state.userList = res;
+      }
+    })
+    this.setState({});
+  }
+  //删除某个用户
+  showDeleteConfirm(r) {
+    confirm({
+      title: '你确定要删除？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        DeleteUser(r).then(res => {
+          if (res.status == 200) {
+            console.log('success');
+          }
+        })
+      }
+    });
+  }
+  //按编号查询
+  searchUser(value) {
+    this.state.searchId=value;
+    this.getTeacherList();
+    this.setState({});
   }
 }

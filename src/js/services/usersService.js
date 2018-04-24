@@ -1,8 +1,8 @@
 /*
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:59:36 
- * @Last Modified by:   VickyFan 
- * @Last Modified time: 2018-04-09 10:59:36 
+ * @Last Modified by: VickyFan
+ * @Last Modified time: 2018-04-24 14:45:51
  */
 import request from './requestWrapper';
 /**
@@ -25,6 +25,30 @@ export function UpdateUserInfo(data) {
   return request({
     url: '/User-Module/UpdateInfo/:id',
     method: 'PUT',
+    type: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      ...data
+    })
+  })
+}
+/**
+ * 删除用户
+ * @param {*} data 
+ */
+export function DeleteUser(data) {
+  return request({
+    url: '/User-Module/DeleteUser/'+data.id,
+    method: 'DELETE',
+    type: 'json',
+    contentType: 'application/json',
+  })
+}
+
+export function GetUserList(data) {
+  return request({
+    url: '/User-Module/List',
+    method: 'POST',
     type: 'json',
     contentType: 'application/json',
     data: JSON.stringify({
