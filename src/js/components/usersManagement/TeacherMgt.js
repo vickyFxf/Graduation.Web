@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 16:49:48 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-24 15:13:28
+ * @Last Modified time: 2018-04-24 15:38:24
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider, Modal } from 'antd';
@@ -17,6 +17,9 @@ export default class TeacherMgt extends React.Component {
       userList: [],
       searchId: '',
     }
+  }
+  componentWillMount(){
+    this.getUserList();
   }
   render() {
     const Search = Input.Search;
@@ -96,14 +99,18 @@ export default class TeacherMgt extends React.Component {
         name: record.name,
       }),
     };
-    console.log(this.state.currentUser);
     return (
       <div id="teacherMgt" className="userMgt-list">
         <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
         <label className="search-label">按编号查询：</label>
         <Search
           placeholder="请输入关键字"
-          onSearch={value => this.searchUser.bind(this,value)}
+          onSearch={(value)=>{
+            this.setState({
+              searchId:value
+            });
+            this.getUserList();
+          }}
           enterButton
         />
         <Table
@@ -115,11 +122,11 @@ export default class TeacherMgt extends React.Component {
     );
   }
   //获取用户列表
-  getTeacherList() {
+  getUserList() {
     let data = {};
     data.permission = 1;
     data.id = this.state.searchId;
-    GetUserList().then(res => {
+    GetUserList(data).then(res => {
       if (res.length > 0) {
         this.state.userList = res;
       }
@@ -141,11 +148,5 @@ export default class TeacherMgt extends React.Component {
         })
       }
     });
-  }
-  //按编号查询
-  searchUser(value) {
-    this.state.searchId=value;
-    this.getTeacherList();
-    this.setState({});
   }
 }
