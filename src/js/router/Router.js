@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:30:42 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-19 16:07:07
+ * @Last Modified time: 2018-04-25 10:00:05
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -43,6 +43,7 @@ import DocumentCenter from '../components/task/DocumentCenter';
 //系统设置
 import SetPage from '../components/page/SetPage';
 import ClassificationMgt from '../components/set/ClassificationMgt';
+import { AddUser } from '../services/usersService';
 export default class Root extends React.Component {
 	render() {
 		return (

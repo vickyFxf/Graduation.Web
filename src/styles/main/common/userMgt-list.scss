@@ -1,8 +1,9 @@
 .userMgt-list{
-  padding-left: 200px;
-  @media (min-width:1440px) {
-    padding-left:300px;
-  }
+  position: relative;
+  // padding-left: 200px;
+  // @media (min-width:1440px) {
+  //   padding-left:300px;
+  // }
   table{width: 100%;}
   caption{
     text-align: center;

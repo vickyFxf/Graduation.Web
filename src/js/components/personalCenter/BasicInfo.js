@@ -1,8 +1,8 @@
 /*
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:27:24 
- * @Last Modified by:   VickyFan 
- * @Last Modified time: 2018-04-09 10:27:24 
+ * @Last Modified by: VickyFan
+ * @Last Modified time: 2018-04-25 14:57:09
  */
 import React from 'react';
 import { Form, Input, Select, Button, Upload, Icon } from 'antd';
@@ -14,10 +14,11 @@ class BasicInfoForm extends React.Component {
     super(props);
     this.state = {
       loading: false,
+      currentUser:[],
     }
   }
   componentWillMount() {
-    // this._getUserInfo();
+    this._getUserInfo();
   }
   render() {
     const uploadButton = (
@@ -32,23 +33,6 @@ class BasicInfoForm extends React.Component {
         <Form onSubmit={this.handleSubmit} className="subAdd-form">
           <fieldset>
             <legend>基本资料</legend>
-            {/* <FormItem
-              label="上传头像"
-              labelCol={{ span: 3 }}
-              wrapperCol={{ span: 5 }}
-            >
-              <Upload
-                name="avatar"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                action="//jsonplaceholder.typicode.com/posts/"
-                // beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-              >
-                {imageUrl ? <img src={imageUrl} alt="" /> : uploadButton}
-              </Upload>
-            </FormItem> */}
             <FormItem
               label="姓名"
               labelCol={{ span: 3 }}
@@ -166,7 +150,12 @@ class BasicInfoForm extends React.Component {
   _getUserInfo() {
     let data;
     data.id = sessionStorage.getItem('id');
-    GetUserInfo(data);
+    GetUserInfo(data).then(res=>{
+      if(res){
+        this.state.currentUser=res;
+      }
+    })
+    this.setState({});
   }
   handleChange = (info) => {
     if (info.file.status === 'uploading') {

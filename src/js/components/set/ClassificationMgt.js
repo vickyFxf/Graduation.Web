@@ -2,13 +2,13 @@
  * @Author: VickyFan 
  * @Date: 2018-04-20 09:45:08 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-23 13:43:22
+ * @Last Modified time: 2018-04-25 09:41:10
  */
 /**
  * 分类管理
  */
 import React from 'react';
-import { Tabs, Button, Modal, Input } from 'antd';
+import { Tabs, Button, Modal, Input, message } from 'antd';
 import { AddClass, DeleteClass, UpdateClass, GetClassList } from '../../services/classService.js';
 const TabPane = Tabs.TabPane;
 const confirm = Modal.confirm;
@@ -67,7 +67,7 @@ export default class ClassificationMgt extends React.Component {
                   _.map(this.state.currenList, (item, index) => {
                     return (
                       <tr key={index}>
-                        <td>{index+1}</td>
+                        <td>{index + 1}</td>
                         <td>{item.className}</td>
                         <td><a onClick={this.showDeleteConfirm.bind(this, item)}>删除</a></td>
                       </tr>
@@ -96,17 +96,17 @@ export default class ClassificationMgt extends React.Component {
         if (this.state.currenType == 0) {
           //课题来源
           let a = [];
-          _.map(res,(item,index)=>{
-            if(item.classType==0){
+          _.map(res, (item, index) => {
+            if (item.classType == 0) {
               a.push(item);
             }
           })
           this.state.currenList = a;
-        }else{
+        } else {
           //课题类别
           let b = [];
-          _.map(res,(item,index)=>{
-            if(item.classType==1){
+          _.map(res, (item, index) => {
+            if (item.classType == 1) {
               b.push(item);
             }
           })
@@ -131,9 +131,10 @@ export default class ClassificationMgt extends React.Component {
       onOk() {
         DeleteClass(item._id).then(res => {
           if (res.status == 200) {
+            message.success('删除成功！');
             this.getCurrentList();
           } else {
-            console.log("error")
+            message.error('删除失败！');
           }
         })
       }
@@ -151,7 +152,10 @@ export default class ClassificationMgt extends React.Component {
     data.className = this.state.InputValue;
     AddClass(data).then(res => {
       if (res) {
+        message.success('添加成功！');
         this.getCurrentList();
+      } else {
+        message.error('添加失败！');
       }
     })
   }

@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:59:36 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-24 14:45:51
+ * @Last Modified time: 2018-04-25 09:50:17
  */
 import request from './requestWrapper';
 /**
@@ -56,6 +56,21 @@ export function GetUserList(data) {
     contentType: 'application/json',
     data: JSON.stringify({
       // permissions:data.permissions
+    })
+  })
+}
+
+/**
+ * 添加用户
+ */
+export function AddUser(data) {
+  return request({
+    url: '/User-Module/AddUser',
+    method: 'POST',
+    type: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      ...data
     })
   })
 }

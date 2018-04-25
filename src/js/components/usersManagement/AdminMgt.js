@@ -2,26 +2,31 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 16:49:48 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-24 15:38:18
+ * @Last Modified time: 2018-04-25 14:52:15
  */
 import React from 'react';
-import { Icon, Button, Input, Table, Divider, Modal } from 'antd';
+import { Icon, Button, Input, Table, Divider, Modal, Form, Select, Upload, message } from 'antd';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { DeleteUser, GetUserList } from '../../services/usersService.js';
+import { DeleteUser, GetUserList, AddUser } from '../../services/usersService.js';
 const confirm = Modal.confirm;
-export default class AdminMgt extends React.Component {
+const FormItem = Form.Item;
+const Option = Select.Option;
+class AdminMgtList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userList: [],
       searchId: '',
+      position: '0',
+      show: false
     }
   }
-  componentWillMount(){
+  componentWillMount() {
     this.getUserList();
   }
   render() {
+    const { getFieldDecorator } = this.props.form;
     const Search = Input.Search;
     const columns = [{
       title: '序号',
@@ -31,7 +36,6 @@ export default class AdminMgt extends React.Component {
       title: '编号',
       dataIndex: 'id',
       key: 'id',
-      render: text => <a href="#">{text}</a>,
     }, {
       title: '姓名',
       dataIndex: 'name',
@@ -90,36 +94,154 @@ export default class AdminMgt extends React.Component {
       email: "1004272351@qq.com",
       tel: "18057727150",
     }];// rowSelection object indicates the need for row selection
-    const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      },
-      getCheckboxProps: record => ({
-        disabled: record.name === 'Disabled User', // Column configuration not to be checked
-        name: record.name,
-      }),
-    };
     return (
-      <div id="teacherMgt" className="userMgt-list">
-        <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
+      <div id="adminMgt" className="userMgt-list">
+        <Button onClick={this.openWindow.bind(this)}><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
         <label className="search-label">按编号查询：</label>
         <Search
           placeholder="请输入关键字"
-          onSearch={(value)=>{
+          onSearch={(value) => {
             this.setState({
-              searchId:value
+              searchId: value
             });
             this.getUserList();
           }}
           enterButton
         />
         <Table
-          rowSelection={rowSelection}
           columns={columns}
           dataSource={data}
         />
+        {/* 添加用户 */}
+        <div className="adduser-box" id="adduser-box" style={{ transition: "width 0.5s", right: '-30%' }}>
+          <div className="add-header">
+            <div className="left">添加用户</div>
+            <div className="right" onClick={this.closeWindow}><i className="iconfont icon-guanbi"></i></div>
+          </div>
+          <div className="add-body">
+            <Form onSubmit={this.handleSubmit} className="subAdd-form">
+              <fieldset>
+                <FormItem
+                  label="姓名"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('name', {
+                    rules: [{
+                      required: true, message: '请填写姓名!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="工号"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('id', {
+                    rules: [{
+                      required: true,message: '请填写工号!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="性别"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span:12 }}
+                >
+                  {getFieldDecorator('sex', {
+                    rules: [{
+                      required: true, message: '请选择性别!',
+                    }],
+                  })(
+                    <Select placeholder="请选择性别">
+                      <Option value="0">男</Option>
+                      <Option value="1">女</Option>
+                    </Select>
+                  )}
+                </FormItem>
+                <FormItem
+                  label="学院"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span:12 }}
+                >
+                  {getFieldDecorator('college', {
+                    rules: [{
+                      required: true, message: '请填写学院!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="岗位"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12}}
+                >
+                  {getFieldDecorator('position', {
+                    rules: [{
+                      required: true, message: '请填写岗位!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="邮箱"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('email', {
+                    rules: [{
+                      required: true, message: '请填写邮箱!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="联系方式"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('tel', {
+                    rules: [{
+                      required: true, message: '请填写联系方式!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                
+                <FormItem
+                  wrapperCol={{
+                    xs: { span:18, offset: 0 },
+                    sm: { span:16, offset: 6},
+                  }}
+                >
+                    <Button onClick={this.closeWindow.bind(this)} style={{marginRight:'70px'}}>取消</Button>
+                    <Button type="primary" htmlType="submit">确定</Button>
+                </FormItem>
+              </fieldset>
+            </Form>
+          </div>
+          
+        </div>
       </div>
     );
+  }
+  //添加用户窗口
+  openWindow() {
+    let box = document.getElementById('adduser-box');
+    box.setAttribute("style", "transition: width 0.5s;right:0")
+  }
+  //关闭用户窗口
+  closeWindow() {
+    let box = document.getElementById('adduser-box');
+    box.setAttribute("style", "transition: width 0.5s;right:-30%")
   }
   //获取用户列表
   getUserList() {
@@ -143,10 +265,37 @@ export default class AdminMgt extends React.Component {
       onOk() {
         DeleteUser(r).then(res => {
           if (res.status == 200) {
-            console.log('success');
+            message.success('删除成功！');
+          }else{
+            message.error('删除失败！');
           }
         })
       }
     });
   }
+  //保存添加用户信息
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let data;
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        data = values;
+        data.sex = Number(data.sex);
+        data.permission = 2;
+        message.success('添加成功！');
+        // console.log(data);
+        // AddUser(data).then(res => {
+        //   if (res) {
+        //     //添加成功
+        //     message.success('添加成功！');
+        //     this.getUserList();
+        //     let box = document.getElementById('adduser-box');
+        //     box.setAttribute("style", "transition: width 0.5s;right:-30%")
+        //   }
+        // })
+      }
+    });
+  }
 }
+const AdminMgt = Form.create()(AdminMgtList);
+export default AdminMgt;

@@ -1,0 +1,49 @@
+.adduser-box{
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  border:1px solid #e3e7ea;
+  border-radius: 3px ;
+  box-shadow:3px 0 0px rgba(0,0,0,0.1);
+  z-index: 900;
+  top: 0;
+  background: #fff;
+  .left{
+    float: left;
+  }
+  .right{
+    float: right;
+  }
+}
+.add-header{
+  border-bottom: 1px solid #e3e7ea;
+  height: 45px;
+  width: 100%;
+  line-height: 45px;
+  .left{
+    font-size: 16px;
+    margin-left: 20px;
+    letter-spacing: 2px;
+  }
+  .right{
+    margin-right: 20px;
+    cursor: pointer;
+  }
+}
+.add-foot{
+  border-top: 1px solid #e3e7ea;
+  position: absolute;
+  bottom: 0;
+  width:100%;
+  height:45px;
+  line-height: 45px;
+  .right{
+    width:70px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .submit{
+    color:#fff;
+    background: #0099ff;
+  }
+}
