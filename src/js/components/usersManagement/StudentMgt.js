@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:29:31 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-25 14:40:57
+ * @Last Modified time: 2018-04-27 15:37:52
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider, Modal } from 'antd';
@@ -100,7 +100,10 @@ export default class StudentMgt extends React.Component {
       }),
     };
     return (
-      <div id="teacherMgt" className="userMgt-list">
+      <div id="teacherMgt" className="userMgt-list margin-left-subpanel">
+        <div className="list-header">
+          <p>学生列表</p>
+        </div>
         <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
         <label className="search-label">按编号查询：</label>
         <Search

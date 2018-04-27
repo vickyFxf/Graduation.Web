@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:31:19 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-09 10:59:07
+ * @Last Modified time: 2018-04-27 17:20:33
  */
 import request from './requestWrapper';
 
@@ -49,6 +49,18 @@ export function GetSubjectInfo(data) {
   return request({
     url: '/Subject-Module/Search/' + data._id,
     method: 'GET',
+    type: 'json',
+    contentType: 'application/json',
+  })
+}
+/**
+ * 删除某个课题
+ * @param {*} data data._id课题唯一id 
+ */
+export function DeleteSubject(data) {
+  return request({
+    url: '/Subject-Module/Search/' + data._id,
+    method: 'DELETE',
     type: 'json',
     contentType: 'application/json',
   })

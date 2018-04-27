@@ -2,12 +2,11 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:28:13 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-27 17:58:48
+ * @Last Modified time: 2018-04-27 14:49:52
  */
 import React from 'react';
 import { Table, Icon, Divider } from 'antd';
-import { Link } from 'react-router';
-export default class SubjectChoosed extends React.Component {
+export default class OpeningReport extends React.Component {
   render() {
     const columns = [{
       title: '序号',
@@ -23,9 +22,7 @@ export default class SubjectChoosed extends React.Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <Link to="subject/subjectDetails/123456">查看</Link>
-          <Divider type="vertical" />
-          <a href="javascript:void(0)" onClick={this.apply.bind(this)}>申请</a>
+          <a href="#">申请</a>
         </span>
       ),
     }];
@@ -39,7 +36,7 @@ export default class SubjectChoosed extends React.Component {
       });
     }
     return (
-      <div className="margin-left-subpanel">
+      <div id="">
         <div className="list-header">
           <p>在线选题</p>
         </div>
@@ -53,8 +50,5 @@ export default class SubjectChoosed extends React.Component {
       </div>
     );
   }
-  //申请课题
-  apply(){
-    
-  }
+
 }

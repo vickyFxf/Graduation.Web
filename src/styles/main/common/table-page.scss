@@ -1,0 +1,15 @@
+.list-header{
+  height: 50px;
+  border-bottom: 1px solid #e3e7ea;
+  p{
+    font-size: 20px;
+    line-height: 50px;
+    padding-left: 10px;
+  }
+}
+.margin-left-subpanel{
+  margin-left: 200px;
+  @media (min-width:1440px) {
+    margin-left:300px;
+  }
+}

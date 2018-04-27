@@ -2,17 +2,17 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 16:49:48 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-27 15:54:51
+ * @Last Modified time: 2018-04-27 16:49:34
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider, Modal, Form, Select, Upload, message } from 'antd';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { DeleteUser, GetUserList, AddUser } from '../../services/usersService.js';
+// import { DeleteUser, GetUserList, AddUser } from '../../services/usersService.js';
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
 const Option = Select.Option;
-class AdminMgtList extends React.Component {
+class SubjectListForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,69 +33,59 @@ class AdminMgtList extends React.Component {
       dataIndex: 'key',
       key: 'key',
     }, {
-      title: '编号',
-      dataIndex: 'id',
-      key: 'id',
+      title: '课题名称',
+      dataIndex: 'subName',
+      key: 'subName',
     }, {
-      title: '姓名',
-      dataIndex: 'name',
-      key: 'name',
+      title: '来源',
+      dataIndex: 'subSource',
+      key: 'subSource',
     }, {
-      title: '性别',
-      dataIndex: 'sex',
-      key: 'sex',
+      title: '类别',
+      dataIndex: 'subCategory',
+      key: 'subCategory',
     }, {
-      title: '学院',
-      dataIndex: 'college',
-      key: 'college',
+      title: '创建时间',
+      dataIndex: 'subTime',
+      key: 'subTime',
     }, {
-      title: '职称',
-      dataIndex: 'title',
-      key: 'title',
-    }, {
-      title: '岗位',
-      dataIndex: 'position',
-      key: 'position',
-    }, {
-      title: '邮箱',
-      dataIndex: 'email',
-      key: 'email',
-    }, {
-      title: '联系电话',
-      dataIndex: 'tel',
-      key: 'tel',
+      title: '是否审核',
+      dataIndex: 'isAudit',
+      key: 'isAudit',
     }, {
       title: '操作',
       key: 'action',
       render: (text, record) => (
         <span>
+          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>查看</a>
+          <Divider/>
+          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>修改</a>
+          <Divider/>
           <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
         </span>
       ),
     }];
     const data = [{
       key: '1',
-      id: "60001",
-      name: "周杰伦",
-      sex: "男",
-      college: "第一临床、信息与工程学院",
-      title: '教授',
-      position: '主任',
-      email: "1004272351@qq.com",
-      tel: "18057727150",
+      subName: "毕业论文管理系统",
+      subSource: "结合教师科研",
+      subCategory: "学术论文",
+      subIntroduction: '通过多层架构，B/S的工作模式，实现毕业论文的在线管理',
+      creatUserId: '1xhdh1839944',
+      subTime: "2017-09-03",
+      isAudit: "未审核",
     }, {
-      key: '2',
-      id: "60002",
-      name: "张一山",
-      sex: "男",
-      college: "第一临床、信息与工程学院",
-      title: '讲师',
-      position: '科员',
-      email: "1004272351@qq.com",
-      tel: "18057727150",
-    }];// rowSelection object indicates the need for row selection
+      key: '1',
+      subName: "毕业论文管理系统",
+      subSource: "结合教师科研",
+      subCategory: "学术论文",
+      subIntroduction: '通过多层架构，B/S的工作模式，实现毕业论文的在线管理',
+      creatUserId: '1xhdh1839944',
+      subTime: "2017-09-13",
+      isAudit: "未审核",
+    }];
     return (
-      <div id="adminMgt" className="userMgt-list margin-left-subpanel">
+      <div id="subList" className="userMgt-list margin-left-subpanel">
         <div className="list-header">
           <p>管理员列表</p>
         </div>
@@ -115,10 +105,10 @@ class AdminMgtList extends React.Component {
           columns={columns}
           dataSource={data}
         />
-        {/* 添加管理员 */}
-        <div className="adduser-box" id="adduser-box" style={{ transition: "width 0.5s", right: '-30%' }}>
+        {/* 添加课题 */}
+        <div className="adduser-box" id="addsubject-box" style={{ transition: "width 0.5s", right: '-30%' }}>
           <div className="add-header">
-            <div className="left">添加管理员</div>
+            <div className="left">添加课题</div>
             <div className="right" onClick={this.closeWindow}><i className="iconfont icon-guanbi"></i></div>
           </div>
           <div className="add-body">
@@ -238,12 +228,12 @@ class AdminMgtList extends React.Component {
   }
   //添加用户窗口
   openWindow() {
-    let box = document.getElementById('adduser-box');
+    let box = document.getElementById('addsubject-box');
     box.setAttribute("style", "transition: width 0.5s;right:0")
   }
   //关闭用户窗口
   closeWindow() {
-    let box = document.getElementById('adduser-box');
+    let box = document.getElementById('addsubject-box');
     box.setAttribute("style", "transition: width 0.5s;right:-30%")
   }
   //获取用户列表
@@ -292,7 +282,7 @@ class AdminMgtList extends React.Component {
         //     //添加成功
         //     message.success('添加成功！');
         //     this.getUserList();
-        //     let box = document.getElementById('adduser-box');
+        //     let box = document.getElementById('addsubject-box');
         //     box.setAttribute("style", "transition: width 0.5s;right:-30%")
         //   }
         // })
@@ -300,5 +290,5 @@ class AdminMgtList extends React.Component {
     });
   }
 }
-const AdminMgt = Form.create()(AdminMgtList);
-export default AdminMgt;
+const SubjectList = Form.create()(SubjectListForm);
+export default SubjectList;

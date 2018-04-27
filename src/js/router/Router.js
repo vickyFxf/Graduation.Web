@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:30:42 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-25 10:00:05
+ * @Last Modified time: 2018-04-27 17:22:46
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -26,9 +26,9 @@ import BasicInfo from '../components/personalCenter/BasicInfo';
 import ChangePwd from '../components/personalCenter/ChangePwd';
 //课题
 import SubjectPage from '../components/page/SubjectPage';
-import SubjectAll from '../components/subject/SubjectAll';
+// import SubjectAll from '../components/subject/SubjectAll';
 import SubjectList from '../components/subject/SubjectList';
-import SubjectAddForm from '../components/subject/SubjectAdd';
+// import SubjectAddForm from '../components/subject/SubjectAdd';
 import SubjectChoosed from '../components/subject/SubjectChoosed';
 import SubjectDetails from '../components/subject/SubjectDetails';
 //任务
@@ -65,10 +65,10 @@ export default class Root extends React.Component {
 					{/* 课题管理 */}
 					<Route path="subject" component={SubjectPage}>
 						<Route path="list" component={SubjectList} />
-            <Route path="allList" component={SubjectAll} />
-						<Route path="subjectAdd" component={SubjectAddForm} />
+            {/* <Route path="allList" component={SubjectAll} /> */}
+						{/* <Route path="subjectAdd" component={SubjectAddForm} /> */}
 						<Route path="subjectChoosed" component={SubjectChoosed} />
-						<Route path="subjectDetails/:_id" component={SubjectDetails} />
+						<Route path="subjectDetails/123456" component={SubjectDetails} />
 					</Route>
 					{/* 个人中心 */}
 					<Route path="selfInfo" component={SelfPage}>
@@ -83,7 +83,7 @@ export default class Root extends React.Component {
             <Route path="englishTranslation" component={EnglishTranslation}/>
             <Route path="literatureReview" component={LiteratureReview}/>
             <Route path="midInspection" component={MidInspection}/>
-            <Route path="documentCenter" component={OpeningReport}/>
+            <Route path="documentCenter" component={DocumentCenter}/>
 					</Route>
           {/* 系统设置 */}
 					<Route path="set" component={SetPage}>
