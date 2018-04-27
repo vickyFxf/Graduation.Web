@@ -18,8 +18,6 @@ class AdminMgtList extends React.Component {
     this.state = {
       userList: [],
       searchId: '',
-      position: '0',
-      show: false
     }
   }
   componentWillMount() {
@@ -28,6 +26,14 @@ class AdminMgtList extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const Search = Input.Search;
+    _.map(this.state.userList,(item,index)=>{
+      item.key=index+1;
+      if(item.sex==0){
+        item.sexString="男";
+      }else{
+        item.sexString="女";
+      }
+    })
     const columns = [{
       title: '序号',
       dataIndex: 'key',
@@ -42,16 +48,12 @@ class AdminMgtList extends React.Component {
       key: 'name',
     }, {
       title: '性别',
-      dataIndex: 'sex',
-      key: 'sex',
+      dataIndex: 'sexString',
+      key: 'sexString',
     }, {
       title: '学院',
       dataIndex: 'college',
       key: 'college',
-    }, {
-      title: '职称',
-      dataIndex: 'title',
-      key: 'title',
     }, {
       title: '岗位',
       dataIndex: 'position',
@@ -73,27 +75,6 @@ class AdminMgtList extends React.Component {
         </span>
       ),
     }];
-    const data = [{
-      key: '1',
-      id: "60001",
-      name: "周杰伦",
-      sex: "男",
-      college: "第一临床、信息与工程学院",
-      title: '教授',
-      position: '主任',
-      email: "1004272351@qq.com",
-      tel: "18057727150",
-    }, {
-      key: '2',
-      id: "60002",
-      name: "张一山",
-      sex: "男",
-      college: "第一临床、信息与工程学院",
-      title: '讲师',
-      position: '科员',
-      email: "1004272351@qq.com",
-      tel: "18057727150",
-    }];// rowSelection object indicates the need for row selection
     return (
       <div id="adminMgt" className="userMgt-list margin-left-subpanel">
         <div className="list-header">
@@ -102,7 +83,7 @@ class AdminMgtList extends React.Component {
         <Button onClick={this.openWindow.bind(this)}><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
         <label className="search-label">按编号查询：</label>
         <Search
-          placeholder="请输入关键字"
+          placeholder="请输入编号"
           onSearch={(value) => {
             this.setState({
               searchId: value
@@ -113,7 +94,7 @@ class AdminMgtList extends React.Component {
         />
         <Table
           columns={columns}
-          dataSource={data}
+          dataSource={this.state.userList}
         />
         {/* 添加管理员 */}
         <div className="adduser-box" id="adduser-box" style={{ transition: "width 0.5s", right: '-30%' }}>
@@ -144,7 +125,7 @@ class AdminMgtList extends React.Component {
                 >
                   {getFieldDecorator('id', {
                     rules: [{
-                      required: true,message: '请填写工号!',
+                      required: true, message: '请填写工号!',
                     }],
                   })(
                     <Input />
@@ -153,7 +134,7 @@ class AdminMgtList extends React.Component {
                 <FormItem
                   label="性别"
                   labelCol={{ span: 6 }}
-                  wrapperCol={{ span:12 }}
+                  wrapperCol={{ span: 12 }}
                 >
                   {getFieldDecorator('sex', {
                     rules: [{
@@ -169,7 +150,7 @@ class AdminMgtList extends React.Component {
                 <FormItem
                   label="学院"
                   labelCol={{ span: 6 }}
-                  wrapperCol={{ span:12 }}
+                  wrapperCol={{ span: 12 }}
                 >
                   {getFieldDecorator('college', {
                     rules: [{
@@ -182,7 +163,7 @@ class AdminMgtList extends React.Component {
                 <FormItem
                   label="岗位"
                   labelCol={{ span: 6 }}
-                  wrapperCol={{ span: 12}}
+                  wrapperCol={{ span: 12 }}
                 >
                   {getFieldDecorator('position', {
                     rules: [{
@@ -218,20 +199,20 @@ class AdminMgtList extends React.Component {
                     <Input />
                   )}
                 </FormItem>
-                
+
                 <FormItem
                   wrapperCol={{
-                    xs: { span:18, offset: 0 },
-                    sm: { span:16, offset: 6},
+                    xs: { span: 18, offset: 0 },
+                    sm: { span: 16, offset: 6 },
                   }}
                 >
-                    <Button onClick={this.closeWindow.bind(this)} style={{marginRight:'70px'}}>取消</Button>
-                    <Button type="primary" htmlType="submit">确定</Button>
+                  <Button onClick={this.closeWindow.bind(this)} style={{ marginRight: '20px' }}>取消</Button>
+                  <Button type="primary" htmlType="submit">确定</Button>
                 </FormItem>
               </fieldset>
             </Form>
           </div>
-          
+
         </div>
       </div>
     );
@@ -249,27 +230,29 @@ class AdminMgtList extends React.Component {
   //获取用户列表
   getUserList() {
     let data = {};
-    data.permission = 2;
-    data.id = this.state.searchId;
+    data.permissions = 3;
+    if(this.state.searchId) {
+      data.id = this.state.searchId;
+    }
     GetUserList(data).then(res => {
-      if (res.length > 0) {
+      if (res) {
         this.state.userList = res;
+        this.setState({});
       }
     })
-    this.setState({});
   }
   //删除某个用户
-  showDeleteConfirm(r) {
+  showDeleteConfirm(item) {
     confirm({
       title: '你确定要删除？',
       okText: '确定',
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        DeleteUser(r).then(res => {
+        DeleteUser(item._id).then(res => {
           if (res.status == 200) {
             message.success('删除成功！');
-          }else{
+          } else {
             message.error('删除失败！');
           }
         })
@@ -284,18 +267,17 @@ class AdminMgtList extends React.Component {
       if (!err) {
         data = values;
         data.sex = Number(data.sex);
-        data.permission = 2;
-        message.success('添加成功！');
-        // console.log(data);
-        // AddUser(data).then(res => {
-        //   if (res) {
-        //     //添加成功
-        //     message.success('添加成功！');
-        //     this.getUserList();
-        //     let box = document.getElementById('adduser-box');
-        //     box.setAttribute("style", "transition: width 0.5s;right:-30%")
-        //   }
-        // })
+        data.permissions = 3;
+        data.password = hex_md5('123456',32);
+        AddUser(data).then(res => {
+          if (res) {
+            //添加成功
+            this.getUserList();
+            message.success('添加成功！');
+            let box = document.getElementById('adduser-box');
+            box.setAttribute("style", "transition: width 0.5s;right:-30%")
+          }
+        })
       }
     });
   }

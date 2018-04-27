@@ -1,16 +1,18 @@
 /*
  * @Author: VickyFan 
- * @Date: 2018-04-09 10:29:31 
+ * @Date: 2018-04-09 16:49:48 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-27 15:37:52
+ * @Last Modified time: 2018-04-27 15:54:51
  */
 import React from 'react';
-import { Icon, Button, Input, Table, Divider, Modal } from 'antd';
+import { Icon, Button, Input, Table, Divider, Modal, Form, Select, Upload, message } from 'antd';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { DeleteUser, GetUserList } from '../../services/usersService.js';
+import { DeleteUser, GetUserList, AddUser } from '../../services/usersService.js';
 const confirm = Modal.confirm;
-export default class StudentMgt extends React.Component {
+const FormItem = Form.Item;
+const Option = Select.Option;
+class StudentMgtList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,40 +20,48 @@ export default class StudentMgt extends React.Component {
       searchId: '',
     }
   }
-  componentWillMount(){
+  componentWillMount() {
     this.getUserList();
   }
   render() {
+    const { getFieldDecorator } = this.props.form;
     const Search = Input.Search;
+    _.map(this.state.userList,(item,index)=>{
+      item.key=index+1;
+      if(item.sex==0){
+        item.sexString="男";
+      }else{
+        item.sexString="女";
+      }
+    })
     const columns = [{
       title: '序号',
       dataIndex: 'key',
       key: 'key',
     }, {
-      title: '编号',
+      title: '学号',
       dataIndex: 'id',
       key: 'id',
-      render: text => <a href="#">{text}</a>,
     }, {
       title: '姓名',
       dataIndex: 'name',
       key: 'name',
     }, {
       title: '性别',
-      dataIndex: 'sex',
-      key: 'sex',
+      dataIndex: 'sexString',
+      key: 'sexString',
     }, {
       title: '学院',
       dataIndex: 'college',
       key: 'college',
     }, {
-      title: '职称',
-      dataIndex: 'title',
-      key: 'title',
+      title: '专业',
+      dataIndex: 'major',
+      key: 'major',
     }, {
-      title: '岗位',
-      dataIndex: 'position',
-      key: 'position',
+      title: '班级',
+      dataIndex: 'class',
+      key: 'class',
     }, {
       title: '邮箱',
       dataIndex: 'email',
@@ -69,87 +79,230 @@ export default class StudentMgt extends React.Component {
         </span>
       ),
     }];
-    const data = [{
-      key: '1',
-      id: "60001",
-      name: "周杰伦",
-      sex: "男",
-      college: "第一临床、信息与工程学院",
-      title: '教授',
-      position: '主任',
-      email: "1004272351@qq.com",
-      tel: "18057727150",
-    }, {
-      key: '2',
-      id: "60002",
-      name: "张一山",
-      sex: "男",
-      college: "第一临床、信息与工程学院",
-      title: '讲师',
-      position: '科员',
-      email: "1004272351@qq.com",
-      tel: "18057727150",
-    }];// rowSelection object indicates the need for row selection
-    const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      },
-      getCheckboxProps: record => ({
-        disabled: record.name === 'Disabled User', // Column configuration not to be checked
-        name: record.name,
-      }),
-    };
     return (
-      <div id="teacherMgt" className="userMgt-list margin-left-subpanel">
+      <div id="adminMgt" className="userMgt-list margin-left-subpanel">
         <div className="list-header">
           <p>学生列表</p>
         </div>
-        <Button><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
-        <label className="search-label">按编号查询：</label>
+        <Button onClick={this.openWindow.bind(this)}><Icon type="plus-circle" style={{ fontSize: 18, color: '#32CD32' }} />添加</Button>
+        <label className="search-label">按学号查询：</label>
         <Search
-          placeholder="请输入关键字"
-          onSearch={(value)=>{
+          placeholder="请输入学号"
+          onSearch={(value) => {
             this.setState({
-              searchId:value
+              searchId: value
             });
             this.getUserList();
           }}
           enterButton
         />
         <Table
-          rowSelection={rowSelection}
           columns={columns}
-          dataSource={data}
+          dataSource={this.state.userList}
         />
+        {/* 添加学生 */}
+        <div className="adduser-box" id="adduser-box" style={{ transition: "width 0.5s", right: '-30%' }}>
+          <div className="add-header">
+            <div className="left">添加学生</div>
+            <div className="right" onClick={this.closeWindow}><i className="iconfont icon-guanbi"></i></div>
+          </div>
+          <div className="add-body">
+            <Form onSubmit={this.handleSubmit} className="subAdd-form">
+              <fieldset>
+                <FormItem
+                  label="姓名"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('name', {
+                    rules: [{
+                      required: true, message: '请填写姓名!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="学号"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('id', {
+                    rules: [{
+                      required: true, message: '请填写学号!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="性别"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('sex', {
+                    rules: [{
+                      required: true, message: '请选择性别!',
+                    }],
+                  })(
+                    <Select placeholder="请选择性别">
+                      <Option value="0">男</Option>
+                      <Option value="1">女</Option>
+                    </Select>
+                  )}
+                </FormItem>
+                <FormItem
+                  label="学院"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('college', {
+                    rules: [{
+                      required: true, message: '请填写学院!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="专业"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('major', {
+                    rules: [{
+                      required: true, message: '请填写专业!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="班级"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('class', {
+                    rules: [{
+                      required: true, message: '请选择班级!',
+                    }],
+                  })(
+                    <Select placeholder="请选择班级">
+                      <Option value="1">1</Option>
+                      <Option value="2">2</Option>
+                      <Option value="3">3</Option>
+                      <Option value="4">4</Option>
+                    </Select>
+                  )}
+                </FormItem>
+                <FormItem
+                  label="邮箱"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('email', {
+                    rules: [{
+                      required: true, message: '请填写邮箱!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+                <FormItem
+                  label="联系方式"
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 12 }}
+                >
+                  {getFieldDecorator('tel', {
+                    rules: [{
+                      required: true, message: '请填写联系方式!',
+                    }],
+                  })(
+                    <Input />
+                  )}
+                </FormItem>
+
+                <FormItem
+                  wrapperCol={{
+                    xs: { span: 18, offset: 0 },
+                    sm: { span: 16, offset: 6 },
+                  }}
+                >
+                  <Button onClick={this.closeWindow.bind(this)} style={{ marginRight: '20px' }}>取消</Button>
+                  <Button type="primary" htmlType="submit">确定</Button>
+                </FormItem>
+              </fieldset>
+            </Form>
+          </div>
+
+        </div>
       </div>
     );
+  }
+  //添加用户窗口
+  openWindow() {
+    let box = document.getElementById('adduser-box');
+    box.setAttribute("style", "transition: width 0.5s;right:0")
+  }
+  //关闭用户窗口
+  closeWindow() {
+    let box = document.getElementById('adduser-box');
+    box.setAttribute("style", "transition: width 0.5s;right:-30%")
   }
   //获取用户列表
   getUserList() {
     let data = {};
-    data.permission = 0;
-    data.id = this.state.searchId;
+    data.permissions = 1;
+    if(this.state.searchId) {
+      data.id = this.state.searchId;
+    }
     GetUserList(data).then(res => {
-      if (res.length > 0) {
+      if (res) {
         this.state.userList = res;
+        this.setState({});
       }
     })
-    this.setState({});
   }
   //删除某个用户
-  showDeleteConfirm(r) {
+  showDeleteConfirm(item) {
     confirm({
       title: '你确定要删除？',
       okText: '确定',
       okType: 'danger',
       cancelText: '取消',
       onOk() {
-        DeleteUser(r).then(res => {
+        DeleteUser(item._id).then(res => {
           if (res.status == 200) {
-            console.log('success');
+            message.success('删除成功！');
+          } else {
+            message.error('删除失败！');
+          }
+        })
+      }
+    });
+  }
+  //保存添加用户信息
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let data;
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        data = values;
+        data.sex = Number(data.sex);
+        data.class = Number(data.class);
+        data.permissions = 1;
+        AddUser(data).then(res => {
+          if (res) {
+            //添加成功
+            this.getUserList();
+            message.success('添加成功！');
+            let box = document.getElementById('adduser-box');
+            box.setAttribute("style", "transition: width 0.5s;right:-30%")
           }
         })
       }
     });
   }
 }
+const StudentMgt = Form.create()(StudentMgtList);
+export default StudentMgt;

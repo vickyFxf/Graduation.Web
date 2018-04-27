@@ -202,9 +202,9 @@
             <span class="changeCode" style="display:inline-block" onclick="changeCode()">换一张</span>
           </p>
           <p class="identity">
-            <input type="radio" name="permission" value="1">教师
-            <input type="radio" name="permission" value="0" checked>学生
-            <input type="radio" name="permission" value="2">管理员
+            <input type="radio" name="permission" value="2">教师
+            <input type="radio" name="permission" value="1" checked>学生
+            <input type="radio" name="permission" value="3">管理员
           </p>
           <a href="javascript:void(0)" class="log" id="log">登&nbsp;录</a>
           <a href="javascript:void(0)" class="reset" onclick="resetForm()">重&nbsp;置</a>
@@ -238,7 +238,7 @@
   function validate() {
     var userInfo = {};
     userInfo.id = $.trim(loginForm.name.value);
-    userInfo.password = hex_md5($.trim(document.loginForm.password.value));
+    userInfo.password = hex_md5($.trim(document.loginForm.password.value),32);
     userInfo.permissions = Number($.trim(loginForm.permission.value));
     if (!userInfo.id) {
       return '请填写用户名！'
@@ -251,34 +251,35 @@
   //登录
   document.getElementById("log").onclick = function () {
     var userInfo = validate();
-    sessionStorage.setItem("id",'201460001' );
-    sessionStorage.setItem("userName", '陈伟');
-    sessionStorage.setItem("permissions", 1);
-    window.location.href = "http://localhost:4000/index.html"
-    // if (typeof (userInfo) == 'object') {
-    //   var res = verifyCode.validate(document.getElementById("code_input").value);
-    //   if (res) {
-    //     $.ajax({
-    //       url: 'http://localhost:3000/User-Module/CheckLogin',
-    //       type: 'POST',
-    //       data: userInfo,
-    //       dataType: 'json',
-    //       success: (res) => {
-    //         if (res.status) {
-    //           alert(res.msg);
-    //         } else {
-    //           sessionStorage.setItem("id", res.id);
-    //           sessionStorage.setItem("userName", res.name);
-    //           sessionStorage.setItem("permissions", res.permissions);
-    //           window.location.href = "http://localhost:4000/index.html"
-    //         }
-    //       }
-    //     })
-    //   } else {
-    //     alert("验证码错误");
-    //   }
-    // } else {
-    //   alert(userInfo);
-    // }
+    // sessionStorage.setItem("id",'201460001' );
+    // sessionStorage.setItem("userName", '陈伟');
+    // sessionStorage.setItem("permissions", 1);
+    // window.location.href = "http://localhost:4000/index.html"
+    console.log(userInfo);
+    if (typeof (userInfo) == 'object') {
+      var res = verifyCode.validate(document.getElementById("code_input").value);
+      if (res) {
+        $.ajax({
+          url: 'http://localhost:3000/User-Module/CheckLogin',
+          type: 'POST',
+          data: userInfo,
+          dataType: 'json',
+          success: (res) => {
+            if (res.status) {
+              alert(res.msg);
+            } else {
+              sessionStorage.setItem("id", res.id);
+              sessionStorage.setItem("userName", res.name);
+              sessionStorage.setItem("permissions", res.permissions);
+              window.location.href = "http://localhost:4000/index.html"
+            }
+          }
+        })
+      } else {
+        alert("验证码错误");
+      }
+    } else {
+      alert(userInfo);
+    }
   }
 </script>

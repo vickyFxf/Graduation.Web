@@ -11,7 +11,7 @@ import request from './requestWrapper';
  */
 export function GetUserInfo(data) {
   return request({
-    url: '/User-Module/UserInfo/' + data.id,
+    url: '/User-Module/UserInfo/' + data,
     method: 'GET',
     type: 'json',
     contentType: 'application/json',
@@ -38,7 +38,7 @@ export function UpdateUserInfo(data) {
  */
 export function DeleteUser(data) {
   return request({
-    url: '/User-Module/DeleteUser/'+data.id,
+    url: '/User-Module/DeleteUser/'+data,
     method: 'DELETE',
     type: 'json',
     contentType: 'application/json',
@@ -49,15 +49,28 @@ export function DeleteUser(data) {
  * 查询用户列表
  */
 export function GetUserList(data) {
-  return request({
-    url: '/User-Module/List',
-    method: 'POST',
-    type: 'json',
-    contentType: 'application/json',
-    data: JSON.stringify({
-      // permissions:data.permissions
+  if(data.id=='undefined'){
+    return request({
+      url: '/User-Module/List',
+      method: 'POST',
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        permissions:data.permissions,
+      })
     })
-  })
+  }else{
+    return request({
+      url: '/User-Module/List',
+      method: 'POST',
+      type: 'json',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        id:data.id,
+        permissions:data.permissions,
+      })
+    })
+  }
 }
 
 /**

@@ -5,8 +5,8 @@
  * @Last Modified time: 2018-04-09 10:27:41 
  */
 import React from 'react';
-import { Form, Input, Select, Button, Icon, RadioGroup, Radio } from 'antd';
-import { UpdateUserInfo } from '../../services/usersService.js';
+import { Form, Input, Select, Button, Icon, RadioGroup, Radio,Modal ,message} from 'antd';
+import { UpdateUserInfo ,GetUserInfo} from '../../services/usersService.js';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -16,8 +16,17 @@ class ChangePwdForm extends React.Component {
     this.state = {
       id: sessionStorage.getItem('id'),
       oldPwdTips: '请输入当前密码',
-      confirmPwdTips: '请确认新密码!'
+      confirmPwdTips: '请确认新密码!',
+      mongoPwd:'',
     }
+  }
+  componentWillMount(){
+    GetUserInfo(this.state.id).then(res=>{
+      if(res){
+        this.state.mongoPwd=res.password;
+      }
+      this.setState({});
+    })
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -81,18 +90,34 @@ class ChangePwdForm extends React.Component {
       </div>
     );
   }
-  //验证两次密码是否一致
-  checkPwd() {
-
-  }
   handleSubmit = (e) => {
     e.preventDefault();
     let data = {};
     this.props.form.validateFields((err, values) => {
       if (!err) {
+        console.log(this.state.mongoPwd);
+        console.log(hex_md5(values.oldPwd));
+        if(this.state.mongoPwd!=hex_md5(values.oldPwd)){
+          Modal.error({
+            content: '原始密码输入错误，请重新输入！',
+          });
+          return;
+        }
+        if(values.newPwd!=values.confirmPwd){
+          Modal.error({
+            content: '前后新密码不一直，请重新输入！',
+          });
+          return;
+        }
         data.password = hex_md5(values.newPwd);
         data.id = this.state.id;
-        UpdateUserInfo(data);
+        UpdateUserInfo(data).then(res=>{
+          if (res) {
+            message.success('修改成功！');
+          } else {
+            message.error('修改失败！');
+          }
+        })
       }
     });
   }
