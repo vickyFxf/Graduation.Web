@@ -27,6 +27,8 @@ class TeacherMgtList extends React.Component {
     const { getFieldDecorator } = this.props.form;
     const Search = Input.Search;
     _.map(this.state.userList,(item,index)=>{
+      item.title=this.toTitle(item.title);
+      item.position=this.toPosition(item.position);
       item.key=index+1;
       if(item.sex==0){
         item.sexString="男";
@@ -171,10 +173,15 @@ class TeacherMgtList extends React.Component {
                 >
                   {getFieldDecorator('title', {
                     rules: [{
-                      required: true, message: '请填写职称!',
+                      required: true, message: '请选择职称!',
                     }],
                   })(
-                    <Input />
+                    <Select placeholder="请选择职称">
+                      <Option value="1">助教</Option>
+                      <Option value="2">讲师</Option>
+                      <Option value="3">副教授</Option>
+                      <Option value="4">教授</Option>
+                    </Select>
                   )}
                 </FormItem>
                 <FormItem
@@ -184,10 +191,13 @@ class TeacherMgtList extends React.Component {
                 >
                   {getFieldDecorator('position', {
                     rules: [{
-                      required: true, message: '请填写岗位!',
+                      required: true, message: '请选择岗位!',
                     }],
                   })(
-                    <Input />
+                    <Select placeholder="请选择岗位">
+                      <Option value="1">普通教师</Option>
+                      <Option value="2">教研主任</Option>
+                    </Select>
                   )}
                 </FormItem>
                 <FormItem
@@ -234,6 +244,34 @@ class TeacherMgtList extends React.Component {
       </div>
     );
   }
+  //判断职称的值
+  toTitle(value){
+    switch(value){
+      case 1:
+        return '助教'
+        break;
+      case 2:
+        return '讲师'
+        break;
+      case 3:
+        return '副教授'
+        break;
+      case 4:
+        return '教授'
+        break;
+    }
+  }
+  toPosition(value){
+    switch(value){
+      case 1:
+        return '普通教师'
+        break;
+      case 2:
+        return '教研主任'
+        break;
+    }
+  }
+  //判断岗位的值
   //添加用户窗口
   openWindow() {
     let box = document.getElementById('adduser-box');
