@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:30:42 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-27 17:22:46
+ * @Last Modified time: 2018-04-28 10:23:32
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -28,7 +28,7 @@ import ChangePwd from '../components/personalCenter/ChangePwd';
 import SubjectPage from '../components/page/SubjectPage';
 // import SubjectAll from '../components/subject/SubjectAll';
 import SubjectList from '../components/subject/SubjectList';
-// import SubjectAddForm from '../components/subject/SubjectAdd';
+import SubjectApproval from '../components/subject/SubjectApproval';
 import SubjectChoosed from '../components/subject/SubjectChoosed';
 import SubjectDetails from '../components/subject/SubjectDetails';
 //任务
@@ -66,7 +66,7 @@ export default class Root extends React.Component {
 					<Route path="subject" component={SubjectPage}>
 						<Route path="list" component={SubjectList} />
             {/* <Route path="allList" component={SubjectAll} /> */}
-						{/* <Route path="subjectAdd" component={SubjectAddForm} /> */}
+						<Route path="subjectApproval" component={SubjectApproval} />
 						<Route path="subjectChoosed" component={SubjectChoosed} />
 						<Route path="subjectDetails/123456" component={SubjectDetails} />
 					</Route>

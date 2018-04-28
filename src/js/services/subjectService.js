@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:31:19 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-27 17:20:33
+ * @Last Modified time: 2018-04-28 11:26:20
  */
 import request from './requestWrapper';
 
@@ -63,5 +63,22 @@ export function DeleteSubject(data) {
     method: 'DELETE',
     type: 'json',
     contentType: 'application/json',
+  })
+}
+/**
+ * 修改某个课题
+ * 教师修改个人课题
+ * 主任审批课题
+ * @param {*} data data._id课题唯一id 
+ */
+export function UpdateSubject(data) {
+  return request({
+    url: '/Subject-Module/Update/' + data._id,
+    method: 'PUT',
+    type: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      ...data
+    })
   })
 }

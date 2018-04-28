@@ -2,19 +2,20 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:28:51 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-27 17:55:34
+ * @Last Modified time: 2018-04-28 11:31:44
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider } from 'antd';
 import { Link } from 'react-router';
-import { GetSubjectInfo } from '../../services/subjectService.js';
-
+import { GetSubjectInfo,UpdateSubject} from '../../services/subjectService.js';
+import history from 'history/createHashHistory' 
 export default class SubjectDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       _id: this.props.params._id,
-      details: {}
+      currentUser: sessionStorage.getItem('permissions'),
+      details: [],
     }
   }
   componentWillMount() {
@@ -30,6 +31,7 @@ export default class SubjectDetails extends React.Component {
   }
   render() {
     const item = this.state.details;
+    console.log(this.state.currentUser);
     return (
       <div className="margin-left-subpanel">
         <div className="list-header">
@@ -57,12 +59,34 @@ export default class SubjectDetails extends React.Component {
               </tr>
             </tbody>
             <caption style={{ textAlign: 'center', captionSide: 'bottom', padding: '0', color: '#000' }}>
-              <button>申请</button>
-              <button>返回</button>
+              {
+                this.state.currentUser=="1"?<button onClick={this.applySubject.bind(this)}>申请</button>:""
+              }
+              {
+                this.state.currentUser=="2"?<span><button onClick={this.approved.bind(this,'2')}>同意</button><button onClick={this.approved.bind(this,'3')}>不同意</button></span>:""
+              }
+              <button onClick={this.goBack.bind(this)}>返回</button>
             </caption>
           </table>
         </div>
       </div>
     )
+  }
+  //返回上一页
+  goBack(){
+    window.history.back();
+  }
+  //学生申请课题
+  approved(value){
+    //1未审核,2已通过,3未通过
+    let data={};
+    data._id=this.state.details;
+    data.isAudit=Number(value);
+    console.log(data);
+    // UpdateSubject(data).then(res=>{
+    //   if(res){
+    //     console.log('审批成功');
+    //   }
+    // })
   }
 }

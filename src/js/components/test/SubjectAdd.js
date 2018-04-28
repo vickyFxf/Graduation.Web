@@ -1,8 +1,11 @@
 /*
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:28:01 
- * @Last Modified by:   VickyFan 
- * @Last Modified time: 2018-04-09 10:28:01 
+ * @Last Modified by: VickyFan
+ * @Last Modified time: 2018-04-28 10:17:56
+ */
+/**
+ * 增加课题
  */
 import React from 'react';
 import { AddSubject } from '../../services/subjectService.js';

@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:29:03 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-27 17:31:42
+ * @Last Modified time: 2018-04-28 17:34:43
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider, Modal, Form, Select, Upload, message } from 'antd';
@@ -20,7 +20,7 @@ class SubjectListForm extends React.Component {
       userList: [],
       searchId: '',
       position: '0',
-      show: false
+      show: false,
     }
   }
   componentWillMount() {
@@ -58,9 +58,9 @@ class SubjectListForm extends React.Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>查看</a>
+          <Link to="subject/subjectDetails/123456">查看</Link>
           <Divider type="vertical" />
-          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>修改</a>
+          <a href="javascript:void(0)" onClick={this.openWindow.bind(this, record)}>修改</a>
           <Divider type="vertical" />
           <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
         </span>
@@ -84,7 +84,7 @@ class SubjectListForm extends React.Component {
       creatUserId: '1xhdh1839944',
       subTime: "2017-09-13",
       isAudit: "未审核",
-    }];// rowSelection object indicates the need for row selection
+    }];
     return (
       <div id="subjectList" className="userMgt-list margin-left-subpanel">
         <div className="list-header">
@@ -123,6 +123,7 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subName', {
                     rules: [{
                       required: true, message: '请填写课题名称!',
+                      initialValue: this.state.editItem?this.state.editItem.subName:''
                     }],
                   })(
                     <Input />
@@ -136,6 +137,7 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subSource', {
                     rules: [{
                       required: true, message: '请选择课题来源!',
+                      initialValue: this.state.editItem?this.state.editItem.subSource:''
                     }],
                   })(
                     <Select placeholder="请选择课题来源">
@@ -152,6 +154,7 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subCategory', {
                     rules: [{
                       required: true, message: '请选择课题类别!',
+                      initialValue: this.state.editItem?this.state.editItem.subCategory:''
                     }],
                   })(
                     <Select placeholder="请选择课题类别">
@@ -168,6 +171,7 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subIntroduction', {
                     rules: [{
                       required: true, message: '请填写课题简介!',
+                      initialValue: this.state.editItem?this.state.editItem.subIntroduction:""
                     }],
                   })(
                       <textarea style={{resize: 'none',maxWidth:'280px',maxHeight:'300px',width:'280px',height:'80px'}}></textarea>
@@ -191,9 +195,12 @@ class SubjectListForm extends React.Component {
     );
   }
   //添加课题窗口
-  openWindow() {
+  openWindow(item) {
+    this.setState({
+      editItem:item      
+    })
     let box = document.getElementById('addsubject-box');
-    box.setAttribute("style", "transition: width 0.5s;right:0")
+    box.setAttribute("style", "transition: width 0.5s;right:0");
   }
   //关闭添加课题窗口
   closeWindow() {

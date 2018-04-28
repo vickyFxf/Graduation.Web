@@ -1,15 +1,15 @@
 /*
  * @Author: VickyFan 
- * @Date: 2018-04-09 10:28:13 
+ * @Date: 2018-04-28 10:20:11 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-28 10:16:43
+ * @Last Modified time: 2018-04-28 10:34:19
  */
 /**
- * 学生在线选题
+ * 主任审批课题
  */
 import React from 'react';
 import { Table, Icon, Divider } from 'antd';
-export default class OpeningReport extends React.Component {
+export default class SubjectApproval extends React.Component {
   render() {
     const columns = [{
       title: '序号',
@@ -18,6 +18,12 @@ export default class OpeningReport extends React.Component {
       title: '课题名称',
       dataIndex: 'subName',
     }, {
+      title: '课题来源',
+      dataIndex: 'subSource',
+    }, {
+      title: '课题类别',
+      dataIndex: 'subCategory',
+    }, {
       title: '指导教师',
       dataIndex: 'teacherName',
     }, {
@@ -25,7 +31,7 @@ export default class OpeningReport extends React.Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a href="#">申请</a>
+          <a href="#">审批</a>
         </span>
       ),
     }];
@@ -35,13 +41,15 @@ export default class OpeningReport extends React.Component {
         key: i,
         sort: i + 1,
         subName: `毕业论文管理系统`,
+        subSource: '科学研究',
+        subCategory:'学术论文',
         teacherName: `陈伟`,
       });
     }
     return (
       <div id="">
         <div className="list-header">
-          <p>在线选题</p>
+          <p>待处理课题</p>
         </div>
         <Table
           columns={columns}

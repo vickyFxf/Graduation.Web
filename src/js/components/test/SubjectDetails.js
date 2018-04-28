@@ -2,7 +2,10 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:28:51 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-09 10:57:32
+ * @Last Modified time: 2018-04-28 10:17:36
+ */
+/**
+ * 课题详情
  */
 import React from 'react';
 import { Icon, Button, Input, Table, Divider } from 'antd';
