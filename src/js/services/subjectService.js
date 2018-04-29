@@ -17,7 +17,7 @@ export function GetSubListById(data) {
     type: 'json',
     contentType: 'application/json',
     data: JSON.stringify({
-      creatUserId: data.creatUserId,
+      ...data
     })
   })
 }
@@ -32,12 +32,7 @@ export function AddSubject(data) {
     type: 'json',
     contentType: 'application/json',
     data: JSON.stringify({
-      subName: data.subName,
-      subSource: data.subSource,
-      subCategory: data.subCategory,
-      subIntroduction: data.subIntroduction,
-      creatUserId: data.creatUserId,
-      isAudit: data.isAudit,
+      ...data
     })
   })
 }
@@ -59,7 +54,7 @@ export function GetSubjectInfo(data) {
  */
 export function DeleteSubject(data) {
   return request({
-    url: '/Subject-Module/Search/' + data._id,
+    url: '/Subject-Module/DelSubject/' + data._id,
     method: 'DELETE',
     type: 'json',
     contentType: 'application/json',

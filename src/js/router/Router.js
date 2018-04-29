@@ -49,7 +49,7 @@ export default class Root extends React.Component {
 		return (
 			<Router history={hashHistory}>
 				<Route path="/" component={Application}>
-          <IndexRedirect to="index"/>
+          <IndexRedirect to="subject"/>
           {/* 教学通知 */}
           <Route path="index" component={HomePage}>
             <Route path="noticeAdd" component={NoticeAdd} />
@@ -68,7 +68,7 @@ export default class Root extends React.Component {
             {/* <Route path="allList" component={SubjectAll} /> */}
 						<Route path="subjectApproval" component={SubjectApproval} />
 						<Route path="subjectChoosed" component={SubjectChoosed} />
-						<Route path="subjectDetails/123456" component={SubjectDetails} />
+						<Route path="subjectDetails/:_id" component={SubjectDetails} />
 					</Route>
 					{/* 个人中心 */}
 					<Route path="selfInfo" component={SelfPage}>

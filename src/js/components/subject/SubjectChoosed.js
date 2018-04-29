@@ -7,37 +7,39 @@
 import React from 'react';
 import { Table, Icon, Divider } from 'antd';
 import { Link } from 'react-router';
+import { GetSubListById} from '../../services/subjectService.js';
 export default class SubjectChoosed extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      chooseList:[],
+    }
+  }
+  componentWillMount(){
+    this.getChooseList();
+  }
   render() {
     const columns = [{
       title: '序号',
-      dataIndex: 'sort',
+      dataIndex: 'key',
+      key: 'key',
     }, {
       title: '课题名称',
       dataIndex: 'subName',
+      key: 'subName',
     }, {
       title: '指导教师',
-      dataIndex: 'teacherName',
+      dataIndex: 'creatUserName',
+      key: 'creatUserName',
     }, {
       title: '操作',
       key: 'action',
       render: (text, record) => (
         <span>
-          <Link to="subject/subjectDetails/123456">查看</Link>
-          <Divider type="vertical" />
-          <a href="javascript:void(0)" onClick={this.apply.bind(this)}>申请</a>
+          <Link to={'subject/subjectDetails/'+record._id}>申请</Link>
         </span>
       ),
     }];
-    const data = [];
-    for (let i = 0; i < 46; i++) {
-      data.push({
-        key: i,
-        sort: i + 1,
-        subName: `毕业论文管理系统`,
-        teacherName: `陈伟`,
-      });
-    }
     return (
       <div className="margin-left-subpanel">
         <div className="list-header">
@@ -45,7 +47,7 @@ export default class SubjectChoosed extends React.Component {
         </div>
         <Table
           columns={columns}
-          dataSource={data}
+          dataSource={this.state.chooseList}
           pagination={{
             pageSize: 10,
           }}
@@ -53,8 +55,15 @@ export default class SubjectChoosed extends React.Component {
       </div>
     );
   }
-  //申请课题
-  apply(){
-    
+  //获取课题列表
+  getChooseList() {
+    let data={};
+    data.isAudit=2;
+    GetSubListById(data).then(res => {
+      if (res) {
+        this.state.chooseList = res;
+      }
+    })
+    this.setState({});
   }
 }

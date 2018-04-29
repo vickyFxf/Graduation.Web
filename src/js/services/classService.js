@@ -67,3 +67,16 @@ export function GetClassList(classType) {
   })
 }
 
+/**
+ * 获取某个分类详情
+ * @param {*} data 
+ */
+export function ClassDetails(id) {
+  return request({
+    url: '/Class-Module/ClassDetails/'+id,
+    method: 'GET',
+    type: 'json',
+    contentType: 'application/json',
+  })
+}
+

@@ -11,10 +11,13 @@ import request from './requestWrapper';
  */
 export function GetUserInfo(data) {
   return request({
-    url: '/User-Module/UserInfo/' + data,
-    method: 'GET',
+    url: '/User-Module/UserInfo',
+    method: 'POST',
     type: 'json',
     contentType: 'application/json',
+    data: JSON.stringify({
+      id:data.id
+    })
   })
 }
 /**

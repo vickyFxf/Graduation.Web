@@ -8,6 +8,16 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import { Icon } from 'antd';
 export default class GlobalPanel extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      globalPermission:sessionStorage.getItem('permissions'),
+      globalUserName:sessionStorage.getItem('name')
+    }
+  }
+  componentWillMount(){
+
+  }
   render() {
     return (
       <div className="global-panel">
@@ -17,15 +27,21 @@ export default class GlobalPanel extends React.Component {
           </div>
         </div>
         <div className="nav-box">
-          <Link to="index" activeClassName="active" className="global-panel-item"><i className="iconfont icon-tongzhi"></i><div>通知</div></Link>
+          {/* <Link to="index" activeClassName="active" className="global-panel-item"><i className="iconfont icon-tongzhi"></i><div>通知</div></Link> */}
           <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>
           <Link to="task" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link>
           <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
-          <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link>
-          <Link to="set" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link>
+          {
+            this.state.globalPermission=="3"?
+            <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link>:""
+          }
+          {
+            this.state.globalPermission=="3"?
+            <Link to="set" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link>:""
+          }
         </div>
         <div className="info-box">
-          <a className="global-panel-item"><span className="avatar">范</span></a>
+          <a className="global-panel-item"><span className="avatar">{}</span></a>
         </div>
         <div className="exit-box">
           <a className="global-panel-item">
