@@ -15,8 +15,9 @@ export default class SubjectPage extends React.Component {
     let items;
     items = [
       {avator: "", id: 20001, title: '在线选题', link: '/subject/subjectChoosed', info: ''},
-      {avator: "", id: 20002, title: '我的课题', link: '/subject/list', info: ''},
-      {avator: "", id: 20003, title: '待审批课题', link: '/subject/subjectApproval', info: ''}]
+      // {avator: "", id: 20002, title: '我的课题', link: '/subject/list', info: ''},
+      // {avator: "", id: 20003, title: '待审批课题', link: '/subject/subjectApproval', info: ''}
+    ]
     return (
       <div className="page-container clear">
         <div className="sub-panel">

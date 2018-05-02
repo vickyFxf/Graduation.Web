@@ -78,7 +78,7 @@ class SubjectListForm extends React.Component {
       key: 'action',
       render: (text, record) => (
         <span>
-          <Link to="subject/subjectDetails/123456">查看</Link>
+          <Link to={'subject/subjectDetails/'+record._id}>查看</Link>
           <Divider type="vertical" />
           <a href="javascript:void(0)" onClick={this.openWindow.bind(this, record)}>修改</a>
           <Divider type="vertical" />

@@ -78,6 +78,8 @@ class TeacherMgtList extends React.Component {
       render: (text, record) => (
         <span>
           <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
+          <Divider type="vertical" />
+          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>重置密码</a>
         </span>
       ),
     }];

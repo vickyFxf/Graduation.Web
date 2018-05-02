@@ -19,6 +19,9 @@ export default class SubjectChoosed extends React.Component {
     this.getChooseList();
   }
   render() {
+    _.map(this.state.chooseList,(item1,index1)=>{
+      item1.key=index1+1;
+    })
     const columns = [{
       title: '序号',
       dataIndex: 'key',
@@ -63,7 +66,7 @@ export default class SubjectChoosed extends React.Component {
       if (res) {
         this.state.chooseList = res;
       }
+      this.setState({});
     })
-    this.setState({});
   }
 }

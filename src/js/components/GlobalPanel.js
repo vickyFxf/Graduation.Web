@@ -12,11 +12,13 @@ export default class GlobalPanel extends React.Component {
     super(props);
     this.state={
       globalPermission:sessionStorage.getItem('permissions'),
-      globalUserName:sessionStorage.getItem('name')
+      iconName:'',
     }
   }
   componentWillMount(){
-
+    let a = sessionStorage.getItem('userName');
+    this.state.iconName = a.substr(0,1);
+    this.setState({})
   }
   render() {
     return (
@@ -41,7 +43,7 @@ export default class GlobalPanel extends React.Component {
           }
         </div>
         <div className="info-box">
-          <a className="global-panel-item"><span className="avatar">{}</span></a>
+          <a className="global-panel-item"><span className="avatar">{this.state.iconName}</span></a>
         </div>
         <div className="exit-box">
           <a className="global-panel-item">

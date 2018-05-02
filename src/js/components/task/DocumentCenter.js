@@ -37,15 +37,27 @@ export default class DocumentCenter extends React.Component {
         </span>
       ),
     }];
-    const data = [];
-    for (let i = 0; i < 20; i++) {
-      data.push({
-        key: i,
-        sort: i + 1,
-        docName: `任务书`,
-        lastDate: `2018-03-0`+i,
-      });
-    }
+    const data = [{
+      key: 1,
+      sort: 1,
+      docName: `任务书`,
+      lastDate: `2018-04-30`,
+    },{
+      key: 2,
+      sort: 2,
+      docName: `开题报告`,
+      lastDate: `2018-04-30`,
+    },{
+      key: 3,
+      sort: 3,
+      docName: `文献综述`,
+      lastDate: `2018-04-30`,
+    },{
+      key: 4,
+      sort: 4,
+      docName: `中期检查`,
+      lastDate: `2018-04-30`,
+    }];
     return (
       <div className="margin-left-subpanel">
         <div className="list-header">

@@ -149,4 +149,8 @@ export default class SubjectDetails extends React.Component {
       }
     })
   }
+  //学生申请课题
+  applySubject(){
+    console.log(123);
+  }
 }
