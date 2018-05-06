@@ -1,0 +1,23 @@
+.task-page{
+  height: 100%;
+  .list-header{
+    height: 10%;
+  }
+  table{
+    width: 100%;
+    tr:nth-child(odd){
+      height:25px;
+      line-height: 25px;
+      background: #d3e7f4;
+    }
+  }
+}
+.task-body{
+  overflow: hidden;
+  height: 85%;
+  .document-box{
+    width: 100%;
+    height: 100%;
+    border:3px solid #d3e7f4;
+  }
+}
