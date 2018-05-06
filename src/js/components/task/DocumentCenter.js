@@ -9,14 +9,35 @@
  */
 import React from 'react';
 import { Table, Icon, Divider ,Button} from 'antd';
+import {GetDocumentList,DownLoad} from '../../services/documentService.js';
 export default class DocumentCenter extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      documentList:[],
+    }
+  }
+  componentWillMount(){
+    this.getList();
+  }
+  getList(){
+    GetDocumentList().then(res=>{
+      if(res){
+        this.state.documentList=res;
+      }
+      this.setState({});
+    })
+  }
   render() {
+    _.map(this.state.documentList,(item,index)=>{
+      item.key=index+1;
+    })
     const columns = [{
       title: '序号',
-      dataIndex: 'sort',
+      dataIndex: 'key',
     }, {
       title: '文档名称',
-      dataIndex: 'docName',
+      dataIndex: 'filename',
     }, {
       title: '文档下载',
       key: 'docDown',
@@ -33,31 +54,11 @@ export default class DocumentCenter extends React.Component {
       key: 'templateDown',
       render: (text, record) => (
         <span>
-          <Button type="dashed" shape="circle" icon="download"></Button>
+          <Button type="dashed" shape="circle" icon="download" onClick={this.downLoad.bind(this,record)}></Button>
         </span>
       ),
     }];
-    const data = [{
-      key: 1,
-      sort: 1,
-      docName: `任务书`,
-      lastDate: `2018-04-30`,
-    },{
-      key: 2,
-      sort: 2,
-      docName: `开题报告`,
-      lastDate: `2018-04-30`,
-    },{
-      key: 3,
-      sort: 3,
-      docName: `文献综述`,
-      lastDate: `2018-04-30`,
-    },{
-      key: 4,
-      sort: 4,
-      docName: `中期检查`,
-      lastDate: `2018-04-30`,
-    }];
+
     return (
       <div className="margin-left-subpanel">
         <div className="list-header">
@@ -65,12 +66,19 @@ export default class DocumentCenter extends React.Component {
         </div>
         <Table
           columns={columns}
-          dataSource={data}
+          dataSource={this.state.documentList}
           pagination={{
             pageSize: 10,
           }}
         />
       </div>
     );
+  }
+  downLoad(r){
+    console.log(r);
+    let data={};
+    data.filename=r.filename;
+    let url='http://localhost:3000/Upload-Module/DownLoad/'+data.filename;
+    window.open(url);
   }
 }

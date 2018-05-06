@@ -117,6 +117,14 @@ export default class ApplicationList extends React.Component {
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-baogao-copy"></i></span>
         </div>;
+      case "文档管理":
+        return <div className="thread-item-wrapper">
+          <span><i className="iconfont icon-baogao-copy"></i></span>
+        </div>;
+      case "上传文档":
+        return <div className="thread-item-wrapper">
+          <span><i className="iconfont icon-baogao-copy"></i></span>
+        </div>;
     }
   }
 }

@@ -43,6 +43,9 @@ import DocumentCenter from '../components/task/DocumentCenter';
 //系统设置
 import SetPage from '../components/page/SetPage';
 import ClassificationMgt from '../components/set/ClassificationMgt';
+import UploaderDocument from '../components/set/UploaderDocument';
+import Test from '../components/set/Test';
+
 import { AddUser } from '../services/usersService';
 export default class Root extends React.Component {
 	render() {
@@ -88,6 +91,8 @@ export default class Root extends React.Component {
           {/* 系统设置 */}
 					<Route path="set" component={SetPage}>
 						<Route path="classificationMgt" component={ClassificationMgt} />
+						<Route path="uploaderDocument" component={UploaderDocument} />
+						<Route path="test" component={Test} />
 					</Route>
 				</Route>
 			</Router>

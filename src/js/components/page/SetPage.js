@@ -8,7 +8,9 @@ export default class SetPage extends React.Component {
   render() {
     let items;
     items = [
-      { avator: "", id: 60001, title: '分类管理', link: '/set/classificationMgt', info: '' }]
+      { avator: "", id: 60001, title: '分类管理', link: '/set/classificationMgt', info: '' },
+      { avator: "", id: 60002, title: '文档管理', link: '/set/uploaderDocument', info: '' },
+      { avator: "", id: 60002, title: '上传文档', link: '/set/test', info: '' }]
     return (
       <div className="page-container clear">
         <div className="sub-panel">
