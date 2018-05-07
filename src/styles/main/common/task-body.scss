@@ -1,23 +1,64 @@
 .task-page{
   height: 100%;
-  .list-header{
-    height: 10%;
-  }
-  table{
-    width: 100%;
-    tr:nth-child(odd){
-      height:25px;
-      line-height: 25px;
+  .task-title{
+    width:100%;
+    height: 5%;
+    h2{
+      width:100%;
+      text-align: center
+    }
+  } 
+  .task-body{
+    height: 90%;
+    overflow: auto;
+    .left,.right{
+      float: left;
+    }
+    .left{
+      width:70%;
+      box-sizing: border-box;
+      border: 3px solid #d3e7f4;
+    }
+    .right{
+      width:25%;
+      margin-left: 5%;
+      .box{
+        width: 100%;
+        box-sizing: border-box;
+        border: 3px solid #d3e7f4;
+        margin-bottom: 20px;
+        span{
+          display: inline;
+        }
+      }
+      .handleButton{
+        button{
+          width: 60px;
+          margin: 0 10px;
+        }
+      }
+      .historyDucument{
+        .history{
+          text-align: center;
+          font-weight: 600;
+          background: #d3e7f4;
+        }
+        button{
+          width: 60px;
+          margin-left: 20px;
+        }
+      }
+    }
+    span{
+      display: inline-block;
+      width: 100%;
       background: #d3e7f4;
     }
-  }
-}
-.task-body{
-  overflow: hidden;
-  height: 85%;
-  .document-box{
-    width: 100%;
-    height: 100%;
-    border:3px solid #d3e7f4;
+    textarea{
+      height: 80px;
+      width:100%;
+      resize: none;
+      overflow-y:auto
+    }
   }
 }

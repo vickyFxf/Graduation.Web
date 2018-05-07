@@ -14,37 +14,51 @@ export default class TaskBook extends React.Component {
         this.state={
             formData:{
                 target:'',
+                isEdit:true,
             }
         }
     }
     render() {
         return (
             <div className="task-page margin-left-subpanel">
-                <div className="list-header">
-                    <p>任务书</p>
+                <div className="task-title">
+                    <h2>【任务书】毕业论文管理系统的设计与实现</h2>
                 </div>
                 <div className="task-body">
-                    <div className="document-box">
-                        <table>
-                            <tr><td colspan="2">[任务书]毕业论文管理系统的设计与实现</td></tr>
-                            <tr><td colspan="2">导师&nbsp;陈伟&nbsp;学生：&nbsp;范秀芳</td></tr>
-                            <tr><td>一、</td><td>目的和要求</td></tr>
-                            <tr><td><input name="targrt" onChange={this.changeValue.bind(this,'targrt')}/></td></tr>
-                            <tr><td>二、</td><td>主要内容和数据等</td></tr>
-                            <tr><td><input name="content" onChange={this.changeValue.bind(this,'content')}/></td></tr>
-                            <tr><td>三、</td><td>应完成的工作</td></tr>
-                            <tr><td><input name="shouldDo" onChange={this.changeValue.bind(this,'shouldDo')}/></td></tr>
-                            <tr><td>四、</td><td>进度安排</td></tr>
-                            <tr><td><input name="process" onChange={this.changeValue.bind(this,'process')}/></td></tr>
-                            <tr><td>五、</td><td>主要参考文献</td></tr>
-                            <tr><td><input name="resources" onChange={this.changeValue.bind(this,'resources')}/></td></tr>
-                            <tr><td>六、</td><td>上传文件</td></tr>
-                            <tr><td><input type="file" name="document" onChange={this.changeValue.bind(this,'document')}/></td></tr>
-                        </table>
+                    <div className="left">
+                        <span>一、目的和要求(500字以内)</span>
+                        <textarea name="targrt" maxLength="500" onChange={this.changeValue.bind(this,'target')} readOnly={this.state.isEdit}></textarea>
+                        <span>二、主要内容和数据等(500字以内)</span>
+                        <textarea name="content" maxLength="500" onChange={this.changeValue.bind(this,'content')} readOnly={this.state.isEdit}></textarea>
+                        <span>三、应完成的工作(800字以内)</span>
+                        <textarea name="shouldDo" maxLength="800" onChange={this.changeValue.bind(this,'shouldDo')} readOnly={this.state.isEdit}></textarea>
+                        <span>四、进度安排(500字以内)</span>
+                        <textarea name="process" maxLength="500" onChange={this.changeValue.bind(this,'process')} readOnly={this.state.isEdit}></textarea>
+                        <span>五、主要参考文献(500字以内)</span>
+                        <textarea name="resource" maxLength="500" onChange={this.changeValue.bind(this,'resource')} readOnly={this.state.isEdit}></textarea>
+                        <span>六、上传文件</span>
+                        <input type="file" name="document" onChange={this.changeValue.bind(this,'document')}/>
+                    </div>
+                    <div className="right">
+                        <div className="box handleButton">
+                            <button>下载模版</button>
+                            <button>下载文档</button>
+                            <button onClick={this.upload()}>上传</button>
+                        </div>
+                        <div className="box historyDucument">
+                            <div className="history">历史文档</div>
+                            <div>
+                                <div>1.2018-5-14&nbsp;&nbsp;&nbsp;&nbsp;22:30:45<button>下载</button></div>
+                                <div>2.2018-5-15&nbsp;&nbsp;&nbsp;&nbsp;22:30:56<button>下载</button></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         );
+    }
+    upload(){
+        
     }
     changeValue(filed){
 
