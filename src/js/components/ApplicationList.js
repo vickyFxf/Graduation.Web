@@ -73,10 +73,6 @@ export default class ApplicationList extends React.Component {
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-jilu"></i></span>
         </div>;
-      case "外文原文":
-        return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jilu"></i></span>
-        </div>;
       case "外文翻译":
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-jilu"></i></span>
@@ -85,7 +81,7 @@ export default class ApplicationList extends React.Component {
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-jilu"></i></span>
         </div>;
-      case "中期检查":
+      case "毕业论文":
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-jilu"></i></span>
         </div>;

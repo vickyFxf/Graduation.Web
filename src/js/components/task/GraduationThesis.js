@@ -1,14 +1,14 @@
 /*
  * @Author: VickyFan 
- * @Date: 2018-04-19 14:55:54 
+ * @Date: 2018-04-19 14:55:35 
  * @Last Modified by:   VickyFan 
- * @Last Modified time: 2018-04-19 14:55:54 
+ * @Last Modified time: 2018-04-19 14:55:35 
  */
 /**
- * 外文翻译
+ * 毕业论文
  */
 import React from 'react';
-export default class EnglishTranslation extends React.Component {
+export default class GraduationThesis extends React.Component {
     constructor(props){
         super(props);
         this.state={
@@ -22,13 +22,21 @@ export default class EnglishTranslation extends React.Component {
         return (
             <div className="task-page margin-left-subpanel">
                 <div className="task-title">
-                    <h2>【外文翻译】毕业论文管理系统的设计与实现</h2>
+                    <h2>【毕业论文】毕业论文管理系统的设计与实现</h2>
                 </div>
                 <div className="task-body">
                     <div className="left">
-                        <span>一、翻译</span>
-                        <textarea name="targrt" onChange={this.changeValue.bind(this,'target')} readOnly={this.state.isEdit} className="translate"></textarea>
-                        <span>二、上传文件</span>
+                        <span>一、摘要(500字以内)</span>
+                        <textarea name="targrt" maxLength="500" onChange={this.changeValue.bind(this,'target')} readOnly={this.state.isEdit}></textarea>
+                        <span>二、关键词(100字以内)</span>
+                        <textarea name="content" maxLength="100" onChange={this.changeValue.bind(this,'content')} readOnly={this.state.isEdit} className="keyWord"></textarea>
+                        <span>三、外文摘要(500字以内)</span>
+                        <textarea name="targrt" maxLength="500" onChange={this.changeValue.bind(this,'target')} readOnly={this.state.isEdit}></textarea>
+                        <span>四、正文</span>
+                        <textarea name="shouldDo" onChange={this.changeValue.bind(this,'shouldDo')} readOnly={this.state.isEdit} className="review-content"></textarea>
+                        <span>五、参考文献(500字以内)</span>
+                        <textarea name="process" maxLength="500" onChange={this.changeValue.bind(this,'process')} readOnly={this.state.isEdit}></textarea>
+                        <span>六、上传文件</span>
                         <input type="file" name="document" onChange={this.changeValue.bind(this,'document')}/>
                     </div>
                     <div className="right">

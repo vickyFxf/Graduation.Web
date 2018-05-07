@@ -35,11 +35,10 @@ import SubjectDetails from '../components/subject/SubjectDetails';
 import TaskPage from '../components/page/TaskPage';
 import TaskBook from '../components/task/TaskBook';
 import OpeningReport from '../components/task/OpeningReport';
-import ForeignLiterature from '../components/task/ForeignLiterature';
 import EnglishTranslation from '../components/task/EnglishTranslation';
 import LiteratureReview from '../components/task/LiteratureReview';
-import MidInspection from '../components/task/MidInspection';
 import DocumentCenter from '../components/task/DocumentCenter';
+import GraduationThesis from '../components/task/GraduationThesis'
 //系统设置
 import SetPage from '../components/page/SetPage';
 import ClassificationMgt from '../components/set/ClassificationMgt';
@@ -82,10 +81,9 @@ export default class Root extends React.Component {
 					<Route path="task" component={TaskPage}>
 						<Route path="TaskBook" component={TaskBook}/>
             <Route path="openingReport" component={OpeningReport}/>
-            <Route path="foreignLiterature" component={ForeignLiterature}/>
-            <Route path="englishTranslation" component={EnglishTranslation}/>
-            <Route path="literatureReview" component={LiteratureReview}/>
-            <Route path="midInspection" component={MidInspection}/>
+						<Route path="englishTranslation" component={EnglishTranslation}/>
+						<Route path="literatureReview" component={LiteratureReview}/>
+            <Route path="graduationThesis" component={GraduationThesis}/>
             <Route path="documentCenter" component={DocumentCenter}/>
 					</Route>
           {/* 系统设置 */}

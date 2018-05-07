@@ -15,6 +15,7 @@
       float: left;
     }
     .left{
+      height: 100%;
       width:70%;
       box-sizing: border-box;
       border: 3px solid #d3e7f4;
@@ -59,6 +60,15 @@
       width:100%;
       resize: none;
       overflow-y:auto
+    }
+    .translate{
+      height: 85%;
+    }
+    .keyWord{
+      height: 10%;
+    }
+    .review-content{
+      height: 40%;
     }
   }
 }
