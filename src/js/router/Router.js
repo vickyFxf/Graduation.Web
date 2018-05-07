@@ -33,6 +33,7 @@ import SubjectChoosed from '../components/subject/SubjectChoosed';
 import SubjectDetails from '../components/subject/SubjectDetails';
 //任务
 import TaskPage from '../components/page/TaskPage';
+import MySubject from '../components/task/MySubject';
 import TaskBook from '../components/task/TaskBook';
 import OpeningReport from '../components/task/OpeningReport';
 import EnglishTranslation from '../components/task/EnglishTranslation';
@@ -79,6 +80,7 @@ export default class Root extends React.Component {
 					</Route>
 					{/* 任务 */}
 					<Route path="task" component={TaskPage}>
+						<Route path="mySubject" component={MySubject}/>
 						<Route path="TaskBook" component={TaskBook}/>
             <Route path="openingReport" component={OpeningReport}/>
 						<Route path="englishTranslation" component={EnglishTranslation}/>

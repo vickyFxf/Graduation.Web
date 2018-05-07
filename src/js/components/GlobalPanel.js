@@ -6,13 +6,15 @@
  */
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-import { Icon } from 'antd';
+import { Icon ,Modal} from 'antd';
+import {GetUserInfo} from '../services/usersService.js';
 export default class GlobalPanel extends React.Component {
   constructor(props){
     super(props);
     this.state={
       globalPermission:sessionStorage.getItem('permissions'),
       iconName:'',
+      id:sessionStorage.getItem('id')
     }
   }
   componentWillMount(){
@@ -29,7 +31,6 @@ export default class GlobalPanel extends React.Component {
           </div>
         </div>
         <div className="nav-box">
-          {/* <Link to="index" activeClassName="active" className="global-panel-item"><i className="iconfont icon-tongzhi"></i><div>通知</div></Link> */}
           <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>
           <Link to="task" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link>
           <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
@@ -50,39 +51,30 @@ export default class GlobalPanel extends React.Component {
             <i className="iconfont icon-gengduo"></i>
             <div className="dropDown">
               <div className="dropItem"><i className="iconfont icon-guanyu"></i>关于</div>
-              <div className="dropItem"><i className="iconfont icon-tuichu"></i>退出登录</div>
+              <div className="dropItem" onClick={this.logout.bind(this)}><i className="iconfont icon-tuichu"></i>退出登录</div>
             </div>
           </a>
         </div>
       </div>
     )
   }
-  //查看是否是初次登录
-  // isFirstLogin() {
-  //   let data = {};
-  //   data.id = this.state.id;
-  //   GetUserInfo(data).then(res => {
-  //     let mdPwd = hex_md5('123456');
-  //     if (res.password == mdPwd) {
-  //       this.state.isFirst = true;
-  //     } else {
-  //       this.state.isFirst = false;
-  //     }
-  //     this.setState({});
-  //   })
-  // }
-  // logout() {
-  //   const tips = '退出前，请先修改默认密码';
-  //   if (this.state.isFirst) {
-  //     Modal.warning({
-  //       title: '警告！',
-  //       content: tips,
-  //       onOk: () => {
-  //         window.location.href = '';
-  //       }
-  //     })
-  //   } else {
-  //     window.location.href = 'http://localhost:4000/login.html';
-  //   }
-  // }
+  logout(e) {
+    e.stopPropagation();
+    let data = {};
+    data.id = sessionStorage.getItem('id');
+    GetUserInfo(data).then(res => {
+      let mdPwd = hex_md5('123456');
+      if (res[0].password == mdPwd) {
+        Modal.warning({
+          title: '警告！',
+          content: '退出前，请先修改系统默认密码！',
+          onOk: () => {
+            window.location.href = 'http://www.baidu.com';
+          }
+        })
+      } else {
+        window.location.href = 'http://localhost:4000/login.html';
+      }
+    })
+  }
 }

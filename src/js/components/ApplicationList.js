@@ -65,6 +65,10 @@ export default class ApplicationList extends React.Component {
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-xinshenqing"></i></span>
         </div>;
+      case "我的课题(学生)":
+        return <div className="thread-item-wrapper">
+          <span><i className="iconfont icon-xinshenqing"></i></span>
+        </div>;
       case "任务书":
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-jilu"></i></span>
