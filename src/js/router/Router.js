@@ -55,7 +55,6 @@ export default class Root extends React.Component {
     }
   }
 	render() {
-    console.log(this.state.globalPermission);
 		return (
 			<Router history={hashHistory}>
 				<Route path="/" component={Application}>

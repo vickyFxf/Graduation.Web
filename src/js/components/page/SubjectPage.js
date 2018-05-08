@@ -10,32 +10,43 @@
 import React from 'react';
 import ApplicationList from '../ApplicationList';
 import BlankArea from '../common/BlankArea';
+import {GetUserInfo } from '../../services/usersService.js';
 export default class SubjectPage extends React.Component {
   constructor(props){
     super(props);
     this.state={
       items:[],
+      isDirector:false,//默认不是主任
+      currentUser:[],
     }
   }
   componentWillMount(){
-    let permissions=sessionStorage.getItem('permissions');
-    let item=[];
-    if(permissions=='1'){
-      item.push({avator: "", id: 20001, title: '在线选题', link: '/subject/subjectChoosed', info: ''});
-    }else if(permissions=='2'){
-      item.push({avator: "", id: 20002, title: '我的课题', link: '/subject/list', info: ''});
-    }else if(permissions=='3'){
-      item.push({avator: "", id: 20003, title: '待审批课题', link: '/subject/subjectApproval', info: ''});
-    }
-    this.state.items=item;
-    this.setState({});
+    this.getCurrentUser();
+  }
+  getCurrentUser(){
+    let data = {};
+    data.id = sessionStorage.getItem('id');
+    GetUserInfo(data).then(res => {
+      if(res){
+        this.state.currentUser=res[0];
+      }
+      this.setState({});
+    })
   }
   render() {
+    let item=[];
+    if(this.state.currentUser.permissions==1){
+      item.push({avator: "", id: 20001, title: '在线选题', link: '/subject/subjectChoosed', info: ''});
+    }else if(this.state.currentUser.permissions==2&&this.state.currentUser.position==1){
+      item.push({avator: "", id: 20002, title: '我的课题', link: '/subject/list', info: ''});
+    }else if(this.state.currentUser.permissions==2&&this.state.currentUser.position==2){
+      item.push({avator: "", id: 20003, title: '待审批课题', link: '/subject/subjectApproval', info: ''});
+    }
     return (
       <div className="page-container clear">
         <div className="sub-panel">
           <div className="sub-panel-content">
-            <ApplicationList items={this.state.items} />
+            <ApplicationList items={item} />
           </div>
         </div>
         {this.props.children == undefined ?

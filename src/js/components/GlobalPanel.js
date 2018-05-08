@@ -9,8 +9,12 @@ import { Link, browserHistory } from 'react-router';
 import { Icon ,Modal} from 'antd';
 import {GetUserInfo} from '../services/usersService.js';
 export default class GlobalPanel extends React.Component {
-  constructor(props){
-    super(props);
+  static contextTypes={  
+      router:React.PropTypes.object  
+  } 
+  constructor(props,context){
+    super(props,context);
+    this.context.router;
     this.state={
       globalPermission:sessionStorage.getItem('permissions'),
       iconName:'',
@@ -75,10 +79,13 @@ export default class GlobalPanel extends React.Component {
           title: '警告！',
           content: '退出前，请先修改系统默认密码！',
           onOk: () => {
-            window.location.href = 'http://www.baidu.com';
+            this.context.router.push("/selfInfo/changePwd");
           }
         })
       } else {
+        sessionStorage.removeItem("id");
+        sessionStorage.removeItem("userName");
+        sessionStorage.removeItem("permissions");
         window.location.href = 'http://localhost:4000/login.html';
       }
     })

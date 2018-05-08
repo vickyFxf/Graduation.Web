@@ -14,19 +14,11 @@ class ChangePwdForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: sessionStorage.getItem('id'),
-      oldPwdTips: '请输入当前密码',
-      confirmPwdTips: '请确认新密码!',
-      mongoPwd:'',
+      mongodbPwd:'',
     }
   }
   componentWillMount(){
-    GetUserInfo(this.state.id).then(res=>{
-      if(res){
-        this.state.mongoPwd=res.password;
-      }
-      this.setState({});
-    })
+    this.getCurrentUser();
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -91,6 +83,16 @@ class ChangePwdForm extends React.Component {
         </Form>
       </div>
     );
+  }
+  getCurrentUser(){
+    let data={};
+    data.id=sessionStorage.getItem('id');
+    GetUserInfo(data).then(res=>{
+      if(res){
+        this.state.mongoPwd=res[0].password;
+      }
+      this.setState({});
+    })
   }
   handleSubmit = (e) => {
     e.preventDefault();
