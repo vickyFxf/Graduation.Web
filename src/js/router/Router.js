@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:30:42 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-28 10:23:32
+ * @Last Modified time: 2018-05-08 12:47:28
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -39,20 +39,30 @@ import OpeningReport from '../components/task/OpeningReport';
 import EnglishTranslation from '../components/task/EnglishTranslation';
 import LiteratureReview from '../components/task/LiteratureReview';
 import DocumentCenter from '../components/task/DocumentCenter';
-import GraduationThesis from '../components/task/GraduationThesis'
+import GraduationThesis from '../components/task/GraduationThesis';
+import MyStudent from '../components/task/MyStudent'
 //系统设置
 import SetPage from '../components/page/SetPage';
 import ClassificationMgt from '../components/set/ClassificationMgt';
 import UploaderDocument from '../components/set/UploaderDocument';
-import Test from '../components/set/Test';
 
 import { AddUser } from '../services/usersService';
 export default class Root extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      globalPermission:sessionStorage.getItem('permissions'),
+    }
+  }
 	render() {
+    console.log(this.state.globalPermission);
 		return (
 			<Router history={hashHistory}>
 				<Route path="/" component={Application}>
-          <IndexRedirect to="subject"/>
+          {
+            this.state.globalPermission=='3'?
+            <IndexRedirect to="userMgt"/>:<IndexRedirect to="subject"/>
+          }
           {/* 教学通知 */}
           <Route path="index" component={HomePage}>
             <Route path="noticeAdd" component={NoticeAdd} />
@@ -87,12 +97,12 @@ export default class Root extends React.Component {
 						<Route path="literatureReview" component={LiteratureReview}/>
             <Route path="graduationThesis" component={GraduationThesis}/>
             <Route path="documentCenter" component={DocumentCenter}/>
+            <Route path="myStudent" component={MyStudent}/>
 					</Route>
           {/* 系统设置 */}
 					<Route path="set" component={SetPage}>
 						<Route path="classificationMgt" component={ClassificationMgt} />
 						<Route path="uploaderDocument" component={UploaderDocument} />
-						<Route path="test" component={Test} />
 					</Route>
 				</Route>
 			</Router>

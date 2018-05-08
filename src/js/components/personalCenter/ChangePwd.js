@@ -1,8 +1,8 @@
 /*
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:27:41 
- * @Last Modified by:   VickyFan 
- * @Last Modified time: 2018-04-09 10:27:41 
+ * @Last Modified by: VickyFan
+ * @Last Modified time: 2018-05-08 12:22:36
  */
 import React from 'react';
 import { Form, Input, Select, Button, Icon, RadioGroup, Radio,Modal ,message} from 'antd';
@@ -31,10 +31,12 @@ class ChangePwdForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="info-border changePwd">
+      <div className="margin-left-subpanel">
+        <div className="list-header">
+          <p>修改密码</p>
+        </div>
         <Form onSubmit={this.handleSubmit} className="subAdd-form">
           <fieldset>
-            <legend>修改密码</legend>
             <FormItem
               label="当前密码"
               labelCol={{ span: 3 }}

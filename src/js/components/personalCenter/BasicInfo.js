@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-09 10:27:24 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-25 14:57:09
+ * @Last Modified time: 2018-05-08 12:19:27
  */
 import React from 'react';
 import { Form, Input, Select, Button, Upload, Icon } from 'antd';
@@ -29,7 +29,10 @@ class BasicInfoForm extends React.Component {
     const imageUrl = this.state.imageUrl;
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="info-border basicInfo">
+      <div className="margin-left-subpanel">
+        <div className="list-header">
+          <p>在线选题</p>
+        </div>
         <Form onSubmit={this.handleSubmit} className="subAdd-form">
           <fieldset>
             <legend>基本资料</legend>

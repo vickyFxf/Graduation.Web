@@ -69,6 +69,10 @@ export default class ApplicationList extends React.Component {
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-xinshenqing"></i></span>
         </div>;
+      case "我的学生":
+        return <div className="thread-item-wrapper">
+          <span><i className="iconfont icon-xinshenqing"></i></span>
+        </div>;
       case "任务书":
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-jilu"></i></span>
@@ -118,10 +122,6 @@ export default class ApplicationList extends React.Component {
           <span><i className="iconfont icon-baogao-copy"></i></span>
         </div>;
       case "文档管理":
-        return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-baogao-copy"></i></span>
-        </div>;
-      case "上传文档":
         return <div className="thread-item-wrapper">
           <span><i className="iconfont icon-baogao-copy"></i></span>
         </div>;

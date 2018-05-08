@@ -2,7 +2,7 @@
  * @Author: VickyFan 
  * @Date: 2018-04-10 15:28:16 
  * @Last Modified by: VickyFan
- * @Last Modified time: 2018-04-19 15:35:56
+ * @Last Modified time: 2018-05-08 12:38:22
  */
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
@@ -31,15 +31,21 @@ export default class GlobalPanel extends React.Component {
           </div>
         </div>
         <div className="nav-box">
-          <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>
-          <Link to="task" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link>
-          <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
+          {
+            this.state.globalPermission=="1"||this.state.globalPermission=="2"?
+            <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>:""
+          }
+          {
+            this.state.globalPermission=="1"||this.state.globalPermission=="2"?
+            <Link to="task" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link>:""
+          }
           {
             this.state.globalPermission=="3"?
             <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link>:""
           }
+          <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
           {
-            this.state.globalPermission=="3"?
+            this.state.globalPermission=="3"||this.state.globalPermission=="2"?
             <Link to="set" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link>:""
           }
         </div>
