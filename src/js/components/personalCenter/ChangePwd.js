@@ -14,6 +14,7 @@ class ChangePwdForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      _id:'',
       mongodbPwd:'',
     }
   }
@@ -36,7 +37,7 @@ class ChangePwdForm extends React.Component {
             >
               {getFieldDecorator('oldPwd', {
                 rules: [{
-                  required: true, message: this.state.oldPwdTips,
+                  required: true, message: "请输入当前密码",
                 }],
               })(
                 <Input type="password" />
@@ -89,6 +90,7 @@ class ChangePwdForm extends React.Component {
     data.id=sessionStorage.getItem('id');
     GetUserInfo(data).then(res=>{
       if(res){
+        this.state._id=res[0]._id;
         this.state.mongoPwd=res[0].password;
       }
       this.setState({});
@@ -99,8 +101,6 @@ class ChangePwdForm extends React.Component {
     let data = {};
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log(this.state.mongoPwd);
-        console.log(hex_md5(values.oldPwd));
         if(this.state.mongoPwd!=hex_md5(values.oldPwd)){
           Modal.error({
             content: '原始密码输入错误，请重新输入！',
@@ -109,12 +109,12 @@ class ChangePwdForm extends React.Component {
         }
         if(values.newPwd!=values.confirmPwd){
           Modal.error({
-            content: '前后新密码不一直，请重新输入！',
+            content: '前后密码不一致，请重新输入！',
           });
           return;
         }
         data.password = hex_md5(values.newPwd);
-        data.id = this.state.id;
+        data._id = this.state._id;
         UpdateUserInfo(data).then(res=>{
           if (res) {
             message.success('修改成功！');

@@ -7,7 +7,7 @@
 import request from './requestWrapper';
 
 /**
- * 获取单个老师课题列表
+ * 获取单个老师课题列表、判断当前是否申请过课题
  * @param {*} data data.id当前教师id
  */
 export function GetSubListById(data) {

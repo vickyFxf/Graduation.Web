@@ -12,14 +12,20 @@ import { GetClassList,ClassDetails} from '../../services/classService.js';
 import { GetUserInfo} from '../../services/usersService.js';
 import history from 'history/createHashHistory' 
 export default class SubjectDetails extends React.Component {
-  constructor(props) {
-    super(props);
+  static contextTypes={  
+    router:React.PropTypes.object  
+  } 
+  constructor(props,context) {
+    super(props,context);
+    this.context.router;
     this.state = {
       _id: this.props.params._id,
       currentUser:sessionStorage.getItem('permissions'),
       subSourceList: [],
       subCategoryList: [],
+      details:{},
       isAuditUser:false,
+      creatSubjectUser:{},
     }
   }
   componentWillMount() {
@@ -55,6 +61,9 @@ export default class SubjectDetails extends React.Component {
                 <tbody>
                   <tr>
                     <td>指导教师</td><td>{this.state.details['creatUserName']}</td>
+                  </tr>
+                  <tr>
+                    <td>联系电话</td><td>{this.state.creatSubjectUser['tel']}</td>
                   </tr>
                   <tr>
                     <td>课题来源</td><td>{this.state.details['subSource']}</td>
@@ -129,9 +138,15 @@ export default class SubjectDetails extends React.Component {
     let data = {};
     data._id = this.state._id;
     GetSubjectInfo(data).then(res => {
-      this.setState({
-        details:res
-      });
+      this.state.details=res;
+      let a={};
+      a.id=res.creatUserId;
+      GetUserInfo(a).then(res=>{
+        if(res){
+          this.state.creatSubjectUser=res[0];
+        }
+        this.setState({});
+      })
     })
   }
   //主任审核课题
@@ -151,6 +166,18 @@ export default class SubjectDetails extends React.Component {
   }
   //学生申请课题
   applySubject(){
-    console.log(123);
+    let data={};
+    data._id=this.state._id;
+    data.selectedBy=1;
+    data.studentId=sessionStorage.getItem('id');
+    data.studentName=sessionStorage.getItem('userName');
+    UpdateSubject(data).then(res=>{
+      if(res){
+        message.success('申请成功！');
+        this.context.router.push("/task/mySubject");
+      }else{
+        message.error('申请失败！')
+      }
+    })
   }
 }

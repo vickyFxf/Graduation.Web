@@ -26,7 +26,7 @@ export function GetUserInfo(data) {
  */
 export function UpdateUserInfo(data) {
   return request({
-    url: '/User-Module/UpdateInfo/:id',
+    url: '/User-Module/UpdateInfo/'+data._id,
     method: 'PUT',
     type: 'json',
     contentType: 'application/json',
