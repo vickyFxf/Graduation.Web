@@ -31,6 +31,7 @@ import SubjectList from '../components/subject/SubjectList';
 import SubjectApproval from '../components/subject/SubjectApproval';
 import SubjectChoosed from '../components/subject/SubjectChoosed';
 import SubjectDetails from '../components/subject/SubjectDetails';
+import ChoosedStudent from '../components/subject/ChoosedStudent';
 //任务
 import TaskPage from '../components/page/TaskPage';
 import MySubject from '../components/task/MySubject';
@@ -81,6 +82,7 @@ export default class Root extends React.Component {
 						<Route path="subjectApproval" component={SubjectApproval} />
 						<Route path="subjectChoosed" component={SubjectChoosed} />
 						<Route path="subjectDetails/:_id" component={SubjectDetails} />
+						<Route path="choosedStudent/:_id" component={ChoosedStudent} />
 					</Route>
 					{/* 个人中心 */}
 					<Route path="selfInfo" component={SelfPage}>

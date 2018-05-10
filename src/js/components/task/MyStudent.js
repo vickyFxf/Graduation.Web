@@ -8,34 +8,152 @@
  * 教师：我的学生
  */
 import React from 'react';
-export default class MySubject extends React.Component {
-    render() {
-      return(
-        <div className="margin-left-subpanel">
-          <div className="list-header">
-            <p>我的学生</p>
-          </div>
-          <div className="table-container" id="subDetails">
-              <table>
-                <caption style={{ textAlign: 'center', captionSide: 'top', padding: '0', color: '#000' }}>我的学生</caption>
-                <tbody>
-                  <tr>
-                    <td>指导教师</td><td>陈伟</td>
-                  </tr>
-                  <tr>
-                    <td>课题来源</td><td>生产活动</td>
-                  </tr>
-                  <tr>
-                    <td>课题类别</td><td>科学研究</td>
-                  </tr>
-                  <tr style={{ minHeight: '35px' }}>
-                    <td>课题简介</td>
-                    <td>好看vnkknj没考虑快来看没离开你究竟军火库能否乱骂了。了；，1包教包会vvgvg吗没开门和vjhj发热仍然让人</td>
-                  </tr>
-                </tbody>
-              </table>
-          </div>
-        </div>
-      )
+import { Icon, Button, Table, Divider, Modal, message } from 'antd';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { GetClassList,ClassDetails} from '../../services/classService.js';
+import { GetSubListById} from '../../services/subjectService.js';
+import moment from 'moment';
+export default class MyStudent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      subjectList: [],
+      subSourceList: [],
+      subCategoryList: [],
     }
+  }
+  componentWillMount() {
+    this.getSubjectList();
+    this.getSubSource();
+  }
+  render() {
+    if(this.state.subjectList.length>0){
+      _.map(this.state.subjectList,(item,index)=>{
+        item.selectedBy=this.toHasSubject(item.selectedBy);
+        item.key=index+1;
+        _.map(this.state.subSourceList,(item2,index2)=>{
+          if(item.subSource==item2._id){
+            item.subSource=item2.className;
+          }
+        })
+        _.map(this.state.subCategoryList,(item3,index3)=>{
+          if(item.subCategory==item3._id){
+            item.subCategory=item3.className;
+          }
+        })
+      })
+    }
+    const columns = [{
+      title: '序号',
+      dataIndex: 'key',
+      key: 'key',
+    }, {
+      title: '课题名称',
+      dataIndex: 'subName',
+      key: 'subName',
+    }, {
+      title: '来源',
+      dataIndex: 'subSource',
+      key: 'subSource',
+    }, {
+      title: '类别',
+      dataIndex: 'subCategory',
+      key: 'subCategory',
+    }, {
+      title: '申请人',
+      dataIndex: 'studentName',
+      key: 'studentName',
+    }, {
+      title: '学号',
+      dataIndex: 'studentId',
+      key: 'studentId',
+    }, {
+      title: '是否同意',
+      dataIndex: 'selectedBy',
+      key: 'selectedBy',
+      render: (text, record) => (
+        <span>
+          {
+            text=='待同意'?<b style={{color:'red'}}>{text}</b>:<span>{text}</span>
+          }
+        </span>
+      ),
+    }, {
+      title: '操作',
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <Link to={'subject/choosedStudent/'+record._id}>查看详情</Link>
+        </span>
+      ),
+    }];
+    return (
+      <div id="subjectList" className="userMgt-list margin-left-subpanel">
+        <div className="list-header">
+          <p>我的学生</p>
+        </div>
+        <Table
+          columns={columns}
+          dataSource={this.state.subjectList}
+        />
+      </div>
+    );
+  }
+  //获取课题来源/获取课题类别
+  getSubSource() {
+    GetClassList().then(res => {
+      if (res) {
+        //课题来源
+        let a = [];
+        _.map(res, (item, index) => {
+          if (item.classType == 0) {
+            a.push(item);
+          }
+        })
+        this.state.subSourceList = a;
+        //课题类别
+        let b = [];
+        _.map(res, (item, index) => {
+          if (item.classType == 1) {
+            b.push(item);
+          }
+        })
+        this.state.subCategoryList = b;
+      }
+      this.setState({})
+    })
+  }
+  //转换课题审核状态
+  toHasSubject(value){
+    switch(value){
+      case 1:
+        return '待同意';
+        break;
+      case 2:
+        return '已同意';
+        break;
+      case 3:
+        return '未同意';
+        break;
+    }
+  }
+  //获取课题列表
+  getSubjectList() {
+    let data = {};
+    data.creatUserId=sessionStorage.getItem('id');
+    data.isAudit=2;
+    GetSubListById(data).then(res => {
+      if (res) {
+        let a=[];
+        _.map(res,(item,index)=>{
+          if(item.studentId&&item.studentId!=''){
+            a.push(item);
+          }
+        })
+        this.state.subjectList = a;
+      }
+    })
+    this.setState({});
+  }
 }

@@ -50,7 +50,6 @@ export default class SubjectChoosed extends React.Component {
         </span>
       ),
     }];
-    console.log(this.state.isSelected);
     return (
       <div className="margin-left-subpanel">
         <div className="list-header">

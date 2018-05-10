@@ -26,6 +26,7 @@ export default class SubjectDetails extends React.Component {
       details:{},
       isAuditUser:false,
       creatSubjectUser:{},
+      reason:'',
     }
   }
   componentWillMount() {
@@ -75,6 +76,15 @@ export default class SubjectDetails extends React.Component {
                     <td>课题简介</td>
                     <td>{this.state.details['subIntroduction']}</td>
                   </tr>
+                  {
+                    this.state.currentUser=="1"?
+                    <tr style={{ minHeight: '35px' }}>
+                      <td>申请理由(500字以内)</td>
+                      <td>
+                        <textarea maxLength="500" style={{ resize: 'none',minHeight:'100px',minWidth:'600px'}} onChange={this.getapplyReason.bind(this)}/>
+                      </td>
+                    </tr>:""
+                  }
                 </tbody>
                 <caption style={{ textAlign: 'center', captionSide: 'bottom', padding: '0', color: '#000' }}>
                   {
@@ -171,13 +181,19 @@ export default class SubjectDetails extends React.Component {
     data.selectedBy=1;
     data.studentId=sessionStorage.getItem('id');
     data.studentName=sessionStorage.getItem('userName');
+    data.applyReason=this.state.reason;
     UpdateSubject(data).then(res=>{
       if(res){
-        message.success('申请成功！');
+        message.success('申请成功！等待导师同意');
         this.context.router.push("/task/mySubject");
       }else{
         message.error('申请失败！')
       }
     })
+  }
+  //获取申请理由
+  getapplyReason(e){
+    this.state.reason=e.target.value;
+    this.setState({});
   }
 }
