@@ -8,7 +8,7 @@ import React from 'react';
 import { Icon, Button, Input, Table, Divider, Modal, Form, Select, Upload, message } from 'antd';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { DeleteUser, GetUserList, AddUser } from '../../services/usersService.js';
+import { DeleteUser, GetUserList, AddUser ,UpdateUserInfo} from '../../services/usersService.js';
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -55,10 +55,6 @@ class AdminMgtList extends React.Component {
       dataIndex: 'college',
       key: 'college',
     }, {
-      title: '岗位',
-      dataIndex: 'position',
-      key: 'position',
-    }, {
       title: '邮箱',
       dataIndex: 'email',
       key: 'email',
@@ -72,6 +68,8 @@ class AdminMgtList extends React.Component {
       render: (text, record) => (
         <span>
           <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
+          <Divider type="vertical" />
+          <a href="javascript:void(0)" onClick={this.rePassword.bind(this, record)}>重置密码</a>
         </span>
       ),
     }];
@@ -85,9 +83,7 @@ class AdminMgtList extends React.Component {
         <Search
           placeholder="请输入编号"
           onSearch={(value) => {
-            this.setState({
-              searchId: value
-            });
+            this.state.searchId=value;
             this.getUserList();
           }}
           enterButton
@@ -95,6 +91,9 @@ class AdminMgtList extends React.Component {
         <Table
           columns={columns}
           dataSource={this.state.userList}
+          pagination={{
+            pageSize: 10,
+          }}
         />
         {/* 添加管理员 */}
         <div className="adduser-box" id="adduser-box" style={{ transition: "width 0.5s", right: '-30%' }}>
@@ -155,19 +154,6 @@ class AdminMgtList extends React.Component {
                   {getFieldDecorator('college', {
                     rules: [{
                       required: true, message: '请填写学院!',
-                    }],
-                  })(
-                    <Input />
-                  )}
-                </FormItem>
-                <FormItem
-                  label="岗位"
-                  labelCol={{ span: 6 }}
-                  wrapperCol={{ span: 12 }}
-                >
-                  {getFieldDecorator('position', {
-                    rules: [{
-                      required: true, message: '请填写岗位!',
                     }],
                   })(
                     <Input />
@@ -276,6 +262,27 @@ class AdminMgtList extends React.Component {
             message.success('添加成功！');
             let box = document.getElementById('adduser-box');
             box.setAttribute("style", "transition: width 0.5s;right:-30%")
+          }
+        })
+      }
+    });
+  }
+  //密码重置
+  rePassword(r){
+    let data={};
+    data.password = hex_md5('123456');
+    data._id = r._id;
+    confirm({
+      title: '你确定要重置密码？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        UpdateUserInfo(data).then(res=>{
+          if (res) {
+            message.success('重置成功！');
+          } else {
+            message.error('重置失败！');
           }
         })
       }

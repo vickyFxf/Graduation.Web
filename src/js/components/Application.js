@@ -56,7 +56,7 @@ export default class Application extends React.Component {
   isLogIn(){
     let id=sessionStorage.getItem('id');
     if(id){
-      // console.log('有用户登录');
+      console.log('有用户登录');
     }else{
       window.location.href = 'http://localhost:4000/login.html';
     }

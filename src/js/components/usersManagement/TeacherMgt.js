@@ -8,7 +8,7 @@ import React from 'react';
 import { Icon, Button, Input, Table, Divider, Modal, Form, Select, Upload, message } from 'antd';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { DeleteUser, GetUserList, AddUser } from '../../services/usersService.js';
+import { DeleteUser, GetUserList, AddUser,UpdateUserInfo} from '../../services/usersService.js';
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -79,7 +79,7 @@ class TeacherMgtList extends React.Component {
         <span>
           <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
           <Divider type="vertical" />
-          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>重置密码</a>
+          <a href="javascript:void(0)" onClick={this.rePassword.bind(this, record)}>重置密码</a>
         </span>
       ),
     }];
@@ -93,9 +93,7 @@ class TeacherMgtList extends React.Component {
         <Search
           placeholder="请输入编号"
           onSearch={(value) => {
-            this.setState({
-              searchId: value
-            });
+            this.state.searchId=value;
             this.getUserList();
           }}
           enterButton
@@ -103,6 +101,9 @@ class TeacherMgtList extends React.Component {
         <Table
           columns={columns}
           dataSource={this.state.userList}
+          pagination={{
+            pageSize: 10,
+          }}
         />
         {/* 添加教师 */}
         <div className="adduser-box" id="adduser-box" style={{ transition: "width 0.5s", right: '-30%' }}>
@@ -194,7 +195,7 @@ class TeacherMgtList extends React.Component {
                   {getFieldDecorator('position', {
                     rules: [{
                       required: true, message: '请选择岗位!',
-                    }],
+                    }]
                   })(
                     <Select placeholder="请选择岗位">
                       <Option value="1">普通教师</Option>
@@ -332,6 +333,27 @@ class TeacherMgtList extends React.Component {
             message.success('添加成功！');
             let box = document.getElementById('adduser-box');
             box.setAttribute("style", "transition: width 0.5s;right:-30%")
+          }
+        })
+      }
+    });
+  }
+  //密码重置
+  rePassword(r){
+    let data={};
+    data.password = hex_md5('123456');
+    data._id = r._id;
+    confirm({
+      title: '你确定要重置密码？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        UpdateUserInfo(data).then(res=>{
+          if (res) {
+            message.success('重置成功！');
+          } else {
+            message.error('重置失败！');
           }
         })
       }

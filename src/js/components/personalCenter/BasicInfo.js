@@ -5,7 +5,7 @@
  * @Last Modified time: 2018-05-08 12:19:27
  */
 import React from 'react';
-import { Form, Input, Select, Button, Upload, Icon } from 'antd';
+import { Form, Input, Select, Button, Icon,message } from 'antd';
 import { GetUserInfo, UpdateUserInfo } from '../../services/usersService.js';
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -14,28 +14,23 @@ class BasicInfoForm extends React.Component {
     super(props);
     this.state = {
       loading: false,
-      currentUser:[],
+      currentUser:{},
+      _id:'',
     }
   }
   componentWillMount() {
     this._getUserInfo();
   }
   render() {
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? 'loading' : 'plus'} />
-      </div>
-    );
     const imageUrl = this.state.imageUrl;
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="margin-left-subpanel">
         <div className="list-header">
-          <p>在线选题</p>
+          <p>基本资料</p>
         </div>
         <Form onSubmit={this.handleSubmit} className="subAdd-form">
           <fieldset>
-            <legend>基本资料</legend>
             <FormItem
               label="姓名"
               labelCol={{ span: 3 }}
@@ -45,13 +40,13 @@ class BasicInfoForm extends React.Component {
                 rules: [{
                   required: true, message: '请填写姓名!',
                 }],
-                initialValue: '范秀芳'
+                initialValue: this.state.currentUser.name
               })(
                 <Input />
               )}
             </FormItem>
             <FormItem
-              label="学号"
+              label="学号(编号)"
               labelCol={{ span: 3 }}
               wrapperCol={{ span: 5 }}
             >
@@ -59,9 +54,9 @@ class BasicInfoForm extends React.Component {
                 rules: [{
                   required: true,
                 }],
-                initialValue: '1406010039'
+                initialValue: this.state.currentUser.id
               })(
-                <Input disabled='true' />
+                <Input disabled={true} />
               )}
             </FormItem>
             <FormItem
@@ -73,11 +68,11 @@ class BasicInfoForm extends React.Component {
                 rules: [{
                   required: true, message: '请选择性别!',
                 }],
-                initialValue: '1'
+                initialValue: this.state.currentUser.sex
               })(
-                <Select placeholder="请选择课题类别">
-                  <Option value="0">男</Option>
-                  <Option value="1">女</Option>
+                <Select placeholder="请选择性别">
+                  <Option value={0}>男</Option>
+                  <Option value={1}>女</Option>
                 </Select>
               )}
             </FormItem>
@@ -90,12 +85,56 @@ class BasicInfoForm extends React.Component {
                 rules: [{
                   required: true, message: '请填写学院!',
                 }],
-                initialValue: '第一临床、信息与工程学院'
+                initialValue: this.state.currentUser.college
               })(
                 <Input />
               )}
             </FormItem>
-            <FormItem
+            {
+              this.state.currentUser.title?
+              <FormItem
+              label="职称"
+              labelCol={{ span: 3 }}
+              wrapperCol={{ span: 5 }}
+            >
+              {getFieldDecorator('title', {
+                rules: [{
+                  required: true, message: '请选择职称!',
+                }],
+                initialValue: this.state.currentUser.title
+              })(
+                <Select placeholder="请选择职称">
+                  <Option value={1}>助教</Option>
+                  <Option value={2}>讲师</Option>
+                  <Option value={3}>副教授</Option>
+                  <Option value={4}>教授</Option>
+                </Select>
+              )}
+            </FormItem>:''
+            }
+            {
+              this.state.currentUser.position&&this.state.currentUser.title?
+              <FormItem
+              label="岗位"
+              labelCol={{ span: 3 }}
+              wrapperCol={{ span: 5 }}
+            >
+              {getFieldDecorator('position', {
+                rules: [{
+                  required: true, message: '请选择岗位!',
+                }],
+                initialValue: this.state.currentUser.position
+              })(
+                <Select placeholder="请选择岗位">
+                  <Option value={1}>普通教师</Option>
+                  <Option value={2}>教研主任</Option>
+                </Select>
+              )}
+            </FormItem>:''
+            }
+            {
+              this.state.currentUser.major?
+              <FormItem
               label="专业"
               labelCol={{ span: 3 }}
               wrapperCol={{ span: 5 }}
@@ -104,11 +143,38 @@ class BasicInfoForm extends React.Component {
                 rules: [{
                   required: true, message: '请填写专业!',
                 }],
-                initialValue: '信息管理与信息系统'
+                initialValue: this.state.currentUser.major
               })(
                 <Input />
               )}
-            </FormItem>
+            </FormItem>:''
+            }
+            {
+              this.state.currentUser.class?
+              <FormItem
+              label="班级"
+              labelCol={{ span: 3 }}
+              wrapperCol={{ span: 5 }}
+            >
+              {getFieldDecorator('class', {
+                rules: [{
+                  required: true, message: '请选择班级!',
+                }],
+                initialValue: this.state.currentUser.class
+              })(
+                <Select placeholder="请选择班级">
+                  <Option value={1}>1</Option>
+                  <Option value={2}>2</Option>
+                  <Option value={3}>3</Option>
+                  <Option value={4}>4</Option>
+                </Select>
+              )}
+            </FormItem>:''
+            }
+            {/* {
+              this.state.currentUser.position?
+
+            } */}
             <FormItem
               label="邮箱"
               labelCol={{ span: 3 }}
@@ -118,7 +184,7 @@ class BasicInfoForm extends React.Component {
                 rules: [{
                   required: true, message: '请填写邮箱!',
                 }],
-                initialValue: '1004272351@qq.com'
+                initialValue: this.state.currentUser.email
               })(
                 <Input />
               )}
@@ -132,7 +198,7 @@ class BasicInfoForm extends React.Component {
                 rules: [{
                   required: true, message: '请填写联系方式!',
                 }],
-                initialValue: '18057727150'
+                initialValue: this.state.currentUser.tel
               })(
                 <Input />
               )}
@@ -151,27 +217,15 @@ class BasicInfoForm extends React.Component {
     );
   }
   _getUserInfo() {
-    let data;
+    let data={};
     data.id = sessionStorage.getItem('id');
     GetUserInfo(data).then(res=>{
-      if(res){
-        this.state.currentUser=res;
+      if(res.length>0){
+        this.state.currentUser=res[0];
+        this.state._id=res[0]._id;
       }
+      this.setState({});
     })
-    this.setState({});
-  }
-  handleChange = (info) => {
-    if (info.file.status === 'uploading') {
-      this.setState({ loading: true });
-      return;
-    }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl => this.setState({
-        imageUrl,
-        loading: false,
-      }));
-    }
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -179,8 +233,15 @@ class BasicInfoForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         data = values;
-        data.sex = Number(data.sex);
-        UpdateUserInfo(data);
+        data._id=this.state._id;
+        UpdateUserInfo(data).then(res=>{
+          if(res){
+            message.success('修改成功！');
+            this._getUserInfo();
+          }else{
+            message.error('修改失败,请重试！');
+          }
+        })
       }
     });
   }

@@ -14,7 +14,6 @@ import moment from 'moment';
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
 const Option = Select.Option;
-const ue = UE.getEditor('subAdd-editor');//富文本编辑器
 class SubjectListForm extends React.Component {
   constructor(props) {
     super(props);

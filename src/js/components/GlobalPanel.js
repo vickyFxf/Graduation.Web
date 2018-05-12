@@ -18,12 +18,14 @@ export default class GlobalPanel extends React.Component {
     this.state={
       globalPermission:sessionStorage.getItem('permissions'),
       iconName:'',
-      id:sessionStorage.getItem('id')
+      id:sessionStorage.getItem('id'),
+      teacher:-1,
     }
   }
   componentWillMount(){
     let a = sessionStorage.getItem('userName');
     this.state.iconName = a.substr(0,1);
+    this.getCurrentUser();
     this.setState({})
   }
   render() {
@@ -40,7 +42,7 @@ export default class GlobalPanel extends React.Component {
             <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>:""
           }
           {
-            this.state.globalPermission=="1"||this.state.globalPermission=="2"?
+            (this.state.globalPermission=="1")||(this.state.teacher==1)?
             <Link to="task" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renwu"></i><div>任务</div></Link>:""
           }
           {
@@ -49,7 +51,7 @@ export default class GlobalPanel extends React.Component {
           }
           <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
           {
-            this.state.globalPermission=="3"||this.state.globalPermission=="2"?
+            this.state.globalPermission=='2'&&this.state.teacher==2?
             <Link to="set" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link>:""
           }
         </div>
@@ -67,6 +69,18 @@ export default class GlobalPanel extends React.Component {
         </div>
       </div>
     )
+  }
+  getCurrentUser(){
+    let data={};
+    data.id=sessionStorage.getItem('id');
+    GetUserInfo(data).then(res=>{
+      if(res){
+        if(res[0].position){
+          this.state.teacher=res[0].position;
+        }
+      }
+      this.setState({});
+    })
   }
   logout(e) {
     e.stopPropagation();

@@ -39,11 +39,11 @@ export default class UploaderDocument extends React.Component {
     },{
       key: 3,
       sort: 3,
-      docName: `文献综述`,
+      docName: `工作进度表`,
     },{
       key: 4,
       sort: 4,
-      docName: `中期检查`,
+      docName: `检查登记表`,
     }];
     return (
       <div className="margin-left-subpanel">
