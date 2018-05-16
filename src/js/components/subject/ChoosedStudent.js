@@ -151,9 +151,14 @@ export default class ChoosedStudent extends React.Component {
     let data={};
     data._id=this.state.details['_id'];
     data.selectedBy=value;
-    data.studentId='';
-    data.studentName='';
-    data.applyReason='';
+    if(value==2){
+      data.studentId=this.state.applyStudent.id;
+      data.studentName=this.state.applyStudent.name;
+    }else if(vlue==3){
+      data.studentId='';
+      data.studentName='';
+      data.applyReason='';
+    }
     UpdateSubject(data).then(res=>{
       if(res){
         message.success('操作成功，请与该生保持联系！');

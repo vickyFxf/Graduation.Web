@@ -9,7 +9,7 @@ import { Icon, Button, Input, Table, Divider, Modal, Form, Select, Upload, messa
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { GetClassList,ClassDetails} from '../../services/classService.js';
-import { GetSubListById,DeleteSubject,AddSubject} from '../../services/subjectService.js';
+import { GetSubListById,DeleteSubject,AddSubject,UpdateSubject} from '../../services/subjectService.js';
 import moment from 'moment';
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -21,9 +21,9 @@ class SubjectListForm extends React.Component {
       subjectList: [],
       subSourceList: [],
       subCategoryList: [],
-      searchId: '',
+      searchKey: '',
       position: '0',
-      show: false,
+      isEdit:false,
     }
   }
   componentWillMount() {
@@ -32,17 +32,17 @@ class SubjectListForm extends React.Component {
   }
   render() {
     _.map(this.state.subjectList,(item1,index1)=>{
-      item1.isAudit=this.toIsAudit(item1.isAudit);
-      item1.subTime=moment(item1.subTine).format('YYYY-MM-DD');
+      item1.isAuditString=this.toIsAudit(item1.isAudit);
+      item1.timeString=moment(item1.subTime).format('YYYY-MM-DD HH:mm:ss')
       item1.key=index1+1;
       _.map(this.state.subSourceList,(item2,index2)=>{
         if(item1.subSource==item2._id){
-          item1.subSource=item2.className;
+          item1.subSourceString=item2.className;
         }
       })
       _.map(this.state.subCategoryList,(item3,index3)=>{
         if(item1.subCategory==item3._id){
-          item1.subCategory=item3.className;
+          item1.subCategoryString=item3.className;
         }
       })
     })
@@ -58,30 +58,35 @@ class SubjectListForm extends React.Component {
       key: 'subName',
     }, {
       title: '来源',
-      dataIndex: 'subSource',
-      key: 'subSource',
+      dataIndex: 'subSourceString',
+      key: 'subSourceString',
     }, {
       title: '类别',
-      dataIndex: 'subCategory',
-      key: 'subCategory',
+      dataIndex: 'subCategoryString',
+      key: 'subCategoryString',
     }, {
       title: '创建时间',
-      dataIndex: 'subTime',
-      key: 'subTime',
+      dataIndex: 'timeString',
+      key: 'timeString',
     }, {
       title: '是否审核',
-      dataIndex: 'isAudit',
-      key: 'isAudit',
+      dataIndex: 'isAuditString',
+      key: 'isAuditString',
     }, {
       title: '操作',
       key: 'action',
       render: (text, record) => (
         <span>
           <Link to={'subject/subjectDetails/'+record._id}>查看</Link>
-          <Divider type="vertical" />
-          <a href="javascript:void(0)" onClick={this.openWindow.bind(this, record)}>修改</a>
-          <Divider type="vertical" />
-          <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
+          {
+            record.isAudit!=2?
+            <span>
+              <Divider type="vertical" />
+              <a href="javascript:void(0)" onClick={this.openEditWindow.bind(this, record)}>修改</a>
+              <Divider type="vertical" />
+              <a href="javascript:void(0)" onClick={this.showDeleteConfirm.bind(this, record)}>删除</a>
+            </span>:''
+          }
         </span>
       ),
     }];
@@ -95,10 +100,8 @@ class SubjectListForm extends React.Component {
         <Search
           placeholder="请输入关键字"
           onSearch={(value) => {
-            this.setState({
-              searchId: value
-            });
-            this.getUserList();
+            this.state.searchKey=value;
+            this.getSubjectList();
           }}
           enterButton
         />
@@ -123,8 +126,8 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subName', {
                     rules: [{
                       required: true, message: '请填写课题名称!',
-                      initialValue: this.state.editItem ? this.state.editItem.subName : ''
                     }],
+                    initialValue: this.state.editItem?this.state.editItem.subName:''
                   })(
                     <Input />
                   )}
@@ -137,8 +140,8 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subSource', {
                     rules: [{
                       required: true, message: '请选择课题来源!',
-                      initialValue: this.state.editItem ? this.state.editItem.subSource : ''
                     }],
+                    initialValue: this.state.editItem?this.state.editItem.subSource:''
                   })(
                     <Select placeholder="请选择课题来源">
                       {
@@ -159,8 +162,8 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subCategory', {
                     rules: [{
                       required: true, message: '请选择课题类别!',
-                      initialValue: this.state.editItem ? this.state.editItem.subCategory : ''
                     }],
+                    initialValue: this.state.editItem?this.state.editItem.subCategory:''
                   })(
                     <Select placeholder="请选择课题类别">
                       {
@@ -181,8 +184,8 @@ class SubjectListForm extends React.Component {
                   {getFieldDecorator('subIntroduction', {
                     rules: [{
                       required: true, message: '请填写课题简介!',
-                      initialValue: this.state.editItem ? this.state.editItem.subIntroduction : ""
                     }],
+                    initialValue: this.state.editItem?this.state.editItem.subIntroduction:''
                   })(
                     <textarea style={{ resize: 'none', maxWidth: '280px', maxHeight: '300px', width: '280px', height: '80px' }}></textarea>
                   )}
@@ -228,13 +231,22 @@ class SubjectListForm extends React.Component {
       this.setState({})
     })
   }
-  //打开添加课题窗口
-  openWindow(item) {
-    this.setState({
-      editItem: item
-    })
+  //打开编辑窗口
+  openEditWindow(item){
     let box = document.getElementById('addsubject-box');
     box.setAttribute("style", "transition: width 0.5s;right:0");
+    this.setState({
+      editItem:item,
+      isEdit:true
+    })
+  }
+  //打开添加课题窗口
+  openWindow() {
+    let box = document.getElementById('addsubject-box');
+    box.setAttribute("style", "transition: width 0.5s;right:0");
+    this.setState({
+      isEdit:false
+    })
   }
   //转换课题审核状态
   toIsAudit(value){
@@ -259,6 +271,7 @@ class SubjectListForm extends React.Component {
   getSubjectList() {
     let data = {};
     data.creatUserId=sessionStorage.getItem('id');
+    data.searchKey=this.state.searchKey;
     GetSubListById(data).then(res => {
       if (res) {
         this.state.subjectList = res;
@@ -294,14 +307,28 @@ class SubjectListForm extends React.Component {
         data.isAudit = 1;//新增默认课题未审核
         data.creatUserId=sessionStorage.getItem('id');
         data.creatUserName=sessionStorage.getItem('userName');
-        AddSubject(data).then(res => {
-          if (res) {
-            this.getSubjectList();            
-            message.success('添加成功！');
-            let box = document.getElementById('addsubject-box');
-            box.setAttribute("style", "transition: width 0.5s;right:-50%")
-          }
-        })
+        if(this.state.isEdit){
+          data.isAudit=1;
+          data._id=this.state.editItem._id;
+          console.log(data);
+          UpdateSubject(data).then(res=>{
+            if(res){
+              this.getSubjectList();            
+              message.success('修改成功！');
+              let box = document.getElementById('addsubject-box');
+              box.setAttribute("style", "transition: width 0.5s;right:-50%")
+            }
+          })
+        }else{
+          AddSubject(data).then(res => {
+            if (res) {
+              this.getSubjectList();            
+              message.success('添加成功！');
+              let box = document.getElementById('addsubject-box');
+              box.setAttribute("style", "transition: width 0.5s;right:-50%")
+            }
+          })
+        }
       }
     });
   }
