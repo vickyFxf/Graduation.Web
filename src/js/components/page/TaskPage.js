@@ -32,7 +32,8 @@ export default class TaskPage extends React.Component {
     }else if(permissions=='2'){
       item=[
         //我的学生页面，主要是包括教师所带学生列表、是否通过该生、学生详情、学生文档
-        { avator: "", id: 30001, title: '我的学生', link: '/task/myStudent', info: '' }];
+        { avator: "", id: 30001, title: '我的学生', link: '/task/myStudent', info: '' },
+        { avator: "", id: 30002, title: '学生进度管理', link: '/task/teacherDocument', info: '' }];
     }
     this.state.items=item;
     this.setState({});

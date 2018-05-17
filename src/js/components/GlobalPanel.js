@@ -39,7 +39,7 @@ export default class GlobalPanel extends React.Component {
         <div className="nav-box">
           {
             this.state.globalPermission=="1"||this.state.globalPermission=="2"?
-            <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-jilu"></i><div>课题</div></Link>:""
+            <Link to="subject" activeClassName="active" className="global-panel-item"><i className="iconfont icon-buoumaotubiao25"></i><div>课题</div></Link>:""
           }
           {
             (this.state.globalPermission=="1")||(this.state.teacher==1)?
@@ -47,9 +47,9 @@ export default class GlobalPanel extends React.Component {
           }
           {
             this.state.globalPermission=="3"?
-            <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>用户</div></Link>:""
+            <Link to="userMgt" activeClassName="active" className="global-panel-item"><i className="iconfont icon-renyuanguanli"></i><div>用户</div></Link>:""
           }
-          <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-yonghu"></i><div>个人中心</div></Link>
+          <Link to="selfInfo" activeClassName="active" className="global-panel-item"><i className="iconfont icon-geren"></i><div>个人中心</div></Link>
           {
             this.state.globalPermission=='2'&&this.state.teacher==2?
             <Link to="set" activeClassName="active" className="global-panel-item"><i className="iconfont icon-xitong"></i><div>系统设置</div></Link>:""
@@ -60,9 +60,9 @@ export default class GlobalPanel extends React.Component {
         </div>
         <div className="exit-box">
           <a className="global-panel-item">
-            <i className="iconfont icon-gengduo"></i>
+            <i className="iconfont icon-gengduomore12"></i>
             <div className="dropDown">
-              <div className="dropItem"><i className="iconfont icon-guanyu"></i>关于</div>
+              <div className="dropItem"><i className="iconfont icon-about"></i>关于</div>
               <div className="dropItem" onClick={this.logout.bind(this)}><i className="iconfont icon-tuichu"></i>退出登录</div>
             </div>
           </a>

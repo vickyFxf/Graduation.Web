@@ -1,0 +1,21 @@
+.teacher-document{
+  table{
+    border: 1px solid #e3e7ea; 
+  }
+  thead th,tbody td{
+    border-right: 1px solid #e3e7ea;
+    text-align: center;
+  }
+  tbody{
+    tr{
+      border-top: 1px solid #e3e7ea;
+    }
+    .anticon-check{
+      &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+        
+      }
+    }
+  }
+}

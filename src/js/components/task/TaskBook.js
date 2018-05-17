@@ -90,7 +90,7 @@ export default class TaskBook extends React.Component {
                                 {
                                     _.map(this.state.myDownDocument,(item,index)=>{
                                         return(
-                                            <div key={index}><span>{index+1}.&nbsp;</span><span>{moment(item.date).format('YYYY-MM-DD hh:mm:ss')}</span><button onClick={this.downMyDocument.bind(this,item)}>下载</button></div>
+                                            <div key={index}><span>{index+1}.&nbsp;</span><span>{moment(item.date).format('YYYY-MM-DD HH:mm:ss')}</span><button onClick={this.downMyDocument.bind(this,item)}>下载</button></div>
                                         )
                                     })
                                 }

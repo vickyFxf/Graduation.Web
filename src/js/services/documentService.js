@@ -79,3 +79,15 @@ export function GetDownDocument(data) {
     })
   })
 }
+//获取教师上传的任务书文档
+export function GetTeacherDownDocument(data) {
+  return request({
+    url: '/TeacherDocument-Module/List',
+    method: 'POST',
+    type: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      ...data
+    })
+  })
+}

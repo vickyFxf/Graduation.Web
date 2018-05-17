@@ -1,0 +1,46 @@
+.student-doc{
+  height: 100%;
+  .title{
+    text-align: center;
+  }
+  .body{
+    height: 80%;
+    overflow: auto;
+    .left{
+      width:70%;
+      height: 100%;
+      box-sizing: border-box;
+      float: left;
+    }
+    .right{
+      width:25%;
+      float: left;
+      margin-left: 2%;
+    }
+    .left,.right{
+      border: 3px solid #d3e7f4;
+    }
+    .left .item{
+      span{
+        display: block;
+        background: #d3e7f4;
+      }
+      div{
+        background: #fff;
+      }
+    }
+    .right{
+      .historyDucument{
+        .history{
+          text-align: center;
+          font-weight: 600;
+          background: #d3e7f4;
+        }
+        button{
+          width: 60px;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

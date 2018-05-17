@@ -43,71 +43,75 @@ export default class ApplicationList extends React.Component {
     switch (e.title) {
       case "教学通知":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-tongzhi2"></i></span>
+          <span><i className="iconfont icon-wendangxiugai"></i></span>
         </div>;
       case "我要发布":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-icon-test"></i></span>
+          <span><i className="iconfont icon-wendangxiugai"></i></span>
         </div>;
       case "在线选题":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-xinshenqing"></i></span>
+          <span><i className="iconfont icon-wendangxiugai"></i></span>
         </div>;
       case "我的课题":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-xinshenqing"></i></span>
+          <span><i className="iconfont icon-buoumaotubiao25"></i></span>
         </div>;
       case "全部课题":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-xinshenqing"></i></span>
+          <span><i className="iconfont icon-buoumaotubiao25"></i></span>
         </div>;
       case "待审批课题":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-xinshenqing"></i></span>
+          <span><i className="iconfont icon-wendang2"></i></span>
         </div>;
       case "我的课题(学生)":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-xinshenqing"></i></span>
+          <span><i className="iconfont icon-buoumaotubiao25"></i></span>
         </div>;
       case "我的学生":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-xinshenqing"></i></span>
+          <span><i className="iconfont icon-wodexuesheng"></i></span>
         </div>;
       case "任务书":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jilu"></i></span>
+          <span><i className="iconfont icon-renwujihua"></i></span>
         </div>;
       case "开题报告":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jilu"></i></span>
+          <span><i className="iconfont icon-baogao"></i></span>
         </div>;
       case "外文翻译":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jilu"></i></span>
+          <span><i className="iconfont icon-fanyi-full"></i></span>
         </div>;
       case "文献综述":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jilu"></i></span>
+          <span><i className="iconfont icon-buoumaotubiao25"></i></span>
         </div>;
       case "毕业论文":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jilu"></i></span>
+          <span><i className="iconfont icon-lunwentimu"></i></span>
         </div>;
       case "文档中心":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jilu"></i></span>
+          <span><i className="iconfont icon-wendangzhongxin"></i></span>
+        </div>;
+      case "学生进度管理":
+        return <div className="thread-item-wrapper">
+          <span><i className="iconfont icon-wendangzhongxin"></i></span>
         </div>;
       case "基本信息":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-gerenxinxi"></i></span>
+          <span><i className="iconfont icon-jibenxinxi-xiugai"></i></span>
         </div>;
       case "修改密码":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-ai-password"></i></span>
+          <span><i className="iconfont icon-xiugaimima"></i></span>
         </div>;
       case "教师":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-jiaolian1"></i></span>
+          <span><i className="iconfont icon-youcaijiaolianhuodongkanban"></i></span>
         </div>;
       case "学生":
         return <div className="thread-item-wrapper">
@@ -115,15 +119,15 @@ export default class ApplicationList extends React.Component {
         </div>;
       case "管理员":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-guanliyuan_jiaoseguanli"></i></span>
+          <span><i className="iconfont icon-renyuanguanli"></i></span>
         </div>;
       case "分类管理":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-baogao-copy"></i></span>
+          <span><i className="iconfont icon-fenlei"></i></span>
         </div>;
       case "文档管理":
         return <div className="thread-item-wrapper">
-          <span><i className="iconfont icon-baogao-copy"></i></span>
+          <span><i className="iconfont icon-ziyuan"></i></span>
         </div>;
     }
   }

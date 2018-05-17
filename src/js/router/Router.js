@@ -41,7 +41,9 @@ import EnglishTranslation from '../components/task/EnglishTranslation';
 import LiteratureReview from '../components/task/LiteratureReview';
 import DocumentCenter from '../components/task/DocumentCenter';
 import GraduationThesis from '../components/task/GraduationThesis';
-import MyStudent from '../components/task/MyStudent'
+import MyStudent from '../components/task/MyStudent';
+import TeacherDocument from '../components/task/TeacherDocument'
+import StudentDocDetails from '../components/task/StudentDocDetails'
 //系统设置
 import SetPage from '../components/page/SetPage';
 import ClassificationMgt from '../components/set/ClassificationMgt';
@@ -99,6 +101,8 @@ export default class Root extends React.Component {
             <Route path="graduationThesis" component={GraduationThesis}/>
             <Route path="documentCenter" component={DocumentCenter}/>
             <Route path="myStudent" component={MyStudent}/>
+						<Route path="teacherDocument" component={TeacherDocument}/>
+						<Route path="studentDocDetails/docName=:_docName&studentId=:_studentId" component={StudentDocDetails}/>
 					</Route>
           {/* 系统设置 */}
 					<Route path="set" component={SetPage}>
