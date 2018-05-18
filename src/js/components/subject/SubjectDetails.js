@@ -112,7 +112,7 @@ export default class SubjectDetails extends React.Component {
     data.id=sessionStorage.getItem('id');
     GetUserInfo(data).then(res=>{
       if(res){
-        if(res[0].title==2){
+        if(res[0].position==2){
           this.state.isAuditUser=true;
         }
       }

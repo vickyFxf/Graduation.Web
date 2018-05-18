@@ -310,22 +310,21 @@ class SubjectListForm extends React.Component {
         if(this.state.isEdit){
           data.isAudit=1;
           data._id=this.state.editItem._id;
-          console.log(data);
           UpdateSubject(data).then(res=>{
             if(res){
-              this.getSubjectList();            
-              message.success('修改成功！');
               let box = document.getElementById('addsubject-box');
-              box.setAttribute("style", "transition: width 0.5s;right:-50%")
+              box.setAttribute("style", "transition: width 0.5s;right:-50%")          
+              message.success('修改成功！');
+              this.getSubjectList();
             }
           })
         }else{
           AddSubject(data).then(res => {
             if (res) {
-              this.getSubjectList();            
-              message.success('添加成功！');
               let box = document.getElementById('addsubject-box');
-              box.setAttribute("style", "transition: width 0.5s;right:-50%")
+              box.setAttribute("style", "transition: width 0.5s;right:-50%");
+              message.success('添加成功！');
+              this.getSubjectList();            
             }
           })
         }

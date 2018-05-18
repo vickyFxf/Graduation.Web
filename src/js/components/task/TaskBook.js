@@ -8,7 +8,7 @@
  * 任务书
  */
 import React from 'react';
-import {AddDocumentLine,UpdateDocumentLine,GetDocumentLine,GetDownDocument} from '../../services/documentService';
+import {AddDocumentLine,UpdateDocumentLine,GetDocumentLine,GetDownDocument,GetTeacherDownDocument} from '../../services/documentService';
 import {GetSubListById} from '../../services/subjectService';
 import {Modal,message} from 'antd';
 const confirm = Modal.confirm;
@@ -27,6 +27,7 @@ export default class TaskBook extends React.Component {
             mySubject:{},
             myDocument:{},
             myDownDocument:[],
+            teacherDownDocument:[],
             formData:{
                 target:'',
                 content:'',
@@ -40,6 +41,7 @@ export default class TaskBook extends React.Component {
         this.getMyDocument();
         this.mySubject();
         this.myDownDocument();
+        this.teacherDownDocument();
     }
     render() {
         return (
@@ -79,6 +81,7 @@ export default class TaskBook extends React.Component {
                     <div className="right">
                         <div className="box handleButton">
                             <button onClick={this.downTemplate.bind(this,'任务书.doc')}>下载模版</button>
+                            {/* application/x-www-form-urlencoded不是不能上传文件，是只能上传文本格式的文件，multipart/form-data是将文件以二进制的形式上传，这样可以实现多种类型的文件上传 */}
                             <form encType='multipart/form-data' action={'http://localhost:3000/MyDocument-Module/Upload/_id='+this.state.studentId+'&teacherId='+this.state.mySubject.creatUserId+'&_docType='+'任务书'} method="post" target="hidden-iframe">
                                 <input type="file" name="myfile"></input>
                                 <input type="submit" value="保存文档"></input>
@@ -91,6 +94,18 @@ export default class TaskBook extends React.Component {
                                     _.map(this.state.myDownDocument,(item,index)=>{
                                         return(
                                             <div key={index}><span>{index+1}.&nbsp;</span><span>{moment(item.date).format('YYYY-MM-DD HH:mm:ss')}</span><button onClick={this.downMyDocument.bind(this,item)}>下载</button></div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                        <div className="box historyDucument">
+                            <div className="history">教师已上传的文档</div>
+                            <div>
+                              {
+                                    _.map(this.state.teacherDownDocument,(item,index)=>{
+                                        return(
+                                            <div key={index}><span>{index+1}.&nbsp;</span><span>{moment(item.date).format('YYYY-MM-DD HH:mm:ss')}</span><button onClick={this.downteacherDocument.bind(this,item)}>下载</button></div>
                                         )
                                     })
                                 }
@@ -215,5 +230,23 @@ export default class TaskBook extends React.Component {
             }
             this.setState({});
         })
+    }
+    //下载教师文档
+    downteacherDocument(item){
+        let url='http://localhost:3000/TeacherDocument-Module/DownLoad/'+item.filename;
+        window.open(url);
+    }
+    //获取教师的所有上传的任务书文档
+    teacherDownDocument(){
+    let data={};
+    data.studentId=sessionStorage.getItem('id');
+    data.docType='任务书';
+    data.teacherId=this.state.mySubject.creatUserId;
+    GetTeacherDownDocument(data).then(res=>{
+        if (res.length>0) {
+            this.state.teacherDownDocument=res;
+        }
+        this.setState({});
+    })
     }
 }

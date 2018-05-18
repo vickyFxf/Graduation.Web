@@ -86,17 +86,15 @@ export default class SubjectApproval extends React.Component {
         <div className="list-header">
           <p>我的课题</p>
         </div>
-        <label className="search-label">按关键字查询：</label>
-        <Search
+        {/* <label className="search-label">按关键字查询：</label> */}
+        {/* <Search
           placeholder="请输入关键字"
           onSearch={(value) => {
-            this.setState({
-              searchId: value
-            });
+            this.state.searchId=value;
             this.getApprovalList();
           }}
           enterButton
-        />
+        /> */}
         <Table
           columns={columns}
           dataSource={this.state.approvalList}
@@ -148,7 +146,6 @@ export default class SubjectApproval extends React.Component {
     data.isAudit=1;
     GetSubListById(data).then(res => {
       if (res) {
-        console.log(res);
         this.state.approvalList = res;
       }
     })

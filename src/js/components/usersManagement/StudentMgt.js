@@ -205,7 +205,8 @@ class StudentMgtList extends React.Component {
                 >
                   {getFieldDecorator('email', {
                     rules: [{
-                      required: true, message: '请填写邮箱!',
+                      required: true, message: '邮箱格式不对!',
+                      pattern:/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/,
                     }],
                   })(
                     <Input />
@@ -218,7 +219,8 @@ class StudentMgtList extends React.Component {
                 >
                   {getFieldDecorator('tel', {
                     rules: [{
-                      required: true, message: '请填写联系方式!',
+                      required: true, message: '手机号码格式不正确',
+                      pattern:/1(3\d|47|5((?!4)\d)|7(0|1|[6-8])|8\d)\d{8,8}/,
                     }],
                   })(
                     <Input />
@@ -293,16 +295,27 @@ class StudentMgtList extends React.Component {
         data = values;
         data.sex = Number(data.sex);
         data.class = Number(data.class);
+        data.password = hex_md5('123456',32);
         data.permissions = 1;
-        AddUser(data).then(res => {
-          if (res) {
-            //添加成功
-            this.getUserList();
-            message.success('添加成功！');
-            let box = document.getElementById('adduser-box');
-            box.setAttribute("style", "transition: width 0.5s;right:-30%")
+        let right=true;
+        _.map(this.state.userList,(item,index)=>{
+          if(item.email==data.email){
+            message.error('邮箱已存在！');
+            right=false;
+            return;
           }
         })
+        if(right){
+          AddUser(data).then(res => {
+            if (res) {
+              //添加成功
+              this.getUserList();
+              message.success('添加成功！');
+              let box = document.getElementById('adduser-box');
+              box.setAttribute("style", "transition: width 0.5s;right:-30%")
+            }
+          })
+        }
       }
     });
   }

@@ -88,7 +88,7 @@ export default class DocumentCenter extends React.Component {
               }}
             />
           </TabPane>
-          <TabPane tab="个人模版" key="1">
+          <TabPane tab="个人文档" key="1">
             <Table
               columns={columns2}
               dataSource={this.state.myDownDocument}
